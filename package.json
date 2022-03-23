@@ -1,0 +1,32 @@
+{
+  "name": "website-ban-hang-trung-gian",
+  "version": "1.0.0",
+  "description": "Đồ án cho môn DA1",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "nodemon --inspect src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UIT19521334/Website-ban-hang-trung-gian.git"
+  },
+  "keywords": [
+    "DA1",
+    "NDCDat"
+  ],
+  "author": "NDCDat,Phuc",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/UIT19521334/Website-ban-hang-trung-gian/issues"
+  },
+  "homepage": "https://github.com/UIT19521334/Website-ban-hang-trung-gian#readme",
+  "dependencies": {
+    "express": "^4.17.3",
+    "express-handlebars": "^6.0.3"
+  },
+  "devDependencies": {
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.15"
+  }
+}
