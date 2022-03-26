@@ -1,0 +1,27 @@
+[
+    {
+        "display_name":"Dashboard",
+        "route":"/",
+        "icon":"bx bx-category"
+    },
+    {
+        "display_name":"Customer",
+        "route":"/customer",
+        "icon":"bx bx-category"
+    },
+    {
+        "display_name":"Products",
+        "route":"/products",
+        "icon":"bx bx-category"
+    },
+    {
+        "display_name":"Orders",
+        "route":"/orders",
+        "icon":"bx bx-category"
+    },
+    {
+        "display_name":"Dashboard",
+        "route":"/",
+        "icon":"bx bx-category"
+    }
+]

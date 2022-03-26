@@ -1,14 +1,26 @@
-import { Outlet } from "react-router-dom";
-import Sidebar from "../sidebar/Sidebar";
-function AppLayout() {
-    return (
-      <div >
-        <Sidebar/>
-        <div style={{padding:'0px 0px 0px 280px'}}>
-            <Outlet/>
-        </div>
-      </div>
-    );
-  }
-  
-  export default AppLayout;
+import React from 'react'
+
+import Sidebar from '../sidebar/Sidebar'
+import AppRoutes from '../AppRoutes'
+
+import { BrowserRouter, Route} from 'react-router-dom'
+
+import './AppLayout.css'
+const AppLayout = () => {
+  return (
+    <BrowserRouter>
+        <Route render={(props)=>(
+          <div className='layout'>
+              <Sidebar {...props}/>
+              <div className="layout__content">
+                  <div className="layout__content-main">
+                      <AppRoutes/>
+                  </div>
+              </div>
+          </div>
+        )}/>
+    </BrowserRouter>
+  )
+}
+
+export default AppLayout
