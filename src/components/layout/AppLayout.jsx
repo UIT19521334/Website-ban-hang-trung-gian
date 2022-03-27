@@ -1,5 +1,6 @@
 import React from 'react'
 
+import Topnav from '../topnav/Topnav'
 import Sidebar from '../sidebar/Sidebar'
 import AppRoutes from '../AppRoutes'
 
@@ -13,6 +14,7 @@ const AppLayout = () => {
           <div className='layout'>
               <Sidebar {...props}/>
               <div className="layout__content">
+                  <Topnav/>
                   <div className="layout__content-main">
                       <AppRoutes/>
                   </div>

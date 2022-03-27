@@ -7,21 +7,27 @@
     {
         "display_name":"Customer",
         "route":"/customer",
-        "icon":"bx bx-category"
+        "icon":"bx bx-user-pin"
     },
     {
         "display_name":"Products",
         "route":"/products",
-        "icon":"bx bx-category"
+        "icon":"bx bx-package"
     },
     {
         "display_name":"Orders",
         "route":"/orders",
-        "icon":"bx bx-category"
+        "icon":"bx bx-cart"
     },
     {
-        "display_name":"Dashboard",
-        "route":"/",
-        "icon":"bx bx-category"
+        "display_name":"Analytics",
+        "route":"/chart",
+        "icon":"bx bx-bar-chart-alt-2"
+    },
+    {
+        "display_name":"Logout",
+        "route":"/dangnhap",
+        "icon":"bx bx-log-out"
     }
+
 ]

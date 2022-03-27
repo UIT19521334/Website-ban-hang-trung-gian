@@ -7,11 +7,13 @@
   --txt-white : #ffffff;
   --main-color: #349eff;
   --second-color : #62b4ff;
+  --box-shadow : rgba(149,157,165,0.2) 0px 8px 24px;
   
-  --sidebar-with : 300px;
-  --boder-radius : 15px;
+  --sidebar-with : 220px;
+  --border-radius : 15px;
   --topnav-height :110px;
-  --trasition-cubic :
+  --trasition-cubic : cubic-bezier(0.175,0.885,0.32,1.275);
+ 
 }
 
 * {
