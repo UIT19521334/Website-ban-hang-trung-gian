@@ -1,6 +1,11 @@
+// Nhìn dòng này nó vô dụng đúng không nhưng éo nhá - không có nó thì trang chart méo hiện lên vầ t chả biết vì sao
+import { Chart as ChartJS } from 'chart.js/auto'; 
+
 import React from "react";
 import { Line } from "react-chartjs-2";
 import { MDBContainer } from "mdbreact";
+
+
 
 class ChartsPage extends React.Component {
   state = {
@@ -8,7 +13,7 @@ class ChartsPage extends React.Component {
       labels: ["January", "February", "March", "April", "May", "June", "July"],
       datasets: [
         {
-          label: "My First dataset",
+          label: "Doanh thu",
           fill: true,
           lineTension: 0.3,
           backgroundColor: "rgba(225, 204,230, .3)",
@@ -26,10 +31,10 @@ class ChartsPage extends React.Component {
           pointHoverBorderWidth: 2,
           pointRadius: 1,
           pointHitRadius: 10,
-          data: [65, 59, 80, 81, 56, 55, 40]
+          data: [65000000, 59000000, 80000000, 81000000, 56000000, 55000000, 40000000]
         },
         {
-          label: "My Second dataset",
+          label: "Chi phí",
           fill: true,
           lineTension: 0.3,
           backgroundColor: "rgba(184, 185, 210, .3)",
@@ -47,7 +52,7 @@ class ChartsPage extends React.Component {
           pointHoverBorderWidth: 2,
           pointRadius: 1,
           pointHitRadius: 10,
-          data: [28, 48, 40, 19, 86, 27, 90]
+          data: [28000000, 48000000, 40000000, 19000000, 86000000, 27000000, 75000000]
         }
       ]
     }
@@ -55,10 +60,12 @@ class ChartsPage extends React.Component {
 
   render() {
     return (
-      <MDBContainer>
-        <h3 className="mt-5">Line chart</h3>
-        <Line data={this.state.dataLine} options={{ responsive: true }} />
-      </MDBContainer>
+      <div>
+        <h3>Revenue charts</h3>
+        <MDBContainer>
+          <Line data={this.state.dataLine} options={{ responsive: true }} />
+        </MDBContainer>
+      </div>
     );
   }
 }

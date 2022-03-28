@@ -11,7 +11,7 @@ const AppRoutes = () => {
     <Switch>
         <Route path='/' exact component={Home}  />
         <Route path='/Dashboard' component={Dashboard} />
-        <Route path='/actions' component={ChartsPage} />
+        <Route path='/actions'  component={ChartsPage} />
         <Route path='/customer' component={Dashboard} />
     </Switch>
   );
