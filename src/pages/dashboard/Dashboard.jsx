@@ -1,10 +1,12 @@
 import React from 'react';
 
-import Statuscard from '../../components/statuscard/Statuscard';
+import Statuscard from './statuscard/Statuscard';
 import statusCards from '../../assets/jsonData/status-card-data.json';
 import './dashboard.css';
-import ChartsPage from './Chart';
-import Tables from '../../components/table/Table';
+import ChartsPage from './chart/Chart';
+import ChartsCicle from './chart/ChartCircle';
+import Topcustomers from './table/Topcustomers';
+import Topproducts from './table/Topproducts';
 import { Link } from 'react-router-dom';
 
 const Dashboard = () => {
@@ -37,14 +39,42 @@ const Dashboard = () => {
           <div className="col-4">
             <div className="card">
               <div className="card__header">
-                <h3>Top customers</h3>
+                <h6>Top customers</h6>
+                <div className="card__header__right">
+                  <Link to='/customer'> view all </Link>
+                </div>
               </div>
               <div className="card__body">
                 {/*Bảng*/}
-                <Tables/>
+                <Topcustomers/>
               </div>
-              <div className="card__footer">
-                <Link to='/'> view all </Link>
+            </div>
+          </div>
+          <div className="col-6">
+            <div className="card">
+              <div className='card__header'>
+                  <h6>TOP PRODUCTS</h6>
+                  <div className="card__header__right">
+                    <Link to='/products'> view all </Link>
+                </div>
+              </div>
+              <div className="card__body">
+                {/*Bảng*/}
+                <Topproducts/>
+              </div>
+            </div>
+          </div>
+          <div className="col-6">
+            <div className="card">
+              <div className='card__header'>
+                  <h6>RECENT TRANSCATION</h6>
+                  <div className="card__header__right">
+                    <Link to='/chart'> view all </Link>
+                </div>
+              </div>
+              <div className="card__body">
+                {/*Biểu đồ hình tròn*/}
+                <ChartsCicle/>
               </div>
             </div>
           </div>

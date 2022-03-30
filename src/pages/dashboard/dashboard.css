@@ -1,6 +1,7 @@
 .page-header{
     margin-bottom: 40px;
     text-transform: capitalize;
+    display: flex;
   }
 .card{
     padding: 30px;
@@ -8,6 +9,7 @@
     background-color: var(--main-bg);
     box-shadow: var(--box-shadow);
     border-radius: var(--border-radius);
+    
 }
 .full-height{
     height: 100%;
@@ -17,6 +19,13 @@
 }
 .card__header{
     text-transform: capitalize;
+    display: flex;
+}
+.card__header__right{
+    
+    position:relative;
+    margin-left: auto; 
+    margin-right: 0;
 }
 .card__header ~ .card__body {
     margin-top: 30px;
@@ -24,4 +33,14 @@
 .card__footer{
     text-transform: capitalize;
     text-align: center;
+    margin-top: 10px;
 }
+.card__body{
+    height: 100%;
+}
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    [class*="col-"] {
+      width: 100%;
+    }
+  }

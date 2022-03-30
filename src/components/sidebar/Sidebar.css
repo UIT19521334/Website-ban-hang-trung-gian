@@ -54,3 +54,6 @@
     );
     color: var(--txt-white);
 }
+.sidebar.hide {
+    display: none;
+}

@@ -1,68 +1,76 @@
-import * as React from 'react';
-import { styled } from '@mui/material/styles';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+import React, {useState} from 'react'
 
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
-  },
-}));
+const Table = props => {
 
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  '&:nth-of-type(odd)': {
-    backgroundColor: theme.palette.action.hover,
-  },
-  // hide last border
-  '&:last-child td, &:last-child th': {
-    border: 0,
-  },
-}));
+    // Hiển thị dòng số dưới cái page
+    const initialDataShow = props.limit && props.bodyData ? props.bodyData.slice(0,Number(props.limit)): props.bodyData
 
-function createData(name, totalOrders, totalSpending) {
-  return { name, totalOrders, totalSpending};
-}
+    const [datashow, setdatashow] = useState(initialDataShow);
 
-const rows = [
-  createData('Mr Grack', 159, 26000),
-  createData('Violet', 237, 19000),
-  createData('Yasuo', 262, 16000),
-  createData('Miss Fortune', 305, 3700),
-  createData('Liliana', 356, 1600),
-];
+    let pages = 1;
 
-export default function Tables() {
+    let range =[];
+
+    if (props.limit !== undefined){
+        let page = Math.floor(props.bodyData.length / Number(props.limit))
+        pages = props.bodyData.length & Number(props.limit) === 0 ? page : page + 1
+        range = [...Array(pages).keys()]
+    }
+
+    const [currPage,setCurrPage] = useState(0)
+
+    const selectPage = page =>{
+        const start = Number(props.limit) * page
+        const end = start + Number(props.limit)
+
+        setdatashow(props.bodyData.slice(start,end))
+        setCurrPage(page)
+    }
+
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 200}} aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            <StyledTableCell>User</StyledTableCell>
-            <StyledTableCell align="right">Orders</StyledTableCell>
-            <StyledTableCell align="right">Spending&nbsp;($)</StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.name}>
-              <StyledTableCell component="th" scope="row">
-                {row.name}
-              </StyledTableCell>
-              <StyledTableCell align="right">{row.totalOrders}</StyledTableCell>
-              <StyledTableCell align="right">{row.totalSpending}</StyledTableCell>
-            </StyledTableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-  );
+    <div>
+        <div className='table-wrapper'>
+            <table className='table-basic'>
+                {
+                    props.headData && props.renderHead ? (
+                        <thead className='table-basic-thead'>
+                            <tr>
+                                {
+                                    props.headData.map((item,index) => props.renderHead(item,index))
+                                }
+                            </tr>
+                        </thead>
+                    ) : null
+                }
+                {
+                    props.bodyData && props.renderBody ? (
+                        <tbody className='table-basic-tbody'>
+                            {
+                                datashow.map((item,index) => props.renderBody(item,index))
+                            }
+                        </tbody>
+                    ) : null
+                }
+            </table>
+        </div>
+        {
+            pages > 1 ? (
+                <div className="table__pagination">
+                    {
+                        range.map((item,index)=>(
+                            <div key = {index} className={`table__pagination-item ${currPage === index ? 'active': ''}`} 
+                                onClick ={() => selectPage(index)}
+                            >
+                                
+                                {item + 1}
+                            </div>
+                        ))
+                    }
+                </div>
+            ) : null
+        }
+    </div>
+  )
 }
+
+export default Table

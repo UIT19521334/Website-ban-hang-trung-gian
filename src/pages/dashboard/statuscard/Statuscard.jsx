@@ -1,6 +1,6 @@
 import React from 'react';
 import './statuscard.css'
-
+// trang chứa mấy cái card trong dashboard
 const Statuscard = props => {
   return (
     <div className='status-card'>

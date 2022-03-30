@@ -53,11 +53,3 @@
 .status-card:hover{
     color: var(--txt-white);
 }
-@media screen and (max-width: 800px) {
-    div.status-card__info {
-      display: none;
-    }
-    div.status-card__icon{
-        width: 100%;
-    }
-  }

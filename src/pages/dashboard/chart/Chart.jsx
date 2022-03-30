@@ -63,7 +63,7 @@ class ChartsPage extends React.Component {
       <div>
         <h3>Revenue charts</h3>
         <MDBContainer>
-          <Line data={this.state.dataLine} options={{ responsive: true }} />
+          <Line style={{position:"relative"}} data={this.state.dataLine} options={{ responsive: true }} />
         </MDBContainer>
       </div>
     );

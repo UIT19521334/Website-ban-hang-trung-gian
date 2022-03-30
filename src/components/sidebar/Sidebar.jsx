@@ -19,7 +19,7 @@ const SidebarItem = props =>{
 }
 
 
-const Sidebar = props => {
+const Sidebar = (props) => {
 
   const activeItem = sideBar__item.findIndex(item => item.route === props.location.pathname)
   return (
