@@ -10,8 +10,9 @@ const Topnav = ({hideSideBar}) => {
     
 
   return (
-    <Navbar bg="light" expand="lg" style={{position: "sticky"}} fixed="top">
+    <Navbar bg="light" expand="lg"  style={{position: "sticky"}} fixed="top" >
         <Container fluid>
+            {/* Dòng này dùng để scroll cái sidebar vào trong */}
             <Navbar.Brand onClick={(e) => {
                 e.preventDefault()
                 hideSideBar()
@@ -25,7 +26,7 @@ const Topnav = ({hideSideBar}) => {
                 style={{ maxHeight: '100px' }}
                 navbarScroll
             >
-                <Nav.Link as={Link} to="/actions" >Home</Nav.Link>
+                <Nav.Link as={Link} to="/home" >Home</Nav.Link>
                 <Nav.Link href="#action2">Link</Nav.Link>
                 <NavDropdown title="Link" id="navbarScrollingDropdown">
                 <NavDropdown.Item href="#action3">Action</NavDropdown.Item>

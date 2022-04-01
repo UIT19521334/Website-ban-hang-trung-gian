@@ -1,14 +1,14 @@
 import React, {useState} from 'react'
 import Topnav from '../topnav/Topnav'
 import Sidebar from '../sidebar/Sidebar'
-import AppRoutes from '../AppRoutes'
+import Admin_route from '../app_route/Admin_route'
 
 import { BrowserRouter, Route} from 'react-router-dom'
 
-import './AppLayout.css'
+import './admin_layout.css'
 
 
-const AppLayout = () => {
+const Admin_layout = () => {
   
   const[showSideBar,setShowSideBar] = useState(true);
 
@@ -27,7 +27,7 @@ const AppLayout = () => {
               <div className={showSideBar ? 'layout__content' : 'layout__content noSideBar'}>
                   <Topnav className='layout__content-navbar'  hideSideBar={hideSideBar}/>
                   <div className="layout__content-main">
-                      <AppRoutes/>
+                      <Admin_route/>
                   </div>
               </div>
           </div>
@@ -36,4 +36,4 @@ const AppLayout = () => {
   )
 }
 
-export default AppLayout
+export default Admin_layout

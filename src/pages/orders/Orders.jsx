@@ -48,13 +48,26 @@ export default function Orders() {
     ],
     rows:ordersList
   });
-//   <Badge type = {[val.status]} content={val.status}/>
+//   <Badge type = {[val.status]} content={val.status}/> Dòng này để thêm màu cho status mà chưa được
+  const [checkbox1, setCheckbox1] = React.useState('');
+
+  const showLogs2 = (e) => {
+    setCheckbox1(e);
+  };
   return  (
+    
     <div className="row">
         <div className="col-12">
             <div className="card">
                 <div className="card__body">
-                  <h2>Orders page</h2>
+                <div className='card__body-header-cus'>
+                    <h2>Orders page</h2>
+                    <div className="card__body-header-right">
+                      <button className='btn__add'> Add </button>
+                      <button className='btn__del'> Delete </button>
+                      <button className='btn__fix'> Fix</button>
+                    </div>
+                  </div>
                   <MDBDataTableV5 
                     className='tableProducts'
 
@@ -71,6 +84,14 @@ export default function Orders() {
                     //Cho thanh search lên top
                     searchTop
                     searchBottom={false}
+                    //Tạo checkbox
+                    // Tìm hiểu thêm tại trang https://mdbootstrap.com/docs/react/tables/datatables/#top-select-serach
+                    checkbox
+                    headCheckboxID='id2'
+                    bodyCheckboxID='checkboxes2'
+                    getValueCheckBox={(e) => {
+                      showLogs2(e);
+                    }}
                   />
                 </div>
             </div>

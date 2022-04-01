@@ -5,17 +5,17 @@ import { MDBContainer } from "mdbreact";
 class ChartsCicle extends React.Component {
 state = {
   dataDoughnut: {
-    labels: ["Red", "Green", "Yellow", "Grey", "Dark Grey"],
+    labels: ["Hot", "Regular", "Top seller", "Irregular", "Top pick"],
     datasets: [
       {
-        data: [300, 50, 100, 40, 120],
-        backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1", "#4D5360"],
+        data: [300, 250, 100, 40, 120],
+        backgroundColor: ["#E74C3C", "#1ABC9C", "#3498DB", "#2C3E50", "#8E44AD"],
         hoverBackgroundColor: [
-          "#FF5A5E",
-          "#5AD3D1",
-          "#FFC870",
-          "#A8B3C5",
-          "#616774"
+          "#F1948A",
+          "#A3E4D7",
+          "#AED6F1",
+          "#ABB2B9",
+          "#D2B4DE"
         ]
       }
     ]

@@ -1,9 +1,16 @@
-import React from 'react';
+import React ,{useState}from 'react';
 import { MDBDataTableV5 } from 'mdbreact';
 import customerList from '../../assets/jsonData/customer-list.json';
-
+import Add_customer from './Add_customers';
+import './customer.css';
 
 export default function Customer() {
+  const[Add_customer_page,setAddProducts_page] = useState(false);
+
+  const showAddPage = () => {
+    console.log('click')
+    setAddProducts_page(!Add_customer_page)
+  }
   const [datatable, setDatatable] = React.useState({
     columns: [
       {
@@ -54,13 +61,25 @@ export default function Customer() {
     ],
     rows:customerList
   });
+  const [checkbox1, setCheckbox1] = React.useState('');
 
+  const showLogs2 = (e) => {
+    setCheckbox1(e);
+  };
   return  (
     <div className="row">
         <div className="col-12">
             <div className="card">
                 <div className="card__body">
-                  <h2>Customer</h2>
+                  <div className='card__body-header-cus'>
+                    <h2>Customer</h2>
+                    <div className="card__body-header-right">
+                      <button className='btn__add' onClick={showAddPage}> Add </button>
+                      <button className='btn__del'> Delete </button>
+                      <button className='btn__fix' onClick={showAddPage}> Fix</button>
+                    </div>
+                  </div>
+                  
                   <MDBDataTableV5 
                     className='tableProducts'
 
@@ -77,10 +96,21 @@ export default function Customer() {
                     //Cho thanh search lên top
                     searchTop
                     searchBottom={false}
+                    //Tạo checkbox
+                    // Tìm hiểu thêm tại trang https://mdbootstrap.com/docs/react/tables/datatables/#top-select-serach
+                    checkbox
+                    headCheckboxID='id2'
+                    bodyCheckboxID='checkboxes2'
+                    getValueCheckBox={(e) => {
+                      showLogs2(e);
+                    }}
                   />
                 </div>
             </div>
         </div>
+        {
+          Add_customer_page && <Add_customer handleClose={showAddPage}/>
+        }
     </div> 
   )
 }
