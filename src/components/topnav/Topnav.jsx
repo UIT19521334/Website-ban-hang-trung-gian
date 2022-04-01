@@ -10,7 +10,7 @@ const Topnav = ({hideSideBar}) => {
     
 
   return (
-    <Navbar bg="light" expand="lg"  style={{position: "sticky"}} fixed="top" >
+    <Navbar bg="light" expand="lg"  style={{position: "sticky"}}  >
         <Container fluid>
             {/* Dòng này dùng để scroll cái sidebar vào trong */}
             <Navbar.Brand onClick={(e) => {

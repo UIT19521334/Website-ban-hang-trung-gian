@@ -1,37 +1,34 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import './login.css';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import './login.css'
 const Login = props => {
-
-  return (
-      <div className="login-form">
-        <div className="row">
-          <div className="username">
-            <p> User name </p>
-            <input type="text" placeholder='User name' />
+        return (
+          <div className="login_form">
+            <form>
+                <h3>Sign In</h3>
+                <div className="form-group">
+                    <label>Email address</label>
+                    <input type="email" className="form-control" placeholder="Enter email" />
+                </div>
+                <div className="form-group">
+                    <label>Password</label>
+                    <input type="password" className="form-control" placeholder="Enter password" />
+                </div>
+                <div className="form-group">
+                    <div className="custom-control custom-checkbox">
+                        <input type="checkbox" className="custom-control-input" id="customCheck1" />
+                        <label className="custom-control-label" htmlFor="customCheck1">Remember me</label>
+                    </div>
+                </div>
+                <Link to = '/admin'>
+                  <button  type="submit" onClick={props.setIsAuticated} className="btn btn-primary btn-block">Submit</button>
+                </Link>
+                
+                <p className="forgot-password text-right">
+                    Forgot <a href="#">password?</a>
+                </p>
+            </form>
           </div>
-          <div className="password">
-            <p> Password </p>
-            <input type="password" placeholder='Password' />
-          </div>
-          <div className="fogot-password">
-            <div >
-              
-              <input type="radio" value="Fogot password" name ="forgot_pass" />
-              <p>Fogot password</p>
-            </div>
-            
-          <Link to = '/admin'>
-            <button onClick={props.setIsAuticated} className='btn-login'> Login </button>
-          </Link>
-            
-            <button className='btn-close-login' > Close </button>
-          </div>
-          </div>  
-        
-      </div>
-    
-  );
-}
-
-export default Login;
+        );
+    }
+    export default Login;

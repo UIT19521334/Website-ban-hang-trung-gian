@@ -12,7 +12,7 @@ const Admin_route = () => {
   return (
     <Switch>
         
-        <Route path='/dashboard' exact component={Dashboard} />
+        <Route path='/dashboard' component={Dashboard} />
         <Route path='/chart'  component={ChartsPage} />
         <Route path='/customer' component={Customer} />
         <Route path='/products' component={Products} />
