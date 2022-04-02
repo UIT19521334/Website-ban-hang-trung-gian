@@ -57,3 +57,27 @@
 .sidebar.hide {
     display: none;
 }
+
+.sidebar .logout_btn {
+    font-weight: 600;
+    width: 180px;
+    height: 54px;
+    
+    
+    color: var(--main-color);
+    background-color: var(--main-bg);
+    
+    
+}
+.sidebar .logout_btn > i {
+    margin-right: 10px;
+    font-size: 1.5rem;
+}
+.sidebar .logout_btn:hover {
+    color: red;
+
+}
+.sidebar .sidebar__footer{
+    align-items: center;
+    margin-top: 100%;
+}

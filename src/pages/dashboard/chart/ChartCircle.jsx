@@ -8,7 +8,7 @@ state = {
     labels: ["Hot", "Regular", "Top seller", "Irregular", "Top pick"],
     datasets: [
       {
-        data: [300, 250, 100, 40, 120],
+        data: [120, 250, 100, 40, 120],
         backgroundColor: ["#E74C3C", "#1ABC9C", "#3498DB", "#2C3E50", "#8E44AD"],
         hoverBackgroundColor: [
           "#F1948A",

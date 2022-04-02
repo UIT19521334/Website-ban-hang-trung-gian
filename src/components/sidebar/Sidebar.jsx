@@ -1,6 +1,6 @@
 import React from 'react';
 import './Sidebar.css';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import logo from '../../assets/image/logo.png'
 import sideBar__item from '../../assets/jsonData/sideBar_routes.json'
 
@@ -38,6 +38,20 @@ const Sidebar = (props) => {
             </Link>
           ))
         }
+        <div className='sidebar__footer'>
+          <button className='logout_btn' onClick={()=>{window.location.reload();}}>
+              <i class='bx bx-log-out'></i>
+              Logout
+          </button>
+        </div>
+            
+           
+              
+            
+              
+  
+            
+        
     </div>
   );
 }

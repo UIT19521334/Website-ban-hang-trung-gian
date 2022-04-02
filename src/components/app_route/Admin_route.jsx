@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
 import Home from '../../pages/home';
 import Dashboard from '../../pages/dashboard/Dashboard';
@@ -11,7 +11,9 @@ import Orders from '../../pages/orders/Orders';
 const Admin_route = () => {
   return (
     <Switch>
-        
+        <Route path="/admin">      
+            <Redirect to="/dashboard" />
+          </Route>
         <Route path='/dashboard' component={Dashboard} />
         <Route path='/chart'  component={ChartsPage} />
         <Route path='/customer' component={Customer} />
