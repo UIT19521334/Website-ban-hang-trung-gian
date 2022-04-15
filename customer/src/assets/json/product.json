@@ -1,0 +1,56 @@
+[
+    {
+        "id":"001",
+        "name":"SneakerA",
+        "img":"../../assets/img/sneaker.jpg",
+        "category":"sneaker",
+        "describe":"Giày cho người giàu",
+        "price":"100",
+        "sold":"123"
+    },
+    {
+        "id":"002",
+        "name":"SneakerB",
+        "img":"../../assets/img/sneaker.jpg",
+        "category":"sneaker",
+        "describe":"Giày cho người hơi giàu",
+        "price":"50",
+        "sold":"1230"
+    },
+    {
+        "id":"003",
+        "name":"SneakerC",
+        "img":"../../assets/img/sneaker.jpg",
+        "category":"sneaker",
+        "describe":"Giày cho người không giàu",
+        "price":"10",
+        "sold":"13"
+    },
+    {
+        "id":"004",
+        "name":"SneakerD",
+        "img":"../../assets/img/sneaker.jpg",
+        "category":"sneaker",
+        "describe":"Giày cho người chưa giàu",
+        "price":"20",
+        "sold":"1243"
+    },
+    {
+        "id":"005",
+        "name":"SneakerE",
+        "img":"../../assets/img/sneaker.jpg",
+        "category":"sneaker",
+        "describe":"Giày cho người sẽ giàu",
+        "price":"90",
+        "sold":"132"
+    },
+    {
+        "id":"006",
+        "name":"SneakerF",
+        "img":"../../assets/img/sneaker.jpg",
+        "category":"sneaker",
+        "describe":"Giày cho người đã giàu",
+        "price":"1000",
+        "sold":"32"
+    }
+]

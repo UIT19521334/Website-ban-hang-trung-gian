@@ -1,0 +1,22 @@
+.product__content{
+    display: flex;
+    justify-content: center;
+}
+
+.product_card ~.product_card {
+    margin-left:20px
+}
+.card__sold{
+    background-color: #EAEDED;
+    color: #1E8449;
+    padding: 5px;
+    border: none;
+}
+.product__list{
+   /* Hai dòng này để cho mấy cái card xếp thành hàng ngang và tự xuống dòng */
+   display: flex;
+   flex-wrap: wrap;
+}
+.product_card__{
+    margin: 9px;
+}
