@@ -9,7 +9,7 @@ const Appbar = () => {
     <div>
       <Navbar bg="Appbar" expand="md" fixed='top'>
         <Container fluid>
-          <Navbar.Brand href='/'>
+          <Navbar.Brand  as={Link} to="/">
             <img src={Logo} alt="logo" width="auto" height="40px" />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />

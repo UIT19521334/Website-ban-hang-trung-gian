@@ -1,16 +1,28 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import { MDBDataTableV5 } from 'mdbreact';
 import productsList from '../../assets/jsonData/products-list.json';
 import Add_products from './Add_products';
 import './products.css';
-
+// import Badge from '../../components/badge/Badge';
 export default function Products() {
+  //const [proDuctData,setproDuctData]= useState([]);
   const[AddProducts_page,setAddProducts_page] = useState(false);
 
   const showAddPage = () => {
     console.log('click')
     setAddProducts_page(!AddProducts_page)
   }
+  // useEffect(()=>{
+  //   let productData =[];
+  //   productsList.map((item,index)=>{
+  //     item.status = (
+  //       <Badge content={item.status} />
+  //     )
+  //     productData.push(item);
+  //   });
+  //   setproDuctData(productData);
+  //   console.log('product data:', productData)
+  // }, [proDuctData])
   const [datatable, setDatatable] = React.useState({
     columns: [
       {
@@ -51,7 +63,7 @@ export default function Products() {
         width: 100,
       },
     ],
-    rows:productsList
+    rows: productsList
   });
   const [checkbox1, setCheckbox1] = React.useState('');
 

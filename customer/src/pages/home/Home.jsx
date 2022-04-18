@@ -10,13 +10,13 @@ const Home = () => {
   return (
     <div>
       <section className='homeheader'>
-          <h5>Sneaker</h5>
-          <h5>Apparel</h5>
-          <h5>Electronics</h5>
-          <h5>Trading Cards</h5>
-          <h5>Collectibles</h5>
-          <h5>Accessories</h5>
-          <h5>NFTs</h5>
+          <Link to='/sneaker' class='homeheader__Link'><h5>Sneaker</h5></Link>
+          <Link to='/apparel' class='homeheader__Link'><h5>Apparel</h5></Link>
+          <Link to='/electronics' class='homeheader__Link'><h5>Electronics</h5></Link>
+          <Link to='/trading-cards' class='homeheader__Link'><h5>Trading Cards</h5></Link>
+          <Link to='/sneaker' class='homeheader__Link'><h5>Collectibles</h5></Link>
+          <Link to='/sneaker' class='homeheader__Link'><h5>Accessories</h5></Link>
+          <Link to='/sneaker' class='homeheader__Link'><h5>NFTs</h5></Link>
       </section>
       <div className="homebanner">
         <Banner/>
@@ -25,11 +25,9 @@ const Home = () => {
         <div className="headerList">
           <h3>Most Popular Sneakers</h3>
           <div className="headerList__right">
-            <Link class='headerList__right-link' to ='product'>See all
+            <Link to='/product' class='headerList__right-link' >See all
               <i class='bx bxs-right-arrow-alt'></i>
             </Link>
-            
-            
           </div>
         </div>
         
@@ -38,7 +36,15 @@ const Home = () => {
         </div>        
       </div>
       <div className="popularbrand">
-        <h3>Poppular Brands</h3>
+        <div className="headerList">
+          <h3>Poppular Brands</h3>
+          <div className="headerList__right">
+            <Link to='/product' class='headerList__right-link' >See all
+              <i class='bx bxs-right-arrow-alt'></i>
+            </Link>
+          </div>
+        </div>
+        
         <div className="popularbrand__content">
           <BrandCard/>
         </div>        
@@ -53,13 +59,29 @@ const Home = () => {
         <Banner2/>
       </div>
       <div className="popularbrand">
-        <h3>Featured Trading Cards</h3>
+      <div className="headerList">
+      <h3>Featured Trading Cards</h3>
+          <div className="headerList__right">
+            <Link to='/product' class='headerList__right-link' >See all
+              <i class='bx bxs-right-arrow-alt'></i>
+            </Link>
+          </div>
+        </div>
+        
         <div className="popularbrand__content">
           <ProductCard/>
         </div>        
       </div>
       <div className="popularbrand">
-        <h3>Collectibles Staff Picks</h3>
+      <div className="headerList">
+      <h3>Collectibles Staff Picks</h3>
+          <div className="headerList__right">
+            <Link to='/product' class='headerList__right-link' >See all
+              <i class='bx bxs-right-arrow-alt'></i>
+            </Link>
+          </div>
+        </div>
+        
         <div className="popularbrand__content">
           <ProductCard/>
         </div>        
@@ -68,13 +90,29 @@ const Home = () => {
         <Banner3/>
       </div>
       <div className="popularbrand">
-        <h3>Trendding sneaker</h3>
+      <div className="headerList">
+      <h3>Trendding sneaker</h3>
+          <div className="headerList__right">
+            <Link to='/product' class='headerList__right-link' >See all
+              <i class='bx bxs-right-arrow-alt'></i>
+            </Link>
+          </div>
+        </div>
+        
         <div className="popularbrand__content">
           <ProductCard/>
         </div>        
       </div>
       <div className="popularbrand">
-        <h3>Release Calendar</h3>
+      <div className="headerList">
+      <h3>Release Calendar</h3>
+          <div className="headerList__right">
+            <Link to='/product' class='headerList__right-link' >See all
+              <i class='bx bxs-right-arrow-alt'></i>
+            </Link>
+          </div>
+        </div>
+        
         <div className="popularbrand__content">
           <ProductCard/>
         </div>        
