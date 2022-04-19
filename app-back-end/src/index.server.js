@@ -5,6 +5,7 @@ import bodyParser from 'body-parser';
 
 //routes
 import userRoutes from './routes/auth.js';
+import adminRoutes from './routes/admin/auth.js';
 
 const app = express();
 
@@ -21,6 +22,7 @@ mongoose.connect(`mongodb+srv://${process.env.MONGO_DB_USER}:${process.env.MONGO
 
 app.use(bodyParser());
 app.use('/api', userRoutes);
+app.use('/api', adminRoutes);
 
 app.listen(process.env.PORT, () => {
     console.log(`Server is running on port ${process.env.PORT}`);

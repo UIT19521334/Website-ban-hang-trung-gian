@@ -1,15 +1,16 @@
 import express from 'express';
-import { requireSignin, signin, signup } from '../controller/auth.js'
+import { requireSignin, signin, signup } from '../controller/auth.js';
+import { validateSignupRequest, isRequestValidated, validateSigninRequest } from '../validators/auth.js';
 
 const router = express.Router();
 
-router.post('/signin', signin);
+router.post('/signin', validateSigninRequest, isRequestValidated, signin);
 
-router.post('/signup', signup);
+router.post('/signup', validateSignupRequest, isRequestValidated, signup);
 
-router.post('/profile', requireSignin, (req, res) => {
-    res.status(200).json({ user: 'profile' })
-});
+// router.post('/profile', requireSignin, (req, res) => {
+//     res.status(200).json({ user: 'profile' })
+// });
 
 //module.exports = router;
 
