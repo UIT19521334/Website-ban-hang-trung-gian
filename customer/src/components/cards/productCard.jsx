@@ -1,7 +1,8 @@
 import React from "react";
 import {Card} from "react-bootstrap";
 import sneaker from '../../assets/img/sneaker.jpg';
-import ProductItem from '../../assets/json/product.json'
+import ProductItem from '../../assets/json/product.json';
+import { Link } from "react-router-dom";
 import './productcard.css';
 function CardItem (props){
     return(
@@ -23,7 +24,15 @@ function ProductCard (){
           {
 
           ProductItem.map((item,index)=>(
-            <div className="product_card">  
+            <div className="product_card">
+                <Link className="product_card__Link"
+                    to={{
+                        pathname: "/productdetail",
+                        state : {
+                            data: item.id
+                        }
+                    }}
+                >  
                 <CardItem key ={index}
                     // img = {item.img} đáng ra là code này nhưng tôi chưa biết cách đưa ảnh vào json nên để tạm
                     img = {sneaker}
@@ -31,6 +40,7 @@ function ProductCard (){
                     price = {item.price}
                     sold = {item.sold}
                 />
+                </Link>
             </div>
             )) 
 

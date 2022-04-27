@@ -9,7 +9,6 @@ export default function Products() {
   const[AddProducts_page,setAddProducts_page] = useState(false);
 
   const showAddPage = () => {
-    console.log('click')
     setAddProducts_page(!AddProducts_page)
   }
   // useEffect(()=>{

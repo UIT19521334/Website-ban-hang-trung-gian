@@ -81,6 +81,6 @@
     flex: 1;
 }
 .product__detail .afterbody_1 .afterbody__right{
-    margin-top: 20px;
+    margin-top: -20px;
     flex: 1;
 }

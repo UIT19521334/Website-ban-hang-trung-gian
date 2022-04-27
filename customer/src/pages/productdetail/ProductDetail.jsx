@@ -2,9 +2,12 @@ import React from "react";
 import sneaker from '../../assets/img/sneaker.jpg';
 import { Form } from "react-bootstrap";
 import ProductCard from "../../components/cards/productCard";
+import PriceHistoryChart from "../../components/chart/PriceHistoryChart";
 import './productdetail.css';
 function ProductDetail (props) {
+    
     return (
+       
         <div className="product__detail">
             
             <div className="header">
@@ -65,23 +68,31 @@ function ProductDetail (props) {
                 <h5>Related Product</h5>
                 <ProductCard/>
             </div>
+            <hr/>
             <div className="afterbody">
                 <h5>Product Details</h5>
                 <div className="afterbody_1">
                     <div className="afterbody__left">
-                        <ul>
-                            <li>Style</li>
-                            <li>Color way</li>
-                            <li>Retail Price</li>
-                            <li>Release Date</li>                          
+                        <div className="row">
+                            <div className="col-3">
                             
-                        </ul>
-                        <ul>
-                            <li>DH7722-001</li>
-                            <li>BLACK/BLACK-WHITE</li>
-                            <li>$120</li>
-                            <li>04/12/2022</li>
-                        </ul>
+                                <li>Style</li>
+                                <li>Color way</li>
+                                <li>Retail Price</li>
+                                <li>Release Date</li>                          
+                                                   
+                            </div>
+                            <div className="col-4">
+
+                                <div><b>DH7722-001</b></div> 
+                                <div><b>BLACK/BLACK-WHITE</b></div> 
+                                <div><b>$120</b></div> 
+                                <div><b>04/12/2022</b></div>
+                            
+                            </div>
+                        </div>
+                        
+                        
                     </div>
                     <div className="afterbody__right">
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -92,6 +103,12 @@ function ProductDetail (props) {
                 </div>
                 
             </div>
+            <hr />
+            <div className="afterbody">
+                <h5>Price History</h5>
+                <PriceHistoryChart/>
+            </div>
+            <hr/>
         </div>
     );
 }

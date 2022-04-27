@@ -19,7 +19,7 @@ mongoose.connect(`mongodb+srv://${process.env.MONGO_DB_USER}:${process.env.MONGO
         console.log('Database connected');
     });
 
-app.use(bodyParser());
+app.use(bodyParser.json());
 app.use('/api', userRoutes);
 
 app.listen(process.env.PORT, () => {

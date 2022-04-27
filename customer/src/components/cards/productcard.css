@@ -2,6 +2,10 @@
     display: flex;
     justify-content: center;
 }
+.product_card__Link{
+    text-decoration: none;
+    color: black;
+}
 
 .product_card ~.product_card {
     margin-left:20px

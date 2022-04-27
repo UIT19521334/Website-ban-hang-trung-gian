@@ -14,9 +14,9 @@ const Home = () => {
           <Link to='/apparel' class='homeheader__Link'><h5>Apparel</h5></Link>
           <Link to='/electronics' class='homeheader__Link'><h5>Electronics</h5></Link>
           <Link to='/trading-cards' class='homeheader__Link'><h5>Trading Cards</h5></Link>
-          <Link to='/sneaker' class='homeheader__Link'><h5>Collectibles</h5></Link>
-          <Link to='/sneaker' class='homeheader__Link'><h5>Accessories</h5></Link>
-          <Link to='/sneaker' class='homeheader__Link'><h5>NFTs</h5></Link>
+          <Link to='/collectibles' class='homeheader__Link'><h5>Collectibles</h5></Link>
+          <Link to='/accessories' class='homeheader__Link'><h5>Accessories</h5></Link>
+          <Link to='/nfts' class='homeheader__Link'><h5>NFTs</h5></Link>
       </section>
       <div className="homebanner">
         <Banner/>
