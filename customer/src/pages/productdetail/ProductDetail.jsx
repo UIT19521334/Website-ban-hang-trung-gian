@@ -1,11 +1,25 @@
-import React from "react";
+import React, {useState} from "react";
 import sneaker from '../../assets/img/sneaker.jpg';
 import { Form } from "react-bootstrap";
 import ProductCard from "../../components/cards/productCard";
 import PriceHistoryChart from "../../components/chart/PriceHistoryChart";
+import ViewBid from "../../components/popup/viewBid";
+import ViewSales from "../../components/popup/viewSales";
+import ViewAsk from "../../components/popup/viewAsk";
 import './productdetail.css';
 function ProductDetail (props) {
-    
+    const[viewAsk_page,setviewAsk_page] = useState(false);
+    const[viewBid_page,setviewBid_page] = useState(false);
+    const[viewSales_page,setviewSales_page] = useState(false);
+    const show_viewAsk = () => {
+        setviewAsk_page(!viewAsk_page)
+    }
+    const show_viewBid = () => {
+        setviewBid_page(!viewBid_page)
+    }
+    const show_viewSales = () => {
+        setviewSales_page(!viewSales_page)
+    }
     return (
        
         <div className="product__detail">
@@ -56,9 +70,9 @@ function ProductDetail (props) {
                             <h4 style={{color:'red'}}>$ 310</h4>
                         </div>
                         <div className="conponent__right">
-                            <button> View Asks</button>
-                            <button> View Bids</button>
-                            <button> View Sales</button>
+                            <button onClick={show_viewAsk}> View Asks</button>
+                            <button onClick={show_viewBid}> View Bids</button>
+                            <button onClick={show_viewSales}> View Sales</button>
                         </div>
                     </div>
                     
@@ -109,6 +123,13 @@ function ProductDetail (props) {
                 <PriceHistoryChart/>
             </div>
             <hr/>
+            {
+                viewBid_page && <ViewBid handleClose={show_viewBid}/>
+            }{
+                viewAsk_page && <ViewAsk handleClose={show_viewAsk}/>
+            }{
+                viewSales_page && <ViewSales handleClose={show_viewSales}/>
+            }
         </div>
     );
 }
