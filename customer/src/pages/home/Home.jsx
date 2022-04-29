@@ -50,7 +50,7 @@ const Home = () => {
         </div>        
       </div>
       <div className="popularbrand">
-        <h3>Featured Apparel</h3>
+        <h3>Featured Shoes</h3>
         <div className="popularbrand__content">
           <ProductCard/>
         </div>        

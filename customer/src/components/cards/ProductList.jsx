@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {Card} from "react-bootstrap";
 import ProductData from '../../assets/json/productData.json';
 import sneaker from '../../assets/img/sneaker.jpg';
@@ -18,11 +18,35 @@ function CardItem (props){
         </Card>
     );
 }   
-function ProductList () {
+function ProductList (props) {
+    const initialDataShow = props.limit && ProductData ? ProductData.slice(0,Number(props.limit)): ProductData
+
+    const [datashow, setdatashow] = useState(initialDataShow);
+
+    let pages = 1;
+
+    let range =[];
+
+    if (props.limit !== undefined){
+        let page = Math.floor(ProductData.length / Number(props.limit))
+        pages = ProductData.length & Number(props.limit) === 0 ? page : page + 1
+        range = [...Array(pages).keys()]
+    }
+
+    const [currPage,setCurrPage] = useState(0)
+
+    const selectPage = page =>{
+        const start = Number(props.limit) * page
+        const end = start + Number(props.limit)
+
+        setdatashow(ProductData.slice(start,end))
+        setCurrPage(page)
+    }
     return (
+        <div>
         <div className="product__list">
             {
-                ProductData.map((item,index)=>(
+                datashow.map((item,index)=>(
                   <div className="product_card__" >
                       <Link className="product_card__Link"
                         to={{
@@ -43,6 +67,24 @@ function ProductList () {
                   </div>
               )) 
 
+            }
+            
+        </div>
+        {
+              pages > 1 ? (
+                  <div className="table__pagination">
+                      {
+                          range.map((item,index)=>(
+                              <div key = {index} className={`table__pagination-item ${currPage === index ? 'active': ''}`} 
+                                  onClick ={() => selectPage(index)}
+                              >
+                                  
+                                  {item + 1}
+                              </div>
+                          ))
+                      }
+                  </div>
+              ) : null
             }
         </div>
     );

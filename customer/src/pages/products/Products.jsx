@@ -189,15 +189,18 @@ function Products () {
             <div className="header__sort">
               <Form.Select aria-label="Default select example">
                 <option>Most popular</option>
-                <option value="1">Feature</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+                <option value="1">Featured Shoes</option>
+                <option value="2">Trading Cards</option>
+                <option value="3">Collectibles Staff Picks</option>
+                <option value="4">Trendding sneaker</option>
+                <option value="5">Release Calendar</option>
               </Form.Select>
             </div>
           </div>
           <div className="content">
             <h5>PRODUCT LIST</h5>
-            <ProductList/>
+            {/* Giá trị limit là số lượng sản phẩm hiện lên mỗi trang */}
+            <ProductList limit = '20'/>
           </div>
         </div>
       </div>

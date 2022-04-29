@@ -45,9 +45,11 @@ function ProductDetail (props) {
                         <Form.Label>Disabled select menu</Form.Label>
                         <Form.Select aria-label="Default select example">
                             <option>Most popular</option>
-                            <option value="1">Feature</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
+                            <option value="1">Featured Shoes</option>
+                            <option value="2">Trading Cards</option>
+                            <option value="3">Collectibles Staff Picks</option>
+                            <option value="4">Trendding sneaker</option>
+                            <option value="5">Release Calendar</option>
                         </Form.Select>
                     </Form.Group>
                     <div className="conponent__btn">

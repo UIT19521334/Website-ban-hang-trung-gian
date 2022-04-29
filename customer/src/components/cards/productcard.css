@@ -24,3 +24,32 @@
 .product_card__{
     margin: 9px;
 }
+.table__pagination{
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 20px;
+}
+.table__pagination-item ~ .table__pagination-item{
+    margin-left: 10px;
+}
+.table__pagination-item {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.table__pagination-item.active, .table__pagination-item.active:hover{
+    background-color: #3498DB;
+    color: #EAEDED;
+    font-weight: 600;
+}
+.table__pagination-item:hover{
+    color: #EAEDED;
+    background-color: #3498DB;
+}
+
