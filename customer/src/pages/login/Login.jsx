@@ -25,7 +25,7 @@ const Login = props => {
                 </Link>
                 
                 <p className="forgot-password text-right">
-                    Forgot <a href="#">password?</a>
+                    Forgot <Link to ="/fogotpassword">password?</Link>
                 </p>
             </form>
           </div>

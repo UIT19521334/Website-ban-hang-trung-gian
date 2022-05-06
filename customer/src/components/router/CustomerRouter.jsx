@@ -5,7 +5,7 @@ import Products from '../../pages/products/Products';
 import ProductDetail from '../../pages/productdetail/ProductDetail';
 import Login from '../../pages/login/Login';
 import Signup from '../../pages/signup/Signup';
-import MyProfile from '../../pages/profile/MyProfile';
+import AccountLayout from '../../pages/profile/AccountLayout';
 const CustomerRouter = () => {
   return (
       <Routes>
@@ -14,7 +14,7 @@ const CustomerRouter = () => {
           <Route path="/productdetail" element={ <ProductDetail/> }/>
           <Route path="/login" element={ <Login/> }/>
           <Route path="/signup" element={ <Signup/> }/>
-          <Route path="/profile" element={ <MyProfile/> }/>
+          <Route path="/profile" element={ <AccountLayout/> }/>
       </Routes>
     );
 }

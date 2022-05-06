@@ -20,7 +20,7 @@
     margin-left: auto;
     margin-right: 0;
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     align-items: center;
 }
 .productList .body .body__right .header__sort{
