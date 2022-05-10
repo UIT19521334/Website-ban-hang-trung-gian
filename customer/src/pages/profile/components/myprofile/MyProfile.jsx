@@ -3,57 +3,41 @@ import './myprofile.css';
 const MyProfile = () => {
   return (
     <div className='profile'>
-      
-      <div className="body_left">
-          <h4>Nguyễn Đức Chí Đạt</h4>
-          <div className="component">
-                <div className="component_left">
-                    <i class='bx bxs-user-pin' ></i>
-                </div>
-                <div className="compoent_right">
-                    <h6>Profile</h6>
-                    <p>Learn what's unique to you</p> 
-                </div>
+      <div className="profile_header">
+          <div className="header_left">
+              <h3>Profile</h3>
           </div>
-          <div className="component">
-                <div className="component_left">
-                    <i class='bx bxs-shield-alt-2' ></i>
-                </div>
-                <div className="compoent_right">
-                    <h6>Secusity</h6>
-                    <p>Learn what's unique to you</p> 
-                </div>
+          <div className="header_right">
+              <button>Edit</button>
           </div>
-          <div className="component">
-                <div className="component_left">
-                    <i class='bx bx-package' ></i>
-                </div>
-                <div className="compoent_right">
-                    <h6>Buying</h6>
-                    <p>Learn what's unique to you</p> 
-                </div>
-          </div>
-          <div className="component">
-                <div className="component_left">
-                    <i class='bx bxs-user-pin' ></i>
-                </div>
-                <div className="compoent_right">
-                    <h6>Profile</h6>
-                    <p>Learn what's unique to you</p> 
-                </div>
-          </div>
-          <div className="component">
-                <div className="component_left">
-                    <i class='bx bxs-user-pin' ></i>
-                </div>
-                <div className="compoent_right">
-                    <h6>Profile</h6>
-                    <p>Learn what's unique to you</p> 
-                </div>
-          </div>
+         
       </div>
-      <div className="body_right">
-
+      <hr />
+      <div className="profile_body">
+          <div className="row">
+              <div className="col-4">
+                  <h5>Name</h5>
+                  <p>Nguyễn Đức Chí Đạt</p>
+              </div>
+              <div className="col-4">
+                  <h5>Shoes size</h5>
+                  <p>Not set</p>
+              </div>
+              <div className="col-4">
+                  <h5>Email address</h5>
+                  <p>nguyenducchidat@gmail.com</p>
+              </div>
+          </div>
+          <div className="row">
+              <div className="col-4">
+                  <h5>UserName</h5>
+                  <p>NDCDat</p>
+              </div>
+              <div className="col-4">
+                  <h5>Reset password</h5>
+                  <button>Reset pass</button>
+              </div>
+          </div>
       </div>
     </div>
   )

@@ -1,21 +1,11 @@
-.layout{
-    color: var(--txt-color);
-
+.account__layout{
+    display: flex;
+    margin-top: 90px;
+    margin-left: 50px;
 }
-.layout__content{
-    padding-left: var(--sidebar-with);
+.account__layout__content{
     background-color: var(--second-bg);
     min-height: 100vh;
-}
-
-.layout__content-main{
-    padding: 30px;
-}
-
-.layout__sideBar{
-    transition: 0.8s;
-}
-.layout__sideBar.noSideBar{
-    transition: 0.8s;
-    display: none;
+    width: 900px;
+    margin: auto    ;
 }

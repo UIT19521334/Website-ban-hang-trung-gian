@@ -44,8 +44,8 @@ const Appbar = () => {
               </NavDropdown>
               
             </Nav>
-            <Button as={Link} to="/login" variant='outline-primary' className='btn-login'  > Login </Button>
-            <Button as={Link} to="/signup" variant='outline-dark' className='btn-signin' > Sign in </Button>
+            <Button as={Link} to="/login" variant='outline-primary' className='btn-login'  > Log in </Button>
+            <Button as={Link} to="/sell" variant='outline-dark' className='btn-signin' > Sell </Button>
             
           </Navbar.Collapse>
         </Container>

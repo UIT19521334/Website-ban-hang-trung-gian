@@ -1,9 +1,7 @@
 import React from 'react'
 
-
-import { BrowserRouter} from 'react-router-dom'
 import SideBar from './components/sidebar/SideBar'
-import AccountRouter from './components/router/AccountRouter'
+import MyProfile from './components/myprofile/MyProfile'
 import './accountlayout.css'
 
 
@@ -12,10 +10,10 @@ const AccountLayout = () => {
   
   return (
     
-      <div className='layout'>
+      <div className='account__layout'>
           <SideBar />
-          <div className="layout__content">
-              <AccountRouter/>
+          <div className="account__layout__content">
+              <MyProfile/>
           </div>
       </div>
     
