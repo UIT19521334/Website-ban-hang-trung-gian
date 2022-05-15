@@ -1,6 +1,6 @@
 import express from 'express';
 import { requireSignin, signin, signup } from '../controller/auth.js'
-import { getPosts } from '../controller/posts.js';
+import { getPosts , createPosts , updatePosts } from '../controller/productController.js';
 const router = express.Router();
 
 router.post('/signin', signin);
@@ -12,7 +12,8 @@ router.post('/profile', requireSignin, (req, res) => {
 });
 
 router.get('/', getPosts);
-
+router.post('/',createPosts);
+router.post('/update',updatePosts);
 //module.exports = router;
 
 export default router;
