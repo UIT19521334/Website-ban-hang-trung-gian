@@ -6,6 +6,7 @@ import PriceHistoryChart from "../../components/chart/PriceHistoryChart";
 import ViewBid from "../../components/popup/viewBid";
 import ViewSales from "../../components/popup/viewSales";
 import ViewAsk from "../../components/popup/viewAsk";
+import { useLocation } from "react-router-dom";
 import './productdetail.css';
 function ProductDetail (props) {
     const[viewAsk_page,setviewAsk_page] = useState(false);
@@ -20,14 +21,18 @@ function ProductDetail (props) {
     const show_viewSales = () => {
         setviewSales_page(!viewSales_page)
     }
+    const location = useLocation();
+    const state = location.state;
+
+
     return (
        
         <div className="product__detail">
             
             <div className="header">
                 <div className="header__left">
-                    <h4>Nike Blazer Low</h4>
-                    <h5>Off-White University Red</h5>
+                    <h4>{state.name}</h4>
+                    <h5>{state.describe}</h5>
                 </div>
                 <div className="header__right">
                     <i class='bx bx-cart-add'></i>
@@ -38,7 +43,7 @@ function ProductDetail (props) {
             </div>
             <div className="body">
                 <div className="body__left">
-                    <img src={sneaker} alt="ảnh sản phẩm" />
+                    <img className="image" src={state.img} alt="ảnh sản phẩm" />
                 </div>
                 <div className="body__right">
                     <Form.Group style={{minWidth:'600px'}}>

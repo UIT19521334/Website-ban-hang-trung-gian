@@ -1,7 +1,9 @@
-import React from "react";
+import React ,{useState} from "react";
 import { Link } from "react-router-dom";
-import './login.css'
+import './login.css';
 const Login = props => {
+    const [checkUser, SetCheckUser] = useState(false);
+    const [checkPass, SetCheckPass] = useState(false);
         return (
           <div className="login_form">
             <form>
@@ -20,7 +22,7 @@ const Login = props => {
                         <label className="custom-control-label" htmlFor="customCheck1">Remember me</label>
                     </div>
                 </div>
-                <Link to = '/admin'>
+                <Link to = '/'>
                   <button  type="submit" onClick={props.setIsAuticated} className="btn btn-primary btn-block">Submit</button>
                 </Link>
                 

@@ -17,6 +17,10 @@
 .product__detail .body {
     display: flex;
 }
+.product__detail .body .body__left .image {
+    
+    height: 300px;
+}
 .product__detail .body .body__right{
     margin-left: auto;
     margin-right: 0;

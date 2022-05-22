@@ -26,16 +26,16 @@ function ProductCard (){
           ProductItem.map((item,index)=>(
             <div className="product_card">
                 <Link className="product_card__Link"
-                    to={{
-                        pathname: "/productdetail",
-                        state : {
-                            data: item.id
-                        }
+                    to= "/productdetail"
+                    state={{
+                        name: item.name,
+                        img: item.img,
+                        describe: item.describe,
                     }}
                 >  
                 <CardItem key ={index}
                     // img = {item.img} đáng ra là code này nhưng tôi chưa biết cách đưa ảnh vào json nên để tạm
-                    img = {sneaker}
+                    img = {item.img}
                     describe ={item.describe}
                     price = {item.price}
                     sold = {item.sold}
