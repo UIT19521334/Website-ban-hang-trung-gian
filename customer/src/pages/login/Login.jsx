@@ -4,17 +4,20 @@ import './login.css';
 const Login = props => {
     const [checkUser, SetCheckUser] = useState(false);
     const [checkPass, SetCheckPass] = useState(false);
+    const check =(e)=>{
+        e.input.username.value
+    }
         return (
           <div className="login_form">
             <form>
                 <h3>Sign In</h3>
                 <div className="form-group">
                     <label>Email address</label>
-                    <input type="email" className="form-control" placeholder="Enter email" />
+                    <input name="username" type="email" className="form-control" placeholder="Enter email" />
                 </div>
                 <div className="form-group">
                     <label>Password</label>
-                    <input type="password" className="form-control" placeholder="Enter password" />
+                    <input name="password" type="password" className="form-control" placeholder="Enter password" />
                 </div>
                 <div className="form-group">
                     <div className="custom-control custom-checkbox">
@@ -23,7 +26,7 @@ const Login = props => {
                     </div>
                 </div>
                 <Link to = '/'>
-                  <button  type="submit" onClick={props.setIsAuticated} className="btn btn-primary btn-block">Submit</button>
+                  <button  type="submit" onClick={check()} className="btn btn-primary btn-block">Submit</button>
                 </Link>
                 
                 <p className="forgot-password text-right">
