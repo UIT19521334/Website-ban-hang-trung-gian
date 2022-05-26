@@ -2,22 +2,30 @@ import React ,{useState} from "react";
 import { Link } from "react-router-dom";
 import './login.css';
 const Login = props => {
-    const [checkUser, SetCheckUser] = useState(false);
-    const [checkPass, SetCheckPass] = useState(false);
-    const check =(e)=>{
-        e.input.username.value
+    const [User, SetUser] = useState("");
+    const [Pass, SetPass] = useState("");
+    const check =()=>{
+        if (User === ""){
+            alert("")
+        }
     }
-        return (
+    const userHandleChange = e =>{
+        SetUser(e.target.value);
+    }
+    const passHandleChange = e =>{
+        SetPass(e.target.value);
+    }
+    return (
           <div className="login_form">
             <form>
                 <h3>Sign In</h3>
                 <div className="form-group">
                     <label>Email address</label>
-                    <input name="username" type="email" className="form-control" placeholder="Enter email" />
+                    <input value={User} onChange={userHandleChange} name="username" type="email" className="form-control" placeholder="Enter email" />
                 </div>
                 <div className="form-group">
                     <label>Password</label>
-                    <input name="password" type="password" className="form-control" placeholder="Enter password" />
+                    <input value={Pass} onChange={passHandleChange} name="password" type="password" className="form-control" placeholder="Enter password" />
                 </div>
                 <div className="form-group">
                     <div className="custom-control custom-checkbox">
@@ -35,5 +43,5 @@ const Login = props => {
             </form>
           </div>
         );
-    }
+}
     export default Login;

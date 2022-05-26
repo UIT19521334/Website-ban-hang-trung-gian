@@ -16,21 +16,21 @@ const Add_customer = props => {
             </div>
             <div className="col-4">
                 
-                <input className='add_popup_input' placeholder='Email of customer'/>
+                <input type="email" className='add_popup_input' placeholder='Email of customer'/>
             </div>
             <div className="col-4">
 
-                <input className='add_popup_input' placeholder='Customer phone number'/>
+                <input type="number" className='add_popup_input' placeholder='Customer phone number'/>
             </div>
         </div>
         <div className="row">
             <div className="col-4">
                 
-                <input className='add_popup_input' placeholder='Total orders'/>
+                <input type="number" className='add_popup_input' placeholder='Total orders'/>
             </div>            
             <div className="col-4">
                 
-                <input className='add_popup_input' placeholder='Total spend'/>
+                <input type="number" className='add_popup_input' placeholder='Total spend'/>
             </div>
             <div className="col-4">
                 

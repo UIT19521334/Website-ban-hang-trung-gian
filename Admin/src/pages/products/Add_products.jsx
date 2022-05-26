@@ -31,11 +31,11 @@ const Add_products = props => {
         <div className="row">
             <div className="col-4">
                 
-                <input className='add_popup_input' placeholder='Price of product'/>
+                <input type="number" className='add_popup_input' placeholder='Price of product'/>
             </div>            
             <div className="col-4">
                 
-                <input className='add_popup_input' placeholder='Number of product'/>
+                <input type="number" className='add_popup_input' placeholder='Number of product'/>
             </div>
             <div className="col-4">
                 
