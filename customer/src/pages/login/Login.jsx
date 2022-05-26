@@ -6,7 +6,7 @@ const Login = props => {
     const [Pass, SetPass] = useState("");
     const check =()=>{
         if (User === ""){
-            alert("")
+            
         }
     }
     const userHandleChange = e =>{
