@@ -3,3 +3,8 @@
 ## Thành viên :
 ### Nguyễn Đức Chí Đạt
 ### Nguyễn Ngọc Phúc
+## Giáo viên hướng dẫn :
+### Huỳnh Tuấn Anh
+## Công nghệ :
+### ReactJS
+### NodeJs
