@@ -1,10 +1,11 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import env from 'dotenv';
-import bodyParser from 'body-parser';
 
 //routes
 import userRoutes from './routes/auth.js';
+import adminRoutes from './routes/admin/auth.js';
+import categoryRoutes from './routes/category.js'
 
 const app = express();
 
@@ -19,8 +20,11 @@ mongoose.connect(`mongodb+srv://${process.env.MONGO_DB_USER}:${process.env.MONGO
         console.log('Database connected');
     });
 
+app.use(express.json());
 app.use(bodyParser.json());
 app.use('/api', userRoutes);
+app.use('/api', adminRoutes);
+app.use('/api', categoryRoutes);
 
 app.listen(process.env.PORT, () => {
     console.log(`Server is running on port ${process.env.PORT}`);
