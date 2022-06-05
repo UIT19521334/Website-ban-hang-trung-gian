@@ -32,7 +32,7 @@ const userSchema = new mongoose.Schema(
     role: {
       type: String,
       enum: ["user", "admin"],
-      default: "admin",
+      default: "user",
     },
     phoneNumber: {
       type: String,
@@ -40,6 +40,30 @@ const userSchema = new mongoose.Schema(
     shoeSize: {
       type: String,
     },
+    portfolio: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Product", //through: portfolio_items
+      },
+    ],
+    taken_orders: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Order", //taker_id
+      },
+    ],
+    listed_orders: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Order", //asker_id
+      },
+    ],
+    follows: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Follow",
+      },
+    ],
   },
   { timestamps: true }
 );
