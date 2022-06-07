@@ -21,7 +21,7 @@ const productSchema = new mongoose.Schema(
       required: true,
     },
     release_date: {
-      type: String,
+      type: Date,
       required: true,
     },
     description: {
@@ -32,8 +32,15 @@ const productSchema = new mongoose.Schema(
     size: {
       type: Number,
     },
-    img_path: [{ img: { type: String } }],
-    category: { type: mongoose.Schema.Types.ObjectId, ref: "Category" },
+    img_path: {
+      type: String,
+      required: true,
+    },
+    category: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Category",
+      required: true,
+    },
     updateAt: Date,
     portfolios: [
       {

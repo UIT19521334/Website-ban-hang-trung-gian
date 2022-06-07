@@ -6,7 +6,9 @@ import env from "dotenv";
 import userRoutes from "./routes/auth.js";
 import adminRoutes from "./routes/admin/auth.js";
 import categoryRoutes from "./routes/category.js";
+import productRoutes from "./routes/product.js";
 import bodyParser from "body-parser";
+import fileUpload from "express-fileupload";
 
 const app = express();
 
@@ -26,9 +28,11 @@ mongoose
 
 app.use(express.json());
 app.use(bodyParser.json());
+// app.use(fileUpload());
 app.use("/api", userRoutes);
 app.use("/api", adminRoutes);
 app.use("/api", categoryRoutes);
+app.use("/api", productRoutes);
 
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on port ${process.env.PORT}`);

@@ -30,10 +30,12 @@ const orderSchema = new mongoose.Schema(
       required: true,
     },
     order_type: {
+      //bid or place or buy now
       type: String,
       required: true,
     },
     active: {
+      //pending
       type: String,
       required: true,
     },

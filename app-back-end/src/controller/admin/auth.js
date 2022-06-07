@@ -15,6 +15,7 @@ export const signup = (req, res) => {
       email,
       password,
       username: Math.random().toString(),
+      role: "admin",
     });
 
     _user.save((error, data) => {
