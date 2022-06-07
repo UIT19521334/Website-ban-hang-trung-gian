@@ -12,17 +12,13 @@ const orderSchema = new mongoose.Schema(
       ref: "User", //seller
       required: true,
     },
-    taker_id: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User", //buyer
-      required: true,
-    },
+    // taker_id: {
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   ref: "User", //buyer
+    //   required: true,
+    // },
     size: {
-      type: String,
-      required: true,
-    },
-    sex: {
-      type: String,
+      type: Number,
       required: true,
     },
     price: {
@@ -30,18 +26,17 @@ const orderSchema = new mongoose.Schema(
       required: true,
     },
     order_type: {
-      //bid or place or buy now
+      //buy or sell
       type: String,
       required: true,
     },
     active: {
-      //pending
-      type: String,
-      required: true,
+      type: Boolean,
+      default: true,
     },
     sold: {
-      type: String,
-      required: true,
+      type: Boolean,
+      default: false,
     },
   },
   { timestamps: true }

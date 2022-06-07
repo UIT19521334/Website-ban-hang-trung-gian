@@ -7,6 +7,8 @@ import userRoutes from "./routes/auth.js";
 import adminRoutes from "./routes/admin/auth.js";
 import categoryRoutes from "./routes/category.js";
 import productRoutes from "./routes/product.js";
+import orderRoutes from "./routes/order.js";
+
 import bodyParser from "body-parser";
 import fileUpload from "express-fileupload";
 
@@ -33,6 +35,7 @@ app.use("/api", userRoutes);
 app.use("/api", adminRoutes);
 app.use("/api", categoryRoutes);
 app.use("/api", productRoutes);
+app.use("/api", orderRoutes);
 
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on port ${process.env.PORT}`);

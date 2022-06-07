@@ -12,10 +12,6 @@ const saleSchema = new mongoose.Schema(
       ref: "Product",
       required: true,
     },
-    sex: {
-      type: String,
-      required: true,
-    },
     size: {
       type: String,
       required: true,
@@ -29,8 +25,8 @@ const saleSchema = new mongoose.Schema(
       required: true,
     },
     active: {
-      type: String,
-      required: true,
+      type: Boolean,
+      default: true,
     },
   },
   { timestamps: true }
