@@ -10,6 +10,8 @@
 .account__sidebar .component{
     display: flex;
     margin-top: 20px;
+    text-decoration: none;
+    color: #515A5A;
 }
 .account__sidebar .component:hover{
     background-color: #E5E8E8;

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import Logo from '../../assets/img/logo.png'
 import './appbar.css'
 const Appbar = () => {
+  const [isLogin, setIsLogin] = React.useState(false);
   return (
     <div>
       <Navbar bg="Appbar" expand="md" fixed='top'>
@@ -44,7 +45,25 @@ const Appbar = () => {
               </NavDropdown>
               
             </Nav>
-            <Button as={Link} to="/login" variant='outline-primary' className='btn-login'  > Log in </Button>
+            { 
+              isLogin === true ? 
+                <Button 
+                  as={Link} to="/profile" 
+                  variant='outline-primary' 
+                  className='btn-login'
+                > 
+                  My account
+                </Button>
+              :
+                <Button 
+                  as={Link} to="/login" 
+                  variant='outline-primary' 
+                  className='btn-login'  
+                > 
+                  Log in 
+                </Button>
+              
+            }
             <Button as={Link} to="/sell" variant='outline-dark' className='btn-signin' > Sell </Button>
             
           </Navbar.Collapse>

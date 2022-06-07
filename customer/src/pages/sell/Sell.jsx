@@ -5,7 +5,7 @@ import DATA from '../../assets/json/productData.json'
 
 const Sell = () => {
     const [searchValue, setSearchValue] = React.useState("");
-    const [listData, setListData] = React.useState(DATA);
+    const [listData, setListData] = React.useState([]);
     
     const handleSearch = (e) => {
         
@@ -38,9 +38,9 @@ const Sell = () => {
             <div className="body_area">
                 {
                     listData.map((item, index) => (
-                        <div className='item'>
+                        <div className='item' key={index}>
                             <div className="item_left">
-                                <img src={item.img} className="item_image" />
+                                <img src={item.img} alt="item" className="item_image" />
                             </div>
                             <div className="item_right">
                                 <div className="item_name">
