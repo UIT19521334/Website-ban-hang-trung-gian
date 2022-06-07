@@ -38,6 +38,7 @@ export const signup = (req, res) => {
 }
 
 export const signin = (req, res) => {
+    console.log(req.body);
     User.findOne({ email: req.body.email })
         .exec((error, user) => {
             if (error) return res.status(400).json({ error });
