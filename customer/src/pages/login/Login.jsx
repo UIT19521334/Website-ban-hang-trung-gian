@@ -1,14 +1,16 @@
-import React, { Component } from "react";
-import { Link  } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link , useNavigate } from "react-router-dom";
 import './login.css'
 import axios from 'axios';
 import {Modal, Button} from 'react-bootstrap';
 import API from '../../API/config';
+import { UserContext } from "../../UserContext";
 
 const Login = props => {
+    const {user, setUser} = useContext(UserContext)
     const [username, setUserName] = React.useState("");
     const [password, setPassWord] = React.useState("");
-    
+    let navigate = useNavigate();
     // Open-close popup validate
     const [show, setShow] = React.useState(false);
     const handleClose = () => setShow(false);
@@ -19,11 +21,12 @@ const Login = props => {
     const handleCloseUserErr = () => setUserErr(false);
     const handleShowUserErr = () => setUserErr(true);
 
-    // Login success
-    const [userSuccess, setUserSuccess] = React.useState(false);
-    const handleCloseUserSuccess = () => setUserSuccess(false);
-    const handleShowUserSuccess= () => setUserSuccess(true);
-
+    //Login true
+    const handleUserSuccess = (check) =>{
+        if (check){
+            navigate("/");
+        }
+    }
     // Validate user-pass
     const checkvalidate = () =>{
         if (username === "" || password === "") {
@@ -44,7 +47,8 @@ const Login = props => {
 
                 localStorage.setItem('isLogin',true);
                 localStorage.setItem('user',res.data.user);
-                handleShowUserSuccess();
+                setUser(res.data.user)
+                handleUserSuccess(true);
             })
             .catch(err => {
                 localStorage.setItem('isLogin',false);
@@ -114,19 +118,7 @@ const Login = props => {
                 </Button>
                 </Modal.Footer>
             </Modal>
-            <Modal show={userSuccess} onHide={handleCloseUserSuccess}>
-                <Modal.Header closeButton>
-                <Modal.Title style={{color: "green"}}>Login Success</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>Congratulation !!!</Modal.Body>
-                <Modal.Footer>
-                <Link to="/" >
-                    <Button variant="secondary">
-                        OK
-                    </Button>
-                </Link>
-                </Modal.Footer>
-            </Modal>
+            
           </div>
         );
     }

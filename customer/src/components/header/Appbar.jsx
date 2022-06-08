@@ -1,11 +1,13 @@
-import React from 'react';
+import React, {useEffect, useContext} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {Button, Navbar, Nav, NavDropdown, Container,Form, FormControl} from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import Logo from '../../assets/img/logo.png'
+import { UserContext } from '../../UserContext';
 import './appbar.css'
 const Appbar = () => {
-  const [isLogin, setIsLogin] = React.useState(false);
+  const {user} = useContext(UserContext)
+
   return (
     <div>
       <Navbar bg="Appbar" expand="md" fixed='top'>
@@ -33,7 +35,6 @@ const Appbar = () => {
             >
               <Nav.Link as={Link} to="/product" >Products</Nav.Link>
               <Nav.Link as={Link} to="/new" >New</Nav.Link>
-              <Nav.Link as={Link} to="/profile" >My account</Nav.Link>
               <NavDropdown title="About" id="navbarScrollingDropdown">
                 <Nav.Link as={Link} to="/how-it-work" >How It Works</Nav.Link>
                 <Nav.Link as={Link} to="/buying-guide" >Buying Guide</Nav.Link>
@@ -46,7 +47,7 @@ const Appbar = () => {
               
             </Nav>
             { 
-              isLogin === true ? 
+              user ? 
                 <Button 
                   as={Link} to="/profile" 
                   variant='outline-primary' 

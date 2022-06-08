@@ -1,7 +1,14 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from "react";
+import { Link, useNavigate  } from 'react-router-dom';
+import { UserContext } from "../../../../UserContext";
 import "./sidebar.css";
 const SideBar = () => {
+  let navigate = useNavigate();
+  const {user, setUser} = useContext(UserContext)
+  const handleLogout =(e)=>{
+    setUser(null);
+    navigate("/");
+  }
   return (
     <div className='account__sidebar'>
       <h3>My account</h3>
@@ -41,14 +48,17 @@ const SideBar = () => {
                     <p>Following something</p> 
                 </div>
           </Link>
-          <Link to="/" className="component">
-                <div className="component_left">
-                  <i class='bx bx-power-off' ></i>
-                </div>
-                <div className="component_logout">
-                    <strong>Log out</strong> 
-                </div>
-          </Link>
+          <div className="component"
+            onClick={handleLogout}
+          >
+            <div className="component_left">
+              <i class='bx bx-power-off' ></i>
+            </div>
+            <div className="component_logout">
+                <strong>Log out</strong> 
+            </div>
+          </div>
+          
     </div>
   );
 }
