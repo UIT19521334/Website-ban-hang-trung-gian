@@ -9,6 +9,7 @@ import categoryRoutes from "./routes/category.js";
 import productRoutes from "./routes/product.js";
 import orderRoutes from "./routes/order.js";
 import saleRoutes from "./routes/sale.js";
+import followRoutes from "./routes/follow.js";
 
 import bodyParser from "body-parser";
 import fileUpload from "express-fileupload";
@@ -38,6 +39,7 @@ app.use("/api", categoryRoutes);
 app.use("/api", productRoutes);
 app.use("/api", orderRoutes);
 app.use("/api", saleRoutes);
+app.use("/api", followRoutes);
 
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on port ${process.env.PORT}`);
