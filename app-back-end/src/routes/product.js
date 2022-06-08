@@ -24,7 +24,7 @@ router.post(
   "/product/create",
   //   requireSignin,
   //   adminMiddleware,
-  upload.single("img_path"),
+  // upload.single("img_path"),
   create
 );
 

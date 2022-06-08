@@ -1,25 +1,19 @@
-import Product from "../models/product.js";
-import slugify from "slugify";
+import Sale from "../models/sale.js";
 
 export const create = async (req, res) => {
   try {
-    const { name, brand, retail_price, release_date, description, category } =
-      req.body;
+    const { order_id, product_id, size, date, price, active } = req.body;
 
-    // const img_path = req.file.filename;
-
-    const newProduct = new Product({
-      name,
-      slug: slugify(name),
-      brand,
-      retail_price,
-      release_date,
-      description,
-      img_path: req.body.img_path,
-      category,
+    const newSale = new Sale({
+      order_id,
+      product_id,
+      size,
+      date,
+      price,
+      active,
     });
 
-    const saved = await newProduct.save();
+    const saved = await newSale.save();
 
     res.status(200).json(saved);
   } catch (err) {
@@ -30,8 +24,8 @@ export const create = async (req, res) => {
 
 export const getAll = async (req, res) => {
   try {
-    const products = await Product.find();
-    res.status(200).json(products);
+    const sales = await Sale.find();
+    res.status(200).json(sales);
   } catch (error) {
     res.status(500).json(err);
     console.log(err);
@@ -40,14 +34,14 @@ export const getAll = async (req, res) => {
 
 export const update = async (req, res) => {
   try {
-    const product = await Product.findByIdAndUpdate(
+    const sale = await Sale.findByIdAndUpdate(
       req.params.id,
       {
         $set: req.body,
       },
       { new: true }
     );
-    res.status(200).json(product);
+    res.status(200).json(sale);
   } catch (err) {
     res.status(500).json(err);
     console.log(err);
@@ -55,7 +49,7 @@ export const update = async (req, res) => {
 };
 export const deleteById = async (req, res) => {
   try {
-    await Product.findByIdAndDelete(req.params.id);
+    await Sale.findByIdAndDelete(req.params.id);
     res.status(200).json("Has been deleted");
   } catch (err) {
     res.status(500).json(err);
