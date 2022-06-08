@@ -24,7 +24,7 @@ function ProductCard (){
           {
 
           ProductItem.map((item,index)=>(
-            <div className="product_card">
+            <div className="product_card" key={index}>
                 <Link className="product_card__Link"
                     to= "/productdetail"
                     state={{
