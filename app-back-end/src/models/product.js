@@ -1,35 +1,81 @@
 import mongoose from "mongoose";
 
-const productschema = new mongoose.Schema({
-    name:{
-        type: String,
-        required : true
+const productSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+      trim: true,
     },
-    img:{
-        type: String,
-        required : true
+    brand: {
+      type: String,
+      required: true,
     },
-    category:{
-        type: String,
-        required : true
+    slug: {
+      type: String,
+      required: true,
+      unique: true,
     },
-    describe:{
-        type: String,
-        required : true
+    retail_price: {
+      type: Number,
+      required: true,
     },
-    size:{
-        type: Number,
-        required : true
+    release_date: {
+      type: Date,
+      required: true,
     },
-    price:{
-        type: Number,
-        required : true
+    description: {
+      type: String,
+      required: true,
+      trim: true,
     },
-    sold:{
-        type: Number,
-        required : true
-    }
-},{timestamps : true});
+    // size: {
+    //   type: Number,
+    // },
+    img_path: {
+      type: String,
+      required: true,
+    },
+    category: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Category",
+      required: true,
+    },
+    // updateAt: Date,
+    // portfolios: [
+    //   {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: "Portfolio_Item",
+    //   },
+    // ],
+    // owners: [
+    //   {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: "User",
+    //   },
+    // ],
+    // orders: [
+    //   {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: "Order",
+    //   },
+    // ],
+    // sales: [
+    //   {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: "Sale",
+    //   },
+    // ],
+    // follows: [
+    //   {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: "Follow",
+    //   },
+    // ],
+  },
+  { timestamps: true }
+);
 
-const ProductModel = mongoose.model('Product',productschema);
-export default ProductModel
+const Product = mongoose.model("Product", productSchema);
+
+export default Product;
