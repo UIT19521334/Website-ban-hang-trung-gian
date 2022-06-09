@@ -6,12 +6,17 @@ import PriceHistoryChart from "../../components/chart/PriceHistoryChart";
 import ViewBid from "../../components/popup/viewBid";
 import ViewSales from "../../components/popup/viewSales";
 import ViewAsk from "../../components/popup/viewAsk";
+import BuySize from "../../components/shoesSize/buySize";
+import SellSize from "../../components/shoesSize/SellSize";
+import { Modal, Button } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 import './productdetail.css';
 function ProductDetail (props) {
     const[viewAsk_page,setviewAsk_page] = useState(false);
     const[viewBid_page,setviewBid_page] = useState(false);
     const[viewSales_page,setviewSales_page] = useState(false);
+    const[viewBuy_page,setviewBuy_page] = useState(false);
+    const[viewSell_page,setviewSell_page] = useState(false);
     const show_viewAsk = () => {
         setviewAsk_page(!viewAsk_page)
     }
@@ -20,6 +25,12 @@ function ProductDetail (props) {
     }
     const show_viewSales = () => {
         setviewSales_page(!viewSales_page)
+    }
+    const show_viewBuy = () => {
+        setviewBuy_page(!viewBuy_page)
+    }
+    const show_viewSell = () => {
+        setviewSell_page(!viewSell_page)
     }
     const location = useLocation();
     const state = location.state;
@@ -58,14 +69,14 @@ function ProductDetail (props) {
                         </Form.Select>
                     </Form.Group>
                     <div className="conponent__btn">
-                        <button className="buy__btn"> Buy or Bid </button>
+                        <button onClick={show_viewBuy} className="buy__btn"> Buy or Bid </button>
                         <div className="conponent__text">
                             <p>Lowest Ask</p>
                             <h4>$ 310</h4>
                         </div>
                     </div>
                     <div className="conponent__btn">
-                        <button className="sell__btn"> Sell or Ask </button>
+                        <button onClick={show_viewSell} className="sell__btn"> Sell or Ask </button>
                         <div className="conponent__text">
                             <p>Highest Bid</p>
                             <h4>$ 310</h4>
@@ -130,13 +141,18 @@ function ProductDetail (props) {
                 <PriceHistoryChart/>
             </div>
             <hr/>
-            {
-                viewBid_page && <ViewBid handleClose={show_viewBid}/>
-            }{
-                viewAsk_page && <ViewAsk handleClose={show_viewAsk}/>
-            }{
-                viewSales_page && <ViewSales handleClose={show_viewSales}/>
-            }
+            
+            <Modal size="lg" show={viewBid_page} onHide={show_viewBid} >
+                <ViewBid handleClose={show_viewBid}/>
+            </Modal>
+            <Modal  size="lg" show={viewAsk_page} onHide={show_viewAsk} >
+                <ViewAsk handleClose={show_viewAsk}/>
+            </Modal>
+            <Modal size="lg" show={viewSales_page} onHide={show_viewSales} >
+                <ViewSales handleClose={show_viewSales}/>
+            </Modal>
+            <BuySize view={viewBuy_page} handleClose={show_viewBuy} />
+            <SellSize view={viewSell_page} handleClose={show_viewSell} />
         </div>
     );
 }

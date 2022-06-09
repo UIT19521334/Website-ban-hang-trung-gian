@@ -4,7 +4,7 @@ import './popup.css';
 
 function ViewBid (props) {
     return (
-        <div className="popup-box">
+        
             <div className="viewBox">            
                 {props.content}          
                 <div className="viewBox_header">
@@ -41,6 +41,6 @@ function ViewBid (props) {
                 </div>
                 
             </div>
-        </div>
+        
     );}
 export default ViewBid

@@ -1,7 +1,9 @@
 import React from 'react';
 import './myprofile.css';
+import { UserContext } from '../../../../UserContext';
 const MyProfile = () => {
-  return (
+    const {user} = React.useContext(UserContext);
+    return (
     <div className='profile'>
       <div className="profile_header">
           <div className="header_left">
@@ -17,7 +19,7 @@ const MyProfile = () => {
           <div className="row">
               <div className="col-4">
                   <h5>Name</h5>
-                  <p>Nguyễn Đức Chí Đạt</p>
+                  <p>{user.name}</p>
               </div>
               <div className="col-4">
                   <h5>Shoes size</h5>
@@ -25,13 +27,13 @@ const MyProfile = () => {
               </div>
               <div className="col-4">
                   <h5>Email address</h5>
-                  <p>nguyenducchidat@gmail.com</p>
+                  <p>{user.email}</p>
               </div>
           </div>
           <div className="row">
               <div className="col-4">
                   <h5>UserName</h5>
-                  <p>NDCDat</p>
+                  <p>{user.username}</p>
               </div>
               <div className="col-4">
                   <h5>Reset password</h5>

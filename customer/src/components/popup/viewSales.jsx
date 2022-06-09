@@ -3,7 +3,7 @@ import data from '../../assets/json/allBids.json';
 import './popup.css';
 function ViewSales (props) {
     return (
-        <div className="popup-box">
+        
             <div className="viewBox">
                 {props.content}
                 <div className="viewBox_header">
@@ -39,6 +39,6 @@ function ViewSales (props) {
                     </table>
                 </div>
             </div>
-        </div>
+        
     );}
 export default ViewSales
