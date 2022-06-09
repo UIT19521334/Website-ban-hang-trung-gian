@@ -1,4 +1,4 @@
-.login_form_{
+.login_form{
     background-color: #5DADE2;
     position: fixed;
     width: 100%;
@@ -6,32 +6,32 @@
     top: 0;
     left: 0;
 }
-.login_form_ form{
-    position: relative;
+.login_form form{
+    
     width: 360px;
-    margin: 0 auto;
-    height: auto;
+    margin: auto;
+    height: max-content;
     max-height: 70vh;
     margin-top: calc(100vh - 85vh - 20px);
     background: #fff;
     border-radius: 4px;
     padding: 20px;
     border: 1px solid #999;
-    overflow: auto;
+    
 }
-.login_form_ .form-group{
+.login_form .form-group{
     margin-top: 20px;
 }
-.login_form_ .form-group label{
+.login_form .form-group label{
     margin-bottom: 5px;
 }
-.login_form_ .btn{
+.login_form .btn{
     padding: 10px;
     width: 100%;
     justify-content: center;
     align-items: center;
 }
-.login_form_ .forgot-password{
+.login_form .forgot-password{
     margin-top: 20px;
     margin-left: auto;
     margin-right: 0;

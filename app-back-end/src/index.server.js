@@ -1,7 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import env from "dotenv";
-
+import cors from "cors";
 //routes
 import userRoutes from "./routes/auth.js";
 import adminRoutes from "./routes/admin/auth.js";
@@ -30,6 +30,11 @@ mongoose
   .then(() => {
     console.log("Database connected");
   });
+// COR
+
+
+
+app.use(cors()) 
 
 app.use(express.json());
 app.use(bodyParser.json());
