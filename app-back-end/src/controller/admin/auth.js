@@ -1,6 +1,6 @@
 import User from "../../models/user.js";
 import jwt from "jsonwebtoken";
-
+import bcrypt from "bcrypt";
 export const signup = (req, res) => {
   User.findOne({ email: req.body.email }).exec((error, user) => {
     if (user)
@@ -37,7 +37,11 @@ export const signin = (req, res) => {
   User.findOne({ email: req.body.email }).exec((error, user) => {
     if (error) return res.status(400).json({ error });
     if (user) {
-      if (user.authenticate(req.body.password) && user.role === "admin") {
+      const checkPassword = bcrypt.compareSync(
+        req.body.password,
+        user.hash_password
+      );
+      if (checkPassword && user.role === "admin") {
         const token = jwt.sign(
           { _id: user._id, role: user.role },
           process.env.JWT_SECRET,
