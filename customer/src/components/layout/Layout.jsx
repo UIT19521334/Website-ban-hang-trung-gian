@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useLocation, useLayoutEffect, useEffect} from 'react'
 import Appbar from '../header/Appbar'
 import Footer from '../footer/Footer'
 
@@ -8,10 +8,8 @@ import { BrowserRouter} from 'react-router-dom'
 
 import './layout.css'
 
-
-
 const Layout = () => {
-  
+ 
   return (
     <BrowserRouter>
       <div className='layout'>

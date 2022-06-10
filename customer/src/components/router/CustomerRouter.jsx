@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{useLocation, useEffect} from 'react';
 import { Route, Routes} from 'react-router-dom';
 import Home from '../../pages/home/Home';
 import Products from '../../pages/products/Products';
@@ -7,7 +7,9 @@ import Login from '../../pages/login/Login';
 import Signup from '../../pages/signup/Signup';
 import AccountLayout from '../../pages/profile/AccountLayout';
 import Sell from '../../pages/sell/Sell';
+
 const CustomerRouter = () => {
+
   return (
       <Routes>
           <Route exact path="/" element={ <Home/> }/>
