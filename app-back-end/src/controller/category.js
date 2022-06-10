@@ -13,8 +13,8 @@ function createCategories(categories, parentId = null) {
   for (let cate of category) {
     categoryList.push({
       _id: cate._id,
-      name: cate.name,
-      slug: cate.slug,
+      name_category: cate.name_category,
+      slug_category: cate.slug_category,
       children: createCategories(categories, cate._id),
     });
   }
@@ -24,8 +24,8 @@ function createCategories(categories, parentId = null) {
 export const addCategory = (req, res) => {
   {
     const categoryObj = {
-      name: req.body.name,
-      slug: slugify(req.body.name),
+      name_category: req.body.name_category,
+      slug_category: slugify(req.body.name_category),
     };
 
     if (req.body.parentId) {

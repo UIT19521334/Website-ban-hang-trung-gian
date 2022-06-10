@@ -30,7 +30,33 @@ export const create = async (req, res) => {
 
 export const getAll = async (req, res) => {
   try {
-    const products = await Product.find();
+    const products = await Product.aggregate([
+      {
+        $lookup: {
+          from: "categories",
+          localField: "category",
+          foreignField: "_id",
+          as: "result",
+        },
+      },
+      {
+        $replaceRoot: {
+          newRoot: {
+            $mergeObjects: [
+              {
+                $arrayElemAt: ["$result", 0],
+              },
+              "$$ROOT",
+            ],
+          },
+        },
+      },
+      {
+        $project: {
+          result: 0,
+        },
+      },
+    ]);
     res.status(200).json(products);
   } catch (error) {
     res.status(500).json(err);
