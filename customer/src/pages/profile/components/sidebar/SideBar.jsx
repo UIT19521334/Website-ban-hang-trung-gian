@@ -11,7 +11,7 @@ const SideBar = () => {
   }
   return (
     <div className='account__sidebar'>
-      <h3>My account</h3>
+      
           <Link to="./" className="component">
                 <div className="component_left">
                   <i class='bx bx-user-pin bx-flip-horizontal' ></i>
