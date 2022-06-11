@@ -8,24 +8,24 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import './add_popup.css';
-const Add_products = props => {
-
+const Fix_products = props => {
+    let fixData = props.fixData;
   // Fake data
   const category_data = ['Chuck Taylor', 'Golf Shoes', 'Hiking Boots', 'High-Tops', 'Running Shoes', 'Soccer Shoes', 'Sneakers', 'Soccer Shoes']
   const status_data = ['Hot', 'Regular', 'TopSeller', 'Irregular', 'TopPick']
   const size_data = ['1', '1.5', '2', '2.5', '3', '3.5', '4', '4.5', '5', '5.5']
 
   // Get data
-  const [productName, setProductName] = useState();
+  const [productName, setProductName] = useState(fixData.name);
   const [productImg, setProductImg] = useState();
-  const [productCategory, setProductCategory] = useState();
+  const [productCategory, setProductCategory] = useState(fixData.category);
 
   const [productDesc, setProductDesc] = useState();
-  const [productNumber, setProductNumber] = useState();
-  const [productStatus, setProductStatus] = useState();
+  const [productNumber, setProductNumber] = useState(fixData.number);
+  const [productStatus, setProductStatus] = useState(fixData.status);
 
   const [productSize, setProductSize] = useState();
-  const [productPrice, setProductPrice] = useState();
+  const [productPrice, setProductPrice] = useState(fixData.price);
   // SetData
   const setProductNameData = (e) => {
     setProductName(e.target.value);
@@ -147,7 +147,7 @@ const Add_products = props => {
           </div>
         </div>
         <div className="add_popup_footer">
-          <button className='btn__add' onClick={handleAdd} > Add </button>
+          <button className='btn__fix' onClick={handleAdd} > Fix </button>
           <button className='btn__del' onClick={props.handleClose} > Close </button>
         </div>
       </div>
@@ -182,7 +182,7 @@ const Add_products = props => {
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Your adding successfully
+            Your fixxing successfully
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -195,4 +195,4 @@ const Add_products = props => {
   );
 }
 
-export default Add_products;
+export default Fix_products;

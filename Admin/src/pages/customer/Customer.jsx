@@ -2,15 +2,11 @@ import React ,{useState}from 'react';
 import { MDBDataTableV5 } from 'mdbreact';
 import customerList from '../../assets/jsonData/customer-list.json';
 import Add_customer from './Add_customers';
+import Fix_customer from './Fix_customer';
 import './customer.css';
 
 export default function Customer() {
-  const[Add_customer_page,setAddProducts_page] = useState(false);
-
-  const showAddPage = () => {
-    console.log('click')
-    setAddProducts_page(!Add_customer_page)
-  }
+  
   const [datatable, setDatatable] = React.useState({
     columns: [
       {
@@ -66,6 +62,37 @@ export default function Customer() {
   const showLogs2 = (e) => {
     setCheckbox1(e);
   };
+  const[Add_customer_page,setAddCustomer_page] = useState(false);
+  const[Fix_customer_page,setFixCustomer_page] = useState(false);
+
+  const handleAddPage = () => {
+    setAddCustomer_page(!Add_customer_page)
+  }
+  const handleFixPage = () => {
+    setFixCustomer_page(!Fix_customer_page)
+  }
+  const checkFix = () =>{
+    if (checkbox1){
+      if (checkbox1.checked == true){
+        handleFixPage()
+      }else{
+        alert("Please choose a field to continute");
+      }
+    } else{
+      alert("Please choose a field to continute");
+    }
+  }
+  const checkDelete = () =>{
+    if (checkbox1){
+      if (checkbox1.checked == true){
+        alert("Delete successfully");
+      }else{
+        alert("Please choose a field to continute");
+      }
+    } else{
+      alert("Please choose a field to continute");
+    }
+  }
   return  (
     <div className="row">
         <div className="col-12">
@@ -74,9 +101,9 @@ export default function Customer() {
                   <div className='card__body-header-cus'>
                     <h2>Customer</h2>
                     <div className="card__body-header-right">
-                      <button className='btn__add' onClick={showAddPage}> Add </button>
-                      <button className='btn__del'> Delete </button>
-                      <button className='btn__fix' onClick={showAddPage}> Fix</button>
+                      <button className='btn__add' onClick={handleAddPage}> Add </button>
+                      <button className='btn__del' onClick={checkDelete}> Delete </button>
+                      <button className='btn__fix' onClick={checkFix}> Fix</button>
                     </div>
                   </div>
                   
@@ -109,7 +136,10 @@ export default function Customer() {
             </div>
         </div>
         {
-          Add_customer_page && <Add_customer handleClose={showAddPage}/>
+          Add_customer_page && <Add_customer handleClose={handleAddPage}/>
+        }
+        {
+          Fix_customer_page && <Fix_customer fixData={checkbox1} handleClose={handleFixPage}/>
         }
     </div> 
   )

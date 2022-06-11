@@ -2,14 +2,49 @@ import React,{useState,useEffect} from 'react';
 import { MDBDataTableV5 } from 'mdbreact';
 import productsList from '../../assets/jsonData/products-list.json';
 import Add_products from './Add_products';
+import Fix_products from './Fix_products';
 import './products.css';
 // import Badge from '../../components/badge/Badge';
 export default function Products() {
   //const [proDuctData,setproDuctData]= useState([]);
   const[AddProducts_page,setAddProducts_page] = useState(false);
+  const[FixProducts_page,setFixProducts_page] = useState(false);
 
-  const showAddPage = () => {
+  // hanldeAdd
+  const handleAddPage = () => {
     setAddProducts_page(!AddProducts_page)
+  }
+
+  //handle Fix
+  const [checkbox1, setCheckbox1] = useState('');
+
+  const showLogs2 = (e) => {
+    setCheckbox1(e);
+  };
+  const handleFixPage = () => {
+    setFixProducts_page(!FixProducts_page)
+  }
+  const checkFix = () =>{
+    if (checkbox1){
+      if (checkbox1.checked == true){
+        handleFixPage()
+      }else{
+        alert("Please choose a field to continute");
+      }
+    } else{
+      alert("Please choose a field to continute");
+    }
+  }
+  const checkDelete = () =>{
+    if (checkbox1){
+      if (checkbox1.checked == true){
+        alert("Delete successfully");
+      }else{
+        alert("Please choose a field to continute");
+      }
+    } else{
+      alert("Please choose a field to continute");
+    }
   }
   // useEffect(()=>{
   //   let productData =[];
@@ -64,11 +99,6 @@ export default function Products() {
     ],
     rows: productsList
   });
-  const [checkbox1, setCheckbox1] = React.useState('');
-
-  const showLogs2 = (e) => {
-    setCheckbox1(e);
-  };
   return  (
     <div className="row">
         <div className="col-12">
@@ -77,9 +107,9 @@ export default function Products() {
                 <div className='card__body-header-cus'>
                     <h2>Products</h2>
                     <div className="card__body-header-right">
-                      <button className='btn__add' onClick={showAddPage}> Add </button>
-                      <button className='btn__del'> Delete </button>
-                      <button className='btn__fix' onClick={showAddPage}> Fix</button>
+                      <button className='btn__add' onClick={handleAddPage}> Add </button>
+                      <button className='btn__del' onClick={checkDelete}> Delete </button>
+                      <button className='btn__fix' onClick={checkFix}> Fix</button>
                     </div>
                   </div>
                   <MDBDataTableV5 
@@ -111,7 +141,10 @@ export default function Products() {
             </div>
         </div>
         {
-          AddProducts_page && <Add_products handleClose={showAddPage}/>
+          AddProducts_page && <Add_products handleClose={handleAddPage}/>
+        }
+        {
+          FixProducts_page && <Fix_products fixData={checkbox1} handleClose={handleFixPage}/>
         }
     </div> 
   )

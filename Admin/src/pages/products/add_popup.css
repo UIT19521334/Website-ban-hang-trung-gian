@@ -66,3 +66,13 @@
     background-color: red;
     color: #fff;
 }
+.box_Add_popup_admin .btn__fix{
+    border : solid 2px orange ;
+    color: orange;
+    margin: 10px;
+    padding: 5px;
+}
+.box_Add_popup_admin .btn__fix:hover{
+    background-color: orange;
+    color: #fff;
+}

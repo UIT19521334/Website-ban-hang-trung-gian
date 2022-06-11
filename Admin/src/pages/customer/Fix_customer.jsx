@@ -8,18 +8,19 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import '../products/add_popup.css';
-const Add_customer = props => {
+const Fix_customer = props => {
+    let fixData = props.fixData;
   // Fake data
-    const location_data = ['Quảng Trị', 'Quảng Nam', 'Tp HCM', 'Hà Nội', 'Đà Nẵng']
+    const location_data = ['Quảng Trị', 'Quảng Nam', 'Tp HCM', 'Hà Nội', 'Đà Nẵng','VietNam']
 
   // Get data
-  const [customerName, setCustomerName] = useState();
-  const [customerEmail, setCustomerEmail] = useState();
-  const [customerPhoneNumber, setCustomerPhoneNumber] = useState();
+  const [customerName, setCustomerName] = useState(fixData.name);
+  const [customerEmail, setCustomerEmail] = useState(fixData.email);
+  const [customerPhoneNumber, setCustomerPhoneNumber] = useState(fixData.phone);
 
-  const [customerTotalOrder, setCustomerTotalOrder] = useState();
-  const [customerTotalSpend, setCustomerTotalSpend] = useState();
-  const [customerLocation, setCustomerLocation] = useState();
+  const [customerTotalOrder, setCustomerTotalOrder] = useState(fixData.total_orders);
+  const [customerTotalSpend, setCustomerTotalSpend] = useState(fixData.total_spend);
+  const [customerLocation, setCustomerLocation] = useState(fixData.location);
 
   // SetData
   const setCustomerNameData = (e) => {
@@ -60,6 +61,10 @@ const Add_customer = props => {
   const handleAdd = () => {
     if (customerName == "" || customerName == null
       || customerEmail == null || customerEmail == ""
+      || customerLocation == null || customerLocation == ""
+      || customerPhoneNumber == null || customerPhoneNumber == ""
+      || customerTotalOrder == null || customerTotalOrder == null
+      || customerTotalSpend == "" || customerTotalSpend == null
     ) {
       handleClickOpen()
     } else {
@@ -82,7 +87,7 @@ const Add_customer = props => {
             </div>
             <div className="col-4">
 
-                <input value={customerPhoneNumber} onChange={setCustomerPhoneNumberData} type="number" className='add_popup_input' placeholder='Customer phone number'/>
+                <input value={customerPhoneNumber} onChange={setCustomerPhoneNumberData} className='add_popup_input' placeholder='Customer phone number'/>
             </div>
         </div>
         <div className="row">
@@ -107,7 +112,7 @@ const Add_customer = props => {
             </div>
         </div>
         <div className="add_popup_footer">
-            <button  className='btn__add' onClick={handleAdd} > Add </button>
+            <button  className='btn__fix' onClick={handleAdd} > Fix </button>
             <button className='btn__del' onClick={props.handleClose} > Close </button>
         </div>
       </div>
@@ -142,7 +147,7 @@ const Add_customer = props => {
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Your adding successfully
+            Your fixxing successfully
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -155,4 +160,4 @@ const Add_customer = props => {
   );
 }
 
-export default Add_customer;
+export default Fix_customer;
