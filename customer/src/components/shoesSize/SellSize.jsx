@@ -146,10 +146,10 @@ function SellSize(props){
                 <Modal.Body>
                 <Form>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                    <Form.Label>Email address</Form.Label>
+                    <Form.Label>Phone number</Form.Label>
                     <Form.Control
-                        type="email"
-                        placeholder="name@example.com"
+                        type="number"
+                        placeholder="example: 0915017711"
                         autoFocus
                     />
                     </Form.Group>

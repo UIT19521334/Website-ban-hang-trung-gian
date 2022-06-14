@@ -44,8 +44,6 @@ const SignUp = props => {
             )
             .then(res => {
 
-                localStorage.setItem('isLogin',true);
-                localStorage.setItem('user',res.data.user);
                 handleShowUserSuccess();
             })
             .catch(err => {
@@ -132,7 +130,7 @@ const SignUp = props => {
                 </Modal.Header>
                 <Modal.Body>Congratulation !!!</Modal.Body>
                 <Modal.Footer>
-                <Link to="/" >
+                <Link to="/login" >
                     <Button variant="secondary">
                         OK
                     </Button>

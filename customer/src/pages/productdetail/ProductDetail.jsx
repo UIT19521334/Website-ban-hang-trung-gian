@@ -58,7 +58,7 @@ function ProductDetail (props) {
                 </div>
                 <div className="body__right">
                     <Form.Group style={{minWidth:'600px'}}>
-                        <Form.Label>Disabled select menu</Form.Label>
+                        <Form.Label>Status menu</Form.Label>
                         <Form.Select aria-label="Default select example">
                             <option>Most popular</option>
                             <option value="1">Featured Shoes</option>
