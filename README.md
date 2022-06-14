@@ -1,4 +1,4 @@
-# SFZ - Web site bán hàng
+# SFZ - Web site mua bán giày
 
 ## Mục lục
 - [Chức năng](#chức-năng)
@@ -26,7 +26,7 @@
 - MongoDB.
 - Expo.
 ##Backend/Database/Diagram
-- Link picture.
+- https://user-images.githubusercontent.com/67258104/173553134-890570f5-0c1b-4d0a-ad4b-b38ecbb0de00.png
 ## Tác giả
 - Nguyễn Ngọc Phúc - 1952xxxx.
 - Nguyễn Đức Chí Đạt - 19521334.
