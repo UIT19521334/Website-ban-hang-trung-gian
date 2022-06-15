@@ -33,7 +33,7 @@ const UserAction = {
         const userList = res.data;
         dispatch({
           type: userConstants.GET_ALL_USERS_SUCCESS,
-          payload: { users: userList },
+          payload: { users: userList.listCustomer },
         });
       } else {
         dispatch({

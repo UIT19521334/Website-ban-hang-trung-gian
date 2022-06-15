@@ -9,7 +9,7 @@ const UserApi = {
   },
 
   getAll: async () => {
-    const res = await axios.get(`user`);
+    const res = await axios.get(`/user/getAll`);
 
     return res;
   },

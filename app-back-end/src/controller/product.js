@@ -56,11 +56,34 @@ export const getAll = async (req, res) => {
           result: 0,
         },
       },
+      {
+        $addFields: {
+          release_date: {
+            $dateToString: {
+              format: "%d/%m/%Y",
+              date: "$release_date",
+            },
+          },
+        },
+      },
+      {
+        $sort: {
+          createdAt: -1,
+        },
+      },
     ]);
+
+    var i = 1;
+
+    for (let product of products) {
+      product.products_id = `SK${i}`;
+      i++;
+    }
+
     res.status(200).json(products);
   } catch (error) {
-    res.status(500).json(err);
-    console.log(err);
+    res.status(500).json(error);
+    console.log(error);
   }
 };
 

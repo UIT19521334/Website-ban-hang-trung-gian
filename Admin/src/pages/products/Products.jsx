@@ -5,29 +5,18 @@ import { MDBDataTableV5 } from "mdbreact";
 import Add_products from "./Add_products";
 import "./products.css";
 import ProductActions from "../../actions/product.actions";
+import CategoryActions from "../../actions/category.actions";
 // import Badge from '../../components/badge/Badge';
 export default function Products() {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(ProductActions.getAllProduct());
+    dispatch(CategoryActions.getAllCategory());
   }, []);
 
-  // useEffect(()=>{
-  //   let productData =[];
-  //   productsList.map((item,index)=>{
-  //     item.status = (
-  //       <Badge content={item.status} />
-  //     )
-  //     productData.push(item);
-  //   });
-  //   setproDuctData(productData);
-  //   console.log('product data:', productData)
-  // }, [proDuctData])
-
-  //const [proDuctData,setproDuctData]= useState([]);
-
   const state_product = useSelector((state) => state.products);
+  const state_category = useSelector((state) => state.categories);
 
   const [AddProducts_page, setAddProducts_page] = useState(false);
 
@@ -72,51 +61,60 @@ export default function Products() {
     rows: state_product.productList,
   });
 
-  useEffect(() => {
-    if (state_product.productList.length > 0) {
-      setDatatable({
-        columns: [
-          {
-            label: "ID",
-            field: "products_id",
-            width: 150,
-          },
-          {
-            label: "Category",
-            field: "name_category",
-            width: 150,
-          },
-          {
-            label: "Name",
-            field: "name",
-            width: 150,
-            attributes: {
-              "aria-controls": "DataTable",
-              "aria-label": "Name",
-            },
-          },
-          {
-            label: "Retail Price",
-            field: "retail_price",
-            sort: "asc",
-            width: 200,
-          },
-          {
-            label: "Release Date",
-            field: "release_date",
-            sort: "asc",
-            width: 200,
-          },
-        ],
-        rows: state_product.productList || [],
-      });
-    }
-  }, [state_product.productList]);
   const [checkbox1, setCheckbox1] = React.useState("");
 
   const showLogs2 = (e) => {
     setCheckbox1(e);
+    // console.log(checkbox1);
   };
+
+  // useEffect(() => {
+  //   if (state_product.productList.length > 0) {
+  //     setDatatable({
+  //       columns: [
+  //         {
+  //           label: "ID",
+  //           field: "products_id",
+  //           width: 150,
+  //         },
+  //         {
+  //           label: "Category",
+  //           field: "name_category",
+  //           width: 150,
+  //         },
+  //         {
+  //           label: "Name",
+  //           field: "name",
+  //           width: 150,
+  //           attributes: {
+  //             "aria-controls": "DataTable",
+  //             "aria-label": "Name",
+  //           },
+  //         },
+  //         {
+  //           label: "Retail Price",
+  //           field: "retail_price",
+  //           sort: "asc",
+  //           width: 200,
+  //         },
+  //         {
+  //           label: "Release Date",
+  //           field: "release_date",
+  //           sort: "asc",
+  //           width: 200,
+  //         },
+  //         {
+  //           label: "Description",
+  //           field: "description",
+  //           sort: "asc",
+  //           width: 200,
+  //         },
+  //       ],
+  //       rows: state_product.productList || [],
+  //     });
+  //   }
+  // }, [state_product.productList]);
+
   return (
     <div className="row">
       <div className="col-12">
@@ -151,7 +149,7 @@ export default function Products() {
               searchBottom={false}
               //Tạo checkbox
               // Tìm hiểu thêm tại trang https://mdbootstrap.com/docs/react/tables/datatables/#top-select-serach
-              checkbox={checkbox1}
+              checkbox
               headCheckboxID="id2"
               bodyCheckboxID="checkboxes2"
               getValueCheckBox={(e) => {
@@ -161,7 +159,14 @@ export default function Products() {
           </div>
         </div>
       </div>
-      {AddProducts_page && <Add_products handleClose={showAddPage} />}
+      {AddProducts_page && (
+        <Add_products
+          handleClose={showAddPage}
+          productList={state_product.productList}
+          categoryList={state_category.categoryList}
+          product={checkbox1}
+        />
+      )}
     </div>
   );
 }

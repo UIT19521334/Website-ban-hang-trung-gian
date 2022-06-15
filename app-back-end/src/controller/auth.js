@@ -8,13 +8,14 @@ export const signup = (req, res) => {
         message: "User already registered",
       });
 
-    const { name, email, password } = req.body;
+    const { name, email, password, phoneNumber } = req.body;
 
     const _user = new User({
       name,
       email,
       password,
       username: Math.random().toString(),
+      phoneNumber,
     });
 
     _user.save((error, data) => {
@@ -42,7 +43,7 @@ export const signin = (req, res) => {
           process.env.JWT_SECRET,
           { expiresIn: "1h" }
         );
-        const { _id, name, email, role } = user;
+        const { _id, name, email, role, phoneNumber } = user;
         res.status(200).json({
           token,
           user: {
@@ -50,6 +51,7 @@ export const signin = (req, res) => {
             name,
             email,
             role,
+            phoneNumber,
           },
         });
       } else {

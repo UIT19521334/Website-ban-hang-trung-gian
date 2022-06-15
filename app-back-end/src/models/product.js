@@ -34,7 +34,7 @@ const productSchema = new mongoose.Schema(
     // },
     img_path: {
       type: String,
-      required: true,
+      // required: true,
     },
     category: {
       type: mongoose.Schema.Types.ObjectId,
