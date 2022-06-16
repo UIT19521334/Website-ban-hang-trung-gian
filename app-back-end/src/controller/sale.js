@@ -5,7 +5,7 @@ export const create = async (req, res) => {
     const { order_id, product_id, size, date, price, active } = req.body;
 
     const newSale = new Sale({
-      order_id,
+      // order_id,
       product_id,
       size,
       date,
@@ -22,10 +22,40 @@ export const create = async (req, res) => {
   }
 };
 
+Number.prototype.padLeft = function (base, chr) {
+  var len = String(base || 10).length - String(this).length + 1;
+  return len > 0 ? new Array(len).join(chr || "0") + this : this;
+};
+
 export const getAll = async (req, res) => {
   try {
-    const sales = await Sale.find();
-    res.status(200).json(sales);
+    const sales = await Sale.find().populate("product_id");
+
+    var stt = 1;
+
+    let payload = [];
+
+    for (let sale of sales) {
+      const date = new Date(sale.createdAt);
+      const year = date.getFullYear();
+      const month = (date.getMonth() + 1).padLeft();
+      const dt = date.getDate().padLeft();
+      const h = date.getHours().padLeft();
+      const m = date.getMinutes().padLeft();
+      const s = date.getSeconds().padLeft();
+
+      let result = {};
+      result.stt = stt;
+      result.date_sale = [dt, month, year].join("/");
+      result.time_sale = [h, m, s].join(":");
+      result.product = sale.product_id.name;
+      result.size = sale.size;
+      result.price = sale.price;
+      payload.push(result);
+      stt++;
+    }
+
+    res.status(200).json(payload);
   } catch (error) {
     res.status(500).json(err);
     console.log(err);

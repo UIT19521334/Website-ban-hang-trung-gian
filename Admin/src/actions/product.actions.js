@@ -22,6 +22,46 @@ const ProductActions = {
       }
     };
   },
+
+  addProduct: (form) => {
+    return async (dispatch) => {
+      dispatch({ type: productConstants.ADD_PRODUCT_REQUEST });
+
+      const res = await ProductAPI.create(form);
+
+      if (res.status === 200) {
+        dispatch({
+          type: productConstants.ADD_PRODUCT_SUCCESS,
+          payload: { product: res.data },
+        });
+      } else {
+        dispatch({
+          type: productConstants.ADD_PRODUCT_FAILURE,
+          payload: { error: res.data.error },
+        });
+      }
+    };
+  },
+
+  editProduct: (form) => {
+    return async (dispatch) => {
+      dispatch({ type: productConstants.EDIT_PRODUCT_REQUEST });
+
+      const res = await ProductAPI.update(form);
+
+      if (res.status === 200) {
+        dispatch({
+          type: productConstants.EDIT_PRODUCT_SUCCESS,
+          payload: { product: res.data },
+        });
+      } else {
+        dispatch({
+          type: productConstants.EDIT_PRODUCT_FAILURE,
+          payload: { error: res.data.error },
+        });
+      }
+    };
+  },
 };
 
 export default ProductActions;

@@ -19,15 +19,20 @@ export default function Products() {
   const state_category = useSelector((state) => state.categories);
 
   const [AddProducts_page, setAddProducts_page] = useState(false);
+  const [EditProducts_page, setEditProducts_page] = useState(false);
 
-  const showAddPage = () => {
-    setAddProducts_page(!AddProducts_page);
+  const showAddPage = (iFlag) => {
+    if (iFlag === "Add") {
+      setAddProducts_page(!AddProducts_page);
+    } else if (iFlag === "Edit") {
+      setEditProducts_page(!EditProducts_page);
+    }
   };
 
   const [datatable, setDatatable] = React.useState({
     columns: [
       {
-        label: "ID",
+        label: "STT",
         field: "products_id",
         width: 150,
       },
@@ -65,7 +70,6 @@ export default function Products() {
 
   const showLogs2 = (e) => {
     setCheckbox1(e);
-    // console.log(checkbox1);
   };
 
   // useEffect(() => {
@@ -123,12 +127,15 @@ export default function Products() {
             <div className="card__body-header-cus">
               <h2>Products</h2>
               <div className="card__body-header-right">
-                <button className="btn__add" onClick={showAddPage}>
+                <button className="btn__add" onClick={() => showAddPage("Add")}>
                   {" "}
                   Add{" "}
                 </button>
                 <button className="btn__del"> Delete </button>
-                <button className="btn__fix" onClick={showAddPage}>
+                <button
+                  className="btn__fix"
+                  onClick={() => showAddPage("Edit")}
+                >
                   {" "}
                   Fix
                 </button>
@@ -161,10 +168,26 @@ export default function Products() {
       </div>
       {AddProducts_page && (
         <Add_products
-          handleClose={showAddPage}
+          handleClose={() => {
+            showAddPage("Add");
+            setCheckbox1("");
+          }}
+          productList={state_product.productList}
+          categoryList={state_category.categoryList}
+          product=""
+          modalFlag="Add"
+        />
+      )}
+      {EditProducts_page && (
+        <Add_products
+          handleClose={() => {
+            showAddPage("Edit");
+            setCheckbox1("");
+          }}
           productList={state_product.productList}
           categoryList={state_category.categoryList}
           product={checkbox1}
+          modalFlag="Edit"
         />
       )}
     </div>

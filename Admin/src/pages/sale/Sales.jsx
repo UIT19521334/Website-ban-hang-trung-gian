@@ -4,42 +4,23 @@ import ordersList from "../../assets/jsonData/orders-list.json";
 import Badge from "../../components/badge/Badge";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import OrderActions from "../../actions/order.actions";
+import SaleActions from "../../actions/sale.actions";
 
-export default function Orders() {
+export default function Sales() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(OrderActions.getAllOrder());
+    dispatch(SaleActions.getAllSale());
   }, []);
 
-  const state_order = useSelector((state) => state.orders);
+  const state_sale = useSelector((state) => state.sales);
 
   const [datatable, setDatatable] = React.useState({
     columns: [
       {
         label: "STT",
-        field: "order_id",
+        field: "stt",
         width: 150,
-      },
-      {
-        label: "Date",
-        field: "date_create",
-        width: 150,
-      },
-      {
-        label: "Time",
-        field: "time_create",
-        width: 150,
-      },
-      {
-        label: "User",
-        field: "user",
-        width: 270,
-        attributes: {
-          "aria-controls": "DataTable",
-          "aria-label": "Name",
-        },
       },
       {
         label: "Product",
@@ -52,18 +33,23 @@ export default function Orders() {
         width: 200,
       },
       {
-        label: "Type",
-        field: "order_type",
-        width: 200,
-      },
-      {
         label: "Price",
         field: "price",
         sort: "asc",
         width: 100,
       },
+      {
+        label: "Date",
+        field: "date_sale",
+        width: 150,
+      },
+      {
+        label: "Time",
+        field: "time_sale",
+        width: 150,
+      },
     ],
-    rows: state_order.orderList,
+    rows: state_sale.saleList,
   });
   //   <Badge type = {[val.status]} content={val.status}/> Dòng này để thêm màu cho status mà chưa được
   const [checkbox1, setCheckbox1] = React.useState("");

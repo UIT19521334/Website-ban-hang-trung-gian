@@ -76,7 +76,7 @@ export const getAll = async (req, res) => {
     var i = 1;
 
     for (let product of products) {
-      product.products_id = `SK${i}`;
+      product.products_id = i;
       i++;
     }
 

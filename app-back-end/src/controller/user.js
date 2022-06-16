@@ -8,12 +8,16 @@ export const getAll = async (req, res) => {
 
     let listCustomer = [];
 
+    var x = 1;
+
     for (var i = 0; i < users.length; i++) {
       let us = JSON.parse(JSON.stringify(users[i]));
       // let profile = await Profile.find({ account: us._id });
       // us.profile = profile;
       if (us.role === "user") {
+        us.id = x;
         listCustomer.push(us);
+        x++;
       }
     }
     res.status(200).json({

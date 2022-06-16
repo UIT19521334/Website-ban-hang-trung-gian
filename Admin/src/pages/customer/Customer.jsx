@@ -25,7 +25,7 @@ export default function Customer() {
   const [datatable, setDatatable] = React.useState({
     columns: [
       {
-        label: "ID",
+        label: "STT",
         field: "id",
         width: 150,
       },

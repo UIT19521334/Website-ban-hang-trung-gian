@@ -4,31 +4,85 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 import DatePicker from "react-datepicker";
 import "./add_popup.css";
 import "react-datepicker/dist/react-datepicker.css";
+import swal from "sweetalert";
+import ProductActions from "../../actions/product.actions";
+import { useDispatch } from "react-redux";
 
 const Add_products = (props) => {
+  const dispatch = useDispatch();
+
   const [startDate, setStartDate] = useState(new Date());
 
+  const initProduct = () => {
+    return {
+      _id: "",
+      name: "",
+      brand: "",
+      retail_price: "",
+      release_date: "",
+      description: "",
+      img_path: "",
+      category: "",
+    };
+  };
+
+  const [product, setProduct] = useState(props.product);
+
   const [editData, setEditData] = useState(false);
-  const checkEditData = () => {
+
+  const checkEditData = (targetValue, object) => {
     if (
       product.name &&
+      product.brand &&
       product.retail_price &&
       product.release_date &&
       product.description &&
-      product.category
+      product.category &&
+      product.img_path
     ) {
       setEditData(true);
     } else {
       setEditData(false);
     }
+    console.log(editData);
   };
 
-  const [product, setProduct] = useState(props.product);
+  const handleModalSave = () => {
+    const form = product;
+    if (props.modalFlag === "Add") {
+      delete form._id;
 
-  const findIdOfCategory = (name_category) => {
-    for (let c of props.categoryList) {
-      if (name_category === c.name_category) return c._id;
+      console.log(form);
+
+      dispatch(ProductActions.addProduct(form));
+
+      swal({
+        title: "Thêm thành công",
+        text: "Bạn đã thêm sản phẩm thành công",
+        icon: "success",
+        button: "OK",
+      });
+    } else {
+      dispatch(ProductActions.editProduct(form));
+
+      swal({
+        title: "Sửa thành công",
+        text: "Bạn đã sửa sản phẩm thành công",
+        icon: "success",
+        button: "OK",
+      });
     }
+    setProduct(initProduct);
+    resetCss();
+  };
+
+  const handleModalClose = () => {
+    setProduct(initProduct);
+    resetCss();
+  };
+
+  const resetCss = () => {
+    setEditData(false);
   };
 
   return (
@@ -55,20 +109,21 @@ const Add_products = (props) => {
           </div>
           <div className="col-4">
             <Autocomplete
-              options={props.productList.map((item) => item.name_category)}
+              options={props.categoryList}
+              getOptionLabel={(item) => item.name_category}
               style={{ margin: 10 }}
-              renderInput={(params) => (
-                <TextField {...params} label="Category" variant="standard" />
-              )}
               value={product.name_category}
-              onChange={(e) => {
+              onChange={(e, v) => {
                 setProduct({
                   ...product,
-                  brand: e.target.value,
-                  category: findIdOfCategory(e.target.value),
+                  brand: v.name_category,
+                  category: v._id,
                 });
                 checkEditData();
               }}
+              renderInput={(params) => (
+                <TextField {...params} label="Category" variant="standard" />
+              )}
             />
           </div>
           <div className="col-4">
@@ -91,7 +146,10 @@ const Add_products = (props) => {
               placeholder="Retail price of product"
               value={product.retail_price}
               onChange={(e) => {
-                setProduct({ ...product, retail_price: e.target.value });
+                setProduct({
+                  ...product,
+                  retail_price: parseInt(e.target.value),
+                });
                 checkEditData();
               }}
             />
@@ -103,7 +161,21 @@ const Add_products = (props) => {
               value={product.release_date}
               onChange={(date) => {
                 setStartDate(date);
-                setProduct({ ...product, release_date: date.target.value });
+                setProduct({
+                  ...product,
+                  release_date: date.toISOString().split("T")[0],
+                });
+                checkEditData();
+              }}
+            />
+          </div>
+          <div className="col-4">
+            <input
+              className="add_popup_input"
+              placeholder="Image of Product"
+              value={product.img_path}
+              onChange={(e) => {
+                setProduct({ ...product, img_path: e.target.value });
                 checkEditData();
               }}
             />
@@ -122,11 +194,11 @@ const Add_products = (props) => {
         <div className="add_popup_footer">
           <button
             className="btn__add"
-            onClick={props.handleClose}
+            onClick={handleModalSave}
             disabled={!editData}
           >
             {" "}
-            Add{" "}
+            {props.modalFlag}{" "}
           </button>
           <button className="btn__del" onClick={props.handleClose}>
             {" "}

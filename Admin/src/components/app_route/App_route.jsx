@@ -6,6 +6,7 @@ import Dashboard from "../../pages/dashboard/Dashboard";
 import Login from "../../pages/login/Login";
 import Orders from "../../pages/orders/Orders";
 import Products from "../../pages/products/Products";
+import Sales from "../../pages/sale/Sales";
 import Admin_layout from "../layout/Admin_layout";
 
 const App_route = () => {
@@ -18,6 +19,7 @@ const App_route = () => {
         <Route path="/customer" element={<Customer />} />
         <Route path="/products" element={<Products />} />
         <Route path="/orders" element={<Orders />} />
+        <Route path="/sales" element={<Sales />} />
       </Route>
       {/* <Route path="/login">
         <Login />

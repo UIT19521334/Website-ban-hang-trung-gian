@@ -6,6 +6,21 @@ const ProductAPI = {
 
     return res;
   },
+
+  create: async (form) => {
+    const res = await axios.post(`product/create`, {
+      ...form,
+    });
+    return res;
+  },
+
+  update: async (form) => {
+    const res = await axios.put(`/product/${form._id}`, {
+      ...form,
+    });
+
+    return res;
+  },
 };
 
 export default ProductAPI;
