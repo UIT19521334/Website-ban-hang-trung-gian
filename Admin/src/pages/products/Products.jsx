@@ -51,6 +51,11 @@ export default function Products() {
         },
       },
       {
+        label: "Description",
+        field: "description",
+        width: 200,
+      },
+      {
         label: "Retail Price",
         field: "retail_price",
         sort: "asc",

@@ -13,7 +13,7 @@ export default function Authenticates() {
     dispatch(AuthenticateActions.getAllAuthenticate());
   }, []);
 
-  const state_authenticate = useSelector((state) => state);
+  const state_authenticate = useSelector((state) => state.authenticate);
 
   const [datatable, setDatatable] = React.useState({
     columns: [
@@ -23,18 +23,29 @@ export default function Authenticates() {
         width: 150,
       },
       {
+        label: "Seller",
+        field: "asker",
+        width: 150,
+      },
+      {
+        label: "Buyer",
+        field: "taker",
+        width: 200,
+      },
+      {
         label: "Product",
         field: "product",
         width: 200,
       },
       {
-        label: "Size",
-        field: "size",
-        width: 200,
-      },
-      {
         label: "Price",
         field: "price",
+        sort: "asc",
+        width: 100,
+      },
+      {
+        label: "Size",
+        field: "size",
         sort: "asc",
         width: 100,
       },
@@ -49,7 +60,7 @@ export default function Authenticates() {
         width: 150,
       },
     ],
-    rows: "",
+    rows: state_authenticate.authenticateList,
   });
   //   <Badge type = {[val.status]} content={val.status}/> Dòng này để thêm màu cho status mà chưa được
   const [checkbox1, setCheckbox1] = React.useState("");

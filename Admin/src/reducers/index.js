@@ -5,6 +5,8 @@ import userReducer from "./user.reducer";
 import categoryReducer from "./category.reducers";
 import orderReducers from "./order.reducers";
 import saleReducers from "./sale.reducers";
+import authenticateReducers from "./authenticate.reducers";
+import analyticReducers from "./analytic.reducers";
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -13,6 +15,8 @@ const rootReducer = combineReducers({
   categories: categoryReducer,
   orders: orderReducers,
   sales: saleReducers,
+  authenticate: authenticateReducers,
+  analytic: analyticReducers,
 });
 
 export default rootReducer;

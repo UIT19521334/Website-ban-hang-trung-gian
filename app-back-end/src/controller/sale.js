@@ -2,15 +2,17 @@ import Sale from "../models/sale.js";
 
 export const create = async (req, res) => {
   try {
-    const { order_id, product_id, size, date, price, active } = req.body;
+    const { product_id, asker_id, taker_id, size, price } = req.body;
 
     const newSale = new Sale({
-      // order_id,
       product_id,
+      asker_id,
+      taker_id,
       size,
-      date,
       price,
-      active,
+      fee: (3 * price) / 100,
+      status: "Chờ xác nhận",
+      active: true,
     });
 
     const saved = await newSale.save();
@@ -22,12 +24,52 @@ export const create = async (req, res) => {
   }
 };
 
+export const getAll = async (req, res) => {
+  try {
+    const sales = await Sale.find()
+      .populate("product_id")
+      .populate({ path: "asker_id", populate: { path: "asker_id" } })
+      .populate({ path: "taker_id", populate: { path: "asker_id" } });
+
+    var stt = 1;
+
+    let payload = [];
+
+    for (let sale of sales) {
+      const date = new Date(sale.createdAt);
+      const year = date.getFullYear();
+      const month = (date.getMonth() + 1).padLeft();
+      const dt = date.getDate().padLeft();
+      const h = date.getHours().padLeft();
+      const m = date.getMinutes().padLeft();
+      const s = date.getSeconds().padLeft();
+
+      let result = {};
+      result.stt = stt;
+      result.asker = sale.asker_id.asker_id.name;
+      result.taker = sale.taker_id.asker_id.name;
+      result.product = sale.product_id.name;
+      result.size = sale.size;
+      result.price = sale.price;
+      result.date_sale = [dt, month, year].join("/");
+      result.time_sale = [h, m, s].join(":");
+      payload.push(result);
+      stt++;
+    }
+
+    res.status(200).json(payload);
+  } catch (error) {
+    res.status(500).json(error);
+    console.log(error);
+  }
+};
+
 Number.prototype.padLeft = function (base, chr) {
   var len = String(base || 10).length - String(this).length + 1;
   return len > 0 ? new Array(len).join(chr || "0") + this : this;
 };
 
-export const getAll = async (req, res) => {
+export const getAllSale = async (req, res) => {
   try {
     const sales = await Sale.find().populate("product_id");
 
@@ -57,8 +99,8 @@ export const getAll = async (req, res) => {
 
     res.status(200).json(payload);
   } catch (error) {
-    res.status(500).json(err);
-    console.log(err);
+    res.status(500).json(error);
+    console.log(error);
   }
 };
 

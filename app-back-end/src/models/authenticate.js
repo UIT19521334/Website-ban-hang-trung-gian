@@ -9,12 +9,12 @@ const authenticateSchema = new mongoose.Schema(
     },
     asker_id: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User", //seller
+      ref: "Order", //seller
       required: true,
     },
     taker_id: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User", //buyer
+      ref: "Order", //buyer
       required: true,
     },
     size: {

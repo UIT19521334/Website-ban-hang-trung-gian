@@ -30,6 +30,14 @@ const orderSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    contactNum: {
+      type: String,
+      // required: true,
+    },
+    address: {
+      type: String,
+      // required: true,
+    },
     active: {
       type: Boolean,
       default: true,

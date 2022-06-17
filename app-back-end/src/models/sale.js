@@ -2,9 +2,14 @@ import mongoose from "mongoose";
 
 const saleSchema = new mongoose.Schema(
   {
-    order_id: {
+    asker_id: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Order",
+      ref: "Order", //seller
+      required: true,
+    },
+    taker_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Order", //buyer
       required: true,
     },
     product_id: {
@@ -16,12 +21,16 @@ const saleSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    date: {
-      type: Date,
-      required: true,
-    },
     price: {
       type: Number,
+      required: true,
+    },
+    fee: {
+      type: Number,
+      required: true,
+    },
+    status: {
+      type: String,
       required: true,
     },
     active: {

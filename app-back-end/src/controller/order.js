@@ -2,8 +2,17 @@ import Order from "../models/order.js";
 
 export const create = async (req, res) => {
   try {
-    const { product_id, asker_id, size, price, order_type, active, sold } =
-      req.body;
+    const {
+      product_id,
+      asker_id,
+      size,
+      price,
+      order_type,
+      active,
+      sold,
+      contactNum,
+      address,
+    } = req.body;
 
     const newOrder = new Order({
       product_id,
@@ -13,6 +22,8 @@ export const create = async (req, res) => {
       order_type,
       active,
       sold,
+      contactNum,
+      address,
     });
 
     const saved = await newOrder.save();

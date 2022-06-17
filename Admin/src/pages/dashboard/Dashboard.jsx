@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 
 import Statuscard from "./statuscard/Statuscard";
-import statusCards from "../../assets/jsonData/status-card-data.json";
+// import statusCards from "../../assets/jsonData/status-card-data.json";
 import "./dashboard.css";
 import ChartsPage from "./chart/Chart";
 import ChartsCicle from "./chart/ChartCircle";
@@ -10,8 +10,57 @@ import Topproducts from "./table/Topproducts";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import ProductActions from "../../actions/product.actions";
+import AnalyticActions from "../../actions/analytic.action";
 
 const Dashboard = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(AnalyticActions.getAll());
+  }, []);
+
+  const state_analytic = useSelector((state) => state.analytic);
+
+  const analyticList = state_analytic.analyticList;
+
+  const statusCards = [
+    {
+      icon: "bx bx-shopping-bag",
+      count: analyticList.revenue,
+      title: "Revenue",
+    },
+    {
+      icon: "bx bx-store",
+      count: analyticList.totalProducts,
+      title: "Products",
+    },
+    {
+      icon: "bx bx-store",
+      count: analyticList.totalUsers,
+      title: "Users",
+    },
+    {
+      icon: "bx bx-store",
+      count: analyticList.totalNewUsers,
+      title: "New Users",
+    },
+    {
+      icon: "bx bx-store",
+      count: analyticList.totalSells,
+      title: "Ask",
+    },
+    {
+      icon: "bx bxl-facebook",
+      count: analyticList.totalBuys,
+      title: "Bid",
+    },
+    {
+      icon: "bx bx-dollar-circle",
+      count: analyticList.totalSales,
+      title: "Sale",
+    },
+  ];
+
   return (
     <div>
       <h2 className="page-header">Dashboard</h2>
