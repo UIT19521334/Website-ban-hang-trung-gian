@@ -2,15 +2,15 @@ import User from "../models/user.js";
 import jwt from "jsonwebtoken";
 
 export const signup = (req, res) => {
-  User.findOne({ email: req.body.email }).exec((error, user) => {
-    if (user)
+  User.findOne({ email: req.body.email }).exec((error, existUser) => {
+    if (existUser)
       return res.status(400).json({
         message: "User already registered",
       });
 
     const { name, email, password, phoneNumber } = req.body;
 
-    const _user = new User({
+    const user = new User({
       name,
       email,
       password,
@@ -18,15 +18,28 @@ export const signup = (req, res) => {
       phoneNumber,
     });
 
-    _user.save((error, data) => {
+    user.save((error, data) => {
       if (error) {
         return res.status(400).json({
           message: "Something went wrong",
         });
       }
       if (data) {
+        const token = jwt.sign(
+          { _id: user._id, role: user.role },
+          process.env.JWT_SECRET,
+          { expiresIn: "1h" }
+        );
+        const { _id, name, email, role } = user;
+
         return res.status(201).json({
-          message: "User created successfully..!",
+          token,
+          user: {
+            _id,
+            name,
+            email,
+            role,
+          },
         });
       }
     });

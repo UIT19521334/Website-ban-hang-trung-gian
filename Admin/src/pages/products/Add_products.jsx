@@ -84,7 +84,6 @@ const Add_products = (props) => {
   const resetCss = () => {
     setEditData(false);
   };
-
   return (
     <div className="popup-box">
       <div className="box_Add_popup_admin">
@@ -206,6 +205,46 @@ const Add_products = (props) => {
           </button>
         </div>
       </div>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle style={{ color: "red" }} id="alert-dialog-title">
+          {"Notification"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            You are missing some fields
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} autoFocus>
+            OK
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <Dialog
+        open={openAddOK}
+        onClose={handleCloseAddOK}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle style={{ color: "green" }} id="alert-dialog-title">
+          {"Congratulation"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Your adding successfully
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseAddOK} autoFocus>
+            OK
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };

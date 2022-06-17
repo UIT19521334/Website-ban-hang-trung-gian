@@ -7,17 +7,16 @@ import Component from './components/router/profileRouter'
 
 
 const AccountLayout = () => {
-  
-  return (
-    
-      <div className='account__layout'>
-          <SideBar />
-          <div className="account__layout__content">
-              <Component/>
-          </div>
-      </div>
-    
-  )
+
+    return (
+        <div className='account__layout'>
+            <SideBar />
+            <div className="account__layout__content">
+                <Component />
+            </div>
+        </div>
+
+    )
 }
 
 export default AccountLayout

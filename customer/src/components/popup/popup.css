@@ -12,11 +12,8 @@
   
   .viewBox {
     position: relative;
-    width: 50%;
-    margin-left: auto;
-    margin-right: 0;
+    
     height: auto;
-    margin-top: calc(100vh - 85vh - 20px);
     background: #fff;
     padding: 20px;
     

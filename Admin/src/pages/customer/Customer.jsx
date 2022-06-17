@@ -21,7 +21,7 @@ export default function Customer() {
   }, []);
 
   const state_user = useSelector((state) => state.user.users);
-
+  
   const [datatable, setDatatable] = React.useState({
     columns: [
       {
@@ -70,7 +70,8 @@ export default function Customer() {
 
   const showLogs2 = (e) => {
     setCheckbox1(e);
-  };
+  }; 
+  
   return (
     <div className="row">
       <div className="col-12">
