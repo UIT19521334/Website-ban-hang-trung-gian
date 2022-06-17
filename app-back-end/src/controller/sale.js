@@ -27,8 +27,17 @@ export const getAll = async (req, res) => {
     const sales = await Sale.find();
     res.status(200).json(sales);
   } catch (error) {
-    res.status(500).json(err);
-    console.log(err);
+    res.status(500).json(error);
+    console.log(error);
+  }
+};
+export const getByProductId = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const sales = await Sale.find({ product_id: id });
+    res.status(200).json(sales);
+  } catch (error) {
+    return res.status(500).json(error);
   }
 };
 

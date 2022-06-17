@@ -1,4 +1,5 @@
 import Order from "../models/order.js";
+import Product from "../models/product.js";
 
 export const create = async (req, res) => {
   try {
@@ -31,6 +32,19 @@ export const getAll = async (req, res) => {
   } catch (error) {
     res.status(500).json(err);
     console.log(err);
+  }
+};
+export const getByProductID = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const orders = await Order.find({ product_id: id });
+
+    return res.status(200).json({
+      success: true,
+      orders,
+    });
+  } catch (error) {
+    return res.status(500).json({ msg: error });
   }
 };
 
