@@ -1,5 +1,6 @@
 import User from "../../models/user.js";
 import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
 
 export const signup = (req, res) => {
   User.findOne({ email: req.body.email }).exec((error, user) => {
@@ -8,7 +9,7 @@ export const signup = (req, res) => {
         message: "Admin already registered",
       });
 
-    const { name, email, password } = req.body;
+    const { name, email, password, phoneNumber } = req.body;
 
     const _user = new User({
       name,
@@ -16,6 +17,7 @@ export const signup = (req, res) => {
       password,
       username: Math.random().toString(),
       role: "admin",
+      phoneNumber,
     });
 
     _user.save((error, data) => {
@@ -37,13 +39,17 @@ export const signin = (req, res) => {
   User.findOne({ email: req.body.email }).exec((error, user) => {
     if (error) return res.status(400).json({ error });
     if (user) {
-      if (user.authenticate(req.body.password) && user.role === "admin") {
+      const checkPassword = bcrypt.compareSync(
+        req.body.password,
+        user.hash_password
+      );
+      if (checkPassword && user.role === "admin") {
         const token = jwt.sign(
           { _id: user._id, role: user.role },
           process.env.JWT_SECRET,
           { expiresIn: "1h" }
         );
-        const { _id, name, email, role } = user;
+        const { _id, name, email, role, phoneNumber } = user;
         res.status(200).json({
           token,
           user: {
@@ -51,6 +57,7 @@ export const signin = (req, res) => {
             name,
             email,
             role,
+            phoneNumber,
           },
         });
       } else {

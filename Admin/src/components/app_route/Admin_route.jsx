@@ -1,25 +1,22 @@
-import React from 'react';
+import React from "react";
 
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Routes } from "react-router-dom";
 
-import Home from '../../pages/home';
-import Dashboard from '../../pages/dashboard/Dashboard';
-import ChartsPage from '../../pages/dashboard/chart/Chart';
-import Customer from '../../pages/customer/Customer';
-import Products from '../../pages/products/Products';
-import Orders from '../../pages/orders/Orders';
+import Home from "../../pages/home";
+import Dashboard from "../../pages/dashboard/Dashboard";
+import ChartsPage from "../../pages/dashboard/chart/Chart";
+import Customer from "../../pages/customer/Customer";
+import Products from "../../pages/products/Products";
+import Orders from "../../pages/orders/Orders";
 const Admin_route = () => {
   return (
-    <Switch>
-        <Route path="/admin">      
-            <Redirect to="/dashboard" />
-          </Route>
-        <Route path='/dashboard' component={Dashboard} />
-        <Route path='/chart'  component={ChartsPage} />
-        <Route path='/customer' component={Customer} />
-        <Route path='/products' component={Products} />
-        <Route path='/orders' component={Orders} />
-    </Switch>
+    <Routes>
+      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/chart" element={<ChartsPage />} />
+      <Route path="/customer" element={<Customer />} />
+      <Route path="/products" element={<Products />} />
+      <Route path="/orders" element={<Orders />} />
+    </Routes>
   );
-}
+};
 export default Admin_route;

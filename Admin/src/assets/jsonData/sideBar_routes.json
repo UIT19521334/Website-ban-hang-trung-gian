@@ -20,6 +20,16 @@
         "icon":"bx bx-cart"
     },
     {
+        "display_name":"Authenticates",
+        "route":"/authenticates",
+        "icon":"bx bx-cart"
+    },
+    {
+        "display_name":"Sales",
+        "route":"/sales",
+        "icon":"bx bx-cart"
+    },
+    {
         "display_name":"Analytics",
         "route":"/chart",
         "icon":"bx bx-bar-chart-alt-2"

@@ -1,154 +1,208 @@
-import React, { useState } from 'react';
-import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import './add_popup.css';
-const Add_products = props => {
+import React, { useState } from "react";
+import TextField from "@material-ui/core/TextField";
+import Autocomplete from "@material-ui/lab/Autocomplete";
+import DatePicker from "react-datepicker";
+import "./add_popup.css";
+import "react-datepicker/dist/react-datepicker.css";
+import swal from "sweetalert";
+import ProductActions from "../../actions/product.actions";
+import { useDispatch } from "react-redux";
 
-  // Fake data
-  const category_data = ['Chuck Taylor', 'Golf Shoes', 'Hiking Boots', 'High-Tops', 'Running Shoes', 'Soccer Shoes', 'Sneakers', 'Soccer Shoes']
-  const status_data = ['Hot', 'Regular', 'TopSeller', 'Irregular', 'TopPick']
-  const size_data = ['1', '1.5', '2', '2.5', '3', '3.5', '4', '4.5', '5', '5.5']
+const Add_products = (props) => {
+  const dispatch = useDispatch();
 
-  // Get data
-  const [productName, setProductName] = useState();
-  const [productImg, setProductImg] = useState();
-  const [productCategory, setProductCategory] = useState();
+  const [startDate, setStartDate] = useState(new Date());
 
-  const [productDesc, setProductDesc] = useState();
-  const [productNumber, setProductNumber] = useState();
-  const [productStatus, setProductStatus] = useState();
-
-  const [productSize, setProductSize] = useState();
-  const [productPrice, setProductPrice] = useState();
-  // SetData
-  const setProductNameData = (e) => {
-    setProductName(e.target.value);
-  }
-  const setProductImgData = (e) => {
-    setProductImg(e.target.value);
-  }
-  const setProductCategoryData = (event, value) => {
-    setProductCategory(value);
-  }
-
-
-  const setProductDescData = (e) => {
-    setProductDesc(e.target.value);
-  }
-  const setProductNumberData = (e) => {
-    setProductNumber(e.target.value);
-  }
-  const setProductStatusData = (event, value) => {
-    setProductStatus(value);
-  }
-
-  const setProductSizeData = (event, value) => {
-    setProductSize(value);
-  }
-  const setProductPriceData = (e) => {
-    setProductPrice(e.target.value);
-  }
-  // Open validate
-  const [open, setOpen] = React.useState(false);
-  const handleClickOpen = () => {
-    setOpen(true);
+  const initProduct = () => {
+    return {
+      _id: "",
+      name: "",
+      brand: "",
+      retail_price: "",
+      release_date: "",
+      description: "",
+      img_path: "",
+      category: "",
+    };
   };
-  const handleClose = () => {
-    setOpen(false);
-  };
-  const [openAddOK, setOpenAddOK] = React.useState(false);
-  
-  const handleOpenAddOK = () => {
-    setOpenAddOK(true);
-  };
-  const handleCloseAddOK = () => {
-    setOpenAddOK(false);
-  };
-  // handleAdd
-  const handleAdd = () => {
-    if (productName == "" || productName == null
-      || productImg == null || productImg == ""
-      || productCategory == null || productCategory == ""
-      || productNumber == null || productNumber == ""
-      || productStatus == null || productSize == null
-      || productPrice == "" || productPrice == null
+
+  const [product, setProduct] = useState(props.product);
+
+  const [editData, setEditData] = useState(false);
+
+  const checkEditData = (targetValue, object) => {
+    if (
+      product.name &&
+      product.brand &&
+      product.retail_price &&
+      product.release_date &&
+      product.description &&
+      product.category &&
+      product.img_path
     ) {
-      handleClickOpen()
+      setEditData(true);
     } else {
-      handleOpenAddOK()
+      setEditData(false);
     }
-  }
+    console.log(editData);
+  };
+
+  const handleModalSave = () => {
+    const form = product;
+    if (props.modalFlag === "Add") {
+      delete form._id;
+
+      console.log(form);
+
+      dispatch(ProductActions.addProduct(form));
+
+      swal({
+        title: "Thêm thành công",
+        text: "Bạn đã thêm sản phẩm thành công",
+        icon: "success",
+        button: "OK",
+      });
+    } else {
+      dispatch(ProductActions.editProduct(form));
+
+      swal({
+        title: "Sửa thành công",
+        text: "Bạn đã sửa sản phẩm thành công",
+        icon: "success",
+        button: "OK",
+      });
+    }
+    setProduct(initProduct);
+    resetCss();
+  };
+
+  const handleModalClose = () => {
+    setProduct(initProduct);
+    resetCss();
+  };
+
+  const resetCss = () => {
+    setEditData(false);
+  };
   return (
     <div className="popup-box">
       <div className="box_Add_popup_admin">
-        <span className="close-icon" onClick={props.handleClose}>x</span>
+        <span className="close-icon" onClick={props.handleClose}>
+          x
+        </span>
         {props.content}
         <div className="row">
+          {/* <div className="col-4">
+            <input className="add_popup_input" placeholder="Product ID" />
+          </div> */}
           <div className="col-4">
-            <input value={productName} onChange={setProductNameData} className='add_popup_input' placeholder='Name of product' />
-          </div>
-          <div className="col-4">
-            <input value={productImg} onChange={setProductImgData} className='add_popup_input' type='file' placeholder='Image of product' />
+            <input
+              className="add_popup_input"
+              placeholder="Name of product"
+              value={product.name}
+              onChange={(e) => {
+                setProduct({ ...product, name: e.target.value });
+                checkEditData();
+              }}
+            />
           </div>
           <div className="col-4">
             <Autocomplete
-              value={productCategory}
-              onChange={setProductCategoryData}
-              options={category_data}
+              options={props.categoryList}
+              getOptionLabel={(item) => item.name_category}
               style={{ margin: 10 }}
-              renderInput={(params) =>
-                <TextField {...params} label="Category" variant="standard" />}
+              value={product.name_category}
+              onChange={(e, v) => {
+                setProduct({
+                  ...product,
+                  brand: v.name_category,
+                  category: v._id,
+                });
+                checkEditData();
+              }}
+              renderInput={(params) => (
+                <TextField {...params} label="Category" variant="standard" />
+              )}
+            />
+          </div>
+          <div className="col-4">
+            <input
+              className="add_popup_input"
+              placeholder="Description"
+              value={product.description}
+              onChange={(e) => {
+                setProduct({ ...product, description: e.target.value });
+                checkEditData();
+              }}
             />
           </div>
         </div>
         <div className="row">
           <div className="col-4">
-
-            <input value={productDesc} onChange={setProductDescData} className='add_popup_input' placeholder='Product description' />
+            <input
+              type="number"
+              className="add_popup_input"
+              placeholder="Retail price of product"
+              value={product.retail_price}
+              onChange={(e) => {
+                setProduct({
+                  ...product,
+                  retail_price: parseInt(e.target.value),
+                });
+                checkEditData();
+              }}
+            />
           </div>
           <div className="col-4">
-
-            <input value={productNumber} onChange={setProductNumberData} type="number" className='add_popup_input' placeholder='Number of product' />
+            <DatePicker
+              className="add_popup_input"
+              selected={startDate}
+              value={product.release_date}
+              onChange={(date) => {
+                setStartDate(date);
+                setProduct({
+                  ...product,
+                  release_date: date.toISOString().split("T")[0],
+                });
+                checkEditData();
+              }}
+            />
           </div>
           <div className="col-4">
+            <input
+              className="add_popup_input"
+              placeholder="Image of Product"
+              value={product.img_path}
+              onChange={(e) => {
+                setProduct({ ...product, img_path: e.target.value });
+                checkEditData();
+              }}
+            />
+          </div>
 
+          {/* <div className="col-4">
             <Autocomplete
-              value={productStatus}
-              onChange={setProductStatusData}
               options={status_data}
               style={{ margin: 10 }}
-              renderInput={(params) =>
-                <TextField {...params} label="Status" variant="standard" />}
+              renderInput={(params) => (
+                <TextField {...params} label="Status" variant="standard" />
+              )}
             />
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-4">
-            <Autocomplete
-              value={productSize}
-              onChange={setProductSizeData}
-              options={size_data}
-              style={{ margin: 10 }}
-              renderInput={(params) =>
-                <TextField {...params} label="Product size" variant="standard" />}
-            />
-
-          </div>
-          <div className="col-4">
-            <input value={productPrice} onChange={setProductPriceData} type="number" className='add_popup_input' placeholder='Price of product' />
-          </div>
-          <div className="col-4">
-          </div>
+          </div> */}
         </div>
         <div className="add_popup_footer">
-          <button className='btn__add' onClick={handleAdd} > Add </button>
-          <button className='btn__del' onClick={props.handleClose} > Close </button>
+          <button
+            className="btn__add"
+            onClick={handleModalSave}
+            disabled={!editData}
+          >
+            {" "}
+            {props.modalFlag}{" "}
+          </button>
+          <button className="btn__del" onClick={props.handleClose}>
+            {" "}
+            Close{" "}
+          </button>
         </div>
       </div>
       <Dialog
@@ -193,6 +247,6 @@ const Add_products = props => {
       </Dialog>
     </div>
   );
-}
+};
 
 export default Add_products;

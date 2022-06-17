@@ -3,8 +3,17 @@ import Product from "../models/product.js";
 
 export const create = async (req, res) => {
   try {
-    const { product_id, asker_id, size, price, order_type, active, sold } =
-      req.body;
+    const {
+      product_id,
+      asker_id,
+      size,
+      price,
+      order_type,
+      active,
+      sold,
+      contactNum,
+      address,
+    } = req.body;
 
     const newOrder = new Order({
       product_id,
@@ -14,6 +23,8 @@ export const create = async (req, res) => {
       order_type,
       active,
       sold,
+      contactNum,
+      address,
     });
 
     const saved = await newOrder.save();
@@ -25,13 +36,47 @@ export const create = async (req, res) => {
   }
 };
 
+Number.prototype.padLeft = function (base, chr) {
+  var len = String(base || 10).length - String(this).length + 1;
+  return len > 0 ? new Array(len).join(chr || "0") + this : this;
+};
+
 export const getAll = async (req, res) => {
   try {
-    const orders = await Order.find();
-    res.status(200).json(orders);
+    const orders = await Order.find()
+      .populate("product_id")
+      .populate("asker_id");
+
+    var stt = 1;
+
+    let payload = [];
+
+    for (let order of orders) {
+      const date = new Date(order.createdAt);
+      const year = date.getFullYear();
+      const month = (date.getMonth() + 1).padLeft();
+      const dt = date.getDate().padLeft();
+      const h = date.getHours().padLeft();
+      const m = date.getMinutes().padLeft();
+      const s = date.getSeconds().padLeft();
+
+      let result = {};
+      result.order_id = stt;
+      result.date_create = [dt, month, year].join("/");
+      result.time_create = [h, m, s].join(":");
+      result.user = order.asker_id.name;
+      result.product = order.product_id.name;
+      result.size = order.size;
+      result.price = order.price;
+      result.order_type = order.order_type;
+      payload.push(result);
+      stt++;
+    }
+
+    res.status(200).json(payload);
   } catch (error) {
-    res.status(500).json(err);
-    console.log(err);
+    res.status(500).json(error);
+    console.log(error);
   }
 };
 export const getByProductID = async (req, res) => {
