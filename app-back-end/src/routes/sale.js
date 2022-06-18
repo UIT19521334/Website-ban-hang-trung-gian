@@ -4,12 +4,18 @@ import {
   getAll,
   update,
   deleteById,
+
   getByProductId,
+
+  getAllSale,
+
 } from "../controller/sale.js";
 
 const router = express.Router();
 
 router.post("/sale/create", create);
+
+router.get("/sale/getAllSale", getAllSale);
 
 router.get("/sale/getAll", getAll);
 

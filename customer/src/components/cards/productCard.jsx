@@ -31,6 +31,11 @@ function CardItem(props) {
 }
 function ProductCard() {
   const { product } = useSelector((state) => state.product);
+  // // Gioi han so card hien thi
+  // let productcard = [];
+  // for (let i = 0; i < 6; i ++) {
+  //   productcard.push(product[i])
+  // }
   return (
     <div className="product__content">
       {product.map((item, index) => {

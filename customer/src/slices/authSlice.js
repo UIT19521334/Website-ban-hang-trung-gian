@@ -3,7 +3,9 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { apiUrl } from "../utils/api";
 
-const user = JSON.parse(localStorage.getItem("user"));
+const user = localStorage.getItem("user")
+  ? JSON.parse(localStorage.getItem("user"))
+  : null;
 const initState = {
   user: user ? user.user : null,
   isLoading: false,
