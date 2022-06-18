@@ -10,7 +10,7 @@ const initState = {
 };
 export const fetchOrder = createAsyncThunk("order/fetch", async (thunkAPI) => {
   try {
-    const url = `${apiUrl}/order/fetAll`;
+    const url = `${apiUrl}/order/getAll`;
     const response = await axios.get(url);
     if (response.data) {
       return response.data;
@@ -42,6 +42,20 @@ export const createOrder = createAsyncThunk(
     try {
       const url = `${apiUrl}/order/create`;
       const response = await axios.post(url, data);
+      if (response.data) {
+        return response.data;
+      }
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+export const updateActive = createAsyncThunk(
+  "order/updateactive",
+  async (id, thunkAPI) => {
+    try {
+      const url = `${apiUrl}/order/updateactive/${id}`;
+      const response = await axios.put(url);
       if (response.data) {
         return response.data;
       }

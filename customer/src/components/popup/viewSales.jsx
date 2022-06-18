@@ -8,7 +8,7 @@ function ViewSales(props) {
       return [
         ...prev,
         {
-          date: curItem.date,
+          date: curItem.createdAt,
           size: curItem.size,
           price: curItem.price,
         },

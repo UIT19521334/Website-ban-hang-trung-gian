@@ -9,11 +9,12 @@ import ViewAsk from "../../components/popup/viewAsk";
 import BuySize from "../../components/shoesSize/buySize";
 import SellSize from "../../components/shoesSize/SellSize";
 import { Modal, Button } from "react-bootstrap";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import "./productdetail.css";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchOrderByProduct } from "../../slices/orderSlice";
 import { fetchSaleByProduct } from "../../slices/saleSlice";
+import { addFollow, checkFollow } from "../../slices/productSlice";
 function ProductDetail(props) {
   const [viewAsk_page, setviewAsk_page] = useState(false);
   const [viewBid_page, setviewBid_page] = useState(false);
@@ -36,26 +37,26 @@ function ProductDetail(props) {
     setviewSell_page(!viewSell_page);
   };
   const location = useLocation();
+  const { id } = useParams();
   const state = location.state;
 
   const { productOrder } = useSelector((state) => state.order);
   const { productSale } = useSelector((state) => state.sale);
-  console.log(
-    "🚀 ~ file: ProductDetail.jsx ~ line 43 ~ ProductDetail ~ productSale",
-    productSale
-  );
+  const { user } = useSelector((state) => state.auth);
+  const [follow, setFollow] = useState(false);
+
   const fetchLowestAsk = function () {
     if (!productOrder || productOrder.length < 1) return 0;
 
     let ask = [];
 
     productOrder.forEach((order) => {
-      if (order.order_type === "sell") {
+      if (order.order_type === "sell" && order.active) {
         ask.push(order);
       }
     });
     const sortedAsk = ask.sort((a1, a2) => a1.price - a2.price);
-    return sortedAsk[0].price;
+    return sortedAsk[0]?.price;
   };
   const fetchHightestBid = function () {
     if (!productOrder || productOrder.length < 1) return 0;
@@ -68,13 +69,26 @@ function ProductDetail(props) {
       }
     });
     const sortedAsk = ask.sort((a1, a2) => -a1.price + a2.price);
-    return sortedAsk[0].price;
+    return sortedAsk[0]?.price;
   };
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchOrderByProduct(state.id));
     dispatch(fetchSaleByProduct(state.id));
-  }, []);
+    checkFollowFunc();
+  }, [id, viewBuy_page, viewSell_page]);
+
+  const handleFollow = () => {
+    dispatch(addFollow({ user_id: user._id, product_id: state.id }));
+    setFollow((prev) => !prev);
+  };
+  const { follow: followStatus } = useSelector((state) => state.product);
+  const checkFollowFunc = () => {
+    dispatch(checkFollow({ user_id: user._id, product_id: state.id }));
+  };
+  useEffect(() => {
+    setFollow(followStatus);
+  }, [followStatus, id]);
 
   return (
     <div className="product__detail">
@@ -85,7 +99,25 @@ function ProductDetail(props) {
         </div>
         <div className="header__right">
           <i class="bx bx-cart-add"></i>
-          <i class="bx bx-heart"></i>
+          {follow && (
+            <i
+              onClick={handleFollow}
+              style={{
+                color: "green",
+                cursor: "pointer",
+              }}
+              class="bx bxs-heart"
+            ></i>
+          )}
+          {!follow && (
+            <i
+              style={{
+                cursor: "pointer",
+              }}
+              onClick={handleFollow}
+              class="bx bx-heart"
+            ></i>
+          )}
           <i class="bx bx-share bx-flip-horizontal"></i>
         </div>
       </div>

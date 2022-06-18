@@ -1,7 +1,13 @@
 import express from "express";
 import multer from "multer";
 import { adminMiddleware, requireSignin } from "../common-middleware/index.js";
-import { create, getAll, update, deleteById } from "../controller/product.js";
+import {
+  create,
+  getAll,
+  update,
+  deleteById,
+  getAllBase,
+} from "../controller/product.js";
 import shortid from "shortid";
 import path from "path";
 
@@ -29,6 +35,7 @@ router.post(
 );
 
 router.get("/product/getAll", getAll);
+router.get("/product/getallbase", getAllBase);
 
 router.put("/product/:id", update);
 

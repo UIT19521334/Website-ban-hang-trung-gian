@@ -30,7 +30,7 @@ function ViewAsk(props) {
       }
     }, []);
 
-    return fixedOrder;
+    return fixedOrder.sort((a, b) => a.price - b.price);
   };
   return (
     <div className="viewBox">

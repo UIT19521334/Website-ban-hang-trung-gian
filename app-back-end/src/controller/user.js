@@ -1,5 +1,8 @@
 import User from "../models/user.js";
 import bcrypt from "bcrypt";
+import Order from "../models/order.js";
+import Sale from "../models/sale.js";
+import Follow from "../models/follow.js";
 // const Profile = require('../models/profile');
 
 export const getAll = async (req, res) => {
@@ -38,6 +41,92 @@ export const getById = async (req, res) => {
     res.status(200).json(res_user);
   } catch (err) {
     res.status(500).json({ error: err });
+  }
+};
+export const getOrder = async (req, res) => {
+  try {
+    const orders = await Order.find({
+      active: true,
+      asker_id: req.params.id,
+    }).populate("product_id");
+
+    const responseData = [];
+    for (let order of orders) {
+      const data = {
+        name: order.product_id.name,
+        brand: order.product_id.brand,
+        date: order.createdAt,
+        price: order.price,
+        type: order.order_type,
+        size: order.size,
+        description: order.product_id.description,
+      };
+      responseData.push(data);
+    }
+    return res.json(responseData);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json(error);
+  }
+};
+export const getFollow = async (req, res) => {
+  try {
+    const follows = await Follow.find({ user_id: req.params.id }).populate(
+      "product_id"
+    );
+    if (follows) {
+      return res.json(follows);
+    }
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+};
+export const getSale = async (req, res) => {
+  try {
+    const sale = await Sale.find().populate("product_id").populate("order_id");
+
+    const responseData = [];
+    for (let s of sale) {
+      if (req.params.id === s.userTaken.toString()) {
+        const data = {
+          name: s.product_id.name,
+          brand: s.product_id.brand,
+          date: s.createdAt,
+          price: s.price,
+          type: "",
+          size: s.size,
+          status: s.status,
+          description: s.product_id.description,
+        };
+        if (s.order_id.order_type === "sell") {
+          data.type = "buy";
+        } else {
+          data.type = "sell";
+        }
+        responseData.push(data);
+      } else if (req.params.id === s.order_id.asker_id.toString()) {
+        const data = {
+          name: s.product_id.name,
+          brand: s.product_id.brand,
+          date: s.createdAt,
+          price: s.price,
+          type: "",
+          size: s.size,
+          status: s.status,
+          description: s.product_id.description,
+        };
+        if (s.order_id.order_type === "sell") {
+          data.type = "sell";
+        } else {
+          data.type = "buy";
+        }
+      }
+    }
+
+    return res.json(responseData);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json(error);
   }
 };
 
