@@ -205,7 +205,7 @@ const Add_products = (props) => {
           </button>
         </div>
       </div>
-      <Dialog
+      {/* <Dialog
         open={open}
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
@@ -244,7 +244,7 @@ const Add_products = (props) => {
             OK
           </Button>
         </DialogActions>
-      </Dialog>
+      </Dialog> */}
     </div>
   );
 };
