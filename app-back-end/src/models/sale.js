@@ -2,12 +2,12 @@ import mongoose from "mongoose";
 
 const saleSchema = new mongoose.Schema(
   {
-    asker_id: {
+    order_id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Order", //seller
       required: true,
     },
-    taker_id: {
+    userTaken: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Order", //buyer
       required: true,
@@ -32,6 +32,14 @@ const saleSchema = new mongoose.Schema(
     status: {
       type: String,
       required: true,
+    },
+    address: {
+      type: String,
+      require: false,
+    },
+    contactNum: {
+      type: String,
+      require: false,
     },
     active: {
       type: Boolean,

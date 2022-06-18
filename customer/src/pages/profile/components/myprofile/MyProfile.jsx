@@ -4,6 +4,7 @@ import { UserContext } from "../../../../UserContext";
 import { Modal, Form, Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { authSelector } from "../../../../redux/authSelector";
+import { ToastContainer, toast } from "react-toastify";
 const MyProfile = () => {
   // const { user } = React.useContext(UserContext);
   const { user } = useSelector(authSelector);
@@ -41,19 +42,20 @@ const MyProfile = () => {
 
   // Save change handles
   const handleSave = () => {
-    if (currentPassword == "") {
+    if (currentPassword === "") {
       handleValidatePopupOpen();
     } else {
-      if (newPassword == "") {
+      if (newPassword === "") {
         handleValidatePopupOpen();
       } else {
-        if (reNewPassword == "") {
+        if (reNewPassword === "") {
           handleValidatePopupOpen();
         } else {
           if (reNewPassword != newPassword) {
             handleSimilarPopupOpen();
           } else {
-            alert("Your change succesfully");
+            toast("Change password Successfully!");
+
             handlePasswordPopupClose();
           }
         }

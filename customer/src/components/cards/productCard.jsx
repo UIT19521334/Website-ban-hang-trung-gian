@@ -7,11 +7,11 @@ import "./productcard.css";
 import { useSelector } from "react-redux";
 function CardItem(props) {
   return (
-    <Card style={{ width: "12rem" }}>
+    <Card style={{ width: "12rem", height: "15rem" }}>
       <Card.Img
         variant="top"
         src={props.img}
-        style={{ width: "8rem", margin: "auto" }}
+        style={{ width: "8rem", margin: "auto", height: "8rem" }}
       />
       <Card.Body>
         <Card.Text
@@ -21,7 +21,7 @@ function CardItem(props) {
             overflow: "hidden",
           }}
         >
-          {props.describe}
+          {props.name}
         </Card.Text>
         <Card.Title>${props.price}</Card.Title>
         <button className="card__sold">{props.sold} sold</button>
@@ -33,29 +33,35 @@ function ProductCard() {
   const { product } = useSelector((state) => state.product);
   return (
     <div className="product__content">
-      {product.map((item, index) => (
-        <div className="product_card" key={index}>
-          <Link
-            className="product_card__Link"
-            to="/productdetail"
-            state={{
-              name: item.name,
-              img: item.img,
-              describe: item.describe,
-              id: item.id,
-            }}
-          >
-            <CardItem
-              key={index}
-              // img = {item.img} đáng ra là code này nhưng tôi chưa biết cách đưa ảnh vào json nên để tạm
-              img={item.img}
-              describe={item.describe}
-              price={item.price}
-              sold={item.sold}
-            />
-          </Link>
-        </div>
-      ))}
+      {product.map((item, index) => {
+        if (index <= 5) {
+          return (
+            <div className="product_card" key={index}>
+              <Link
+                className="product_card__Link"
+                to={`/productdetail/${item.id}`}
+                key={Math.random()}
+                state={{
+                  name: item.name,
+                  img: item.img,
+                  describe: item.describe,
+                  id: item.id,
+                }}
+              >
+                <CardItem
+                  key={index}
+                  // img = {item.img} đáng ra là code này nhưng tôi chưa biết cách đưa ảnh vào json nên để tạm
+                  img={item.img}
+                  name={item.name}
+                  describe={item.describe}
+                  price={item.price}
+                  sold={item.sold}
+                />
+              </Link>
+            </div>
+          );
+        } else return null;
+      })}
     </div>
   );
 }

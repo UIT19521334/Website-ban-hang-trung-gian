@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { MDBDataTableV5 } from "mdbreact";
@@ -78,52 +77,51 @@ export default function Products() {
     setCheckbox1(e);
   };
 
-  // useEffect(() => {
-  //   if (state_product.productList.length > 0) {
-  //     setDatatable({
-  //       columns: [
-  //         {
-  //           label: "ID",
-  //           field: "products_id",
-  //           width: 150,
-  //         },
-  //         {
-  //           label: "Category",
-  //           field: "name_category",
-  //           width: 150,
-  //         },
-  //         {
-  //           label: "Name",
-  //           field: "name",
-  //           width: 150,
-  //           attributes: {
-  //             "aria-controls": "DataTable",
-  //             "aria-label": "Name",
-  //           },
-  //         },
-  //         {
-  //           label: "Retail Price",
-  //           field: "retail_price",
-  //           sort: "asc",
-  //           width: 200,
-  //         },
-  //         {
-  //           label: "Release Date",
-  //           field: "release_date",
-  //           sort: "asc",
-  //           width: 200,
-  //         },
-  //         {
-  //           label: "Description",
-  //           field: "description",
-  //           sort: "asc",
-  //           width: 200,
-  //         },
-  //       ],
-  //       rows: state_product.productList || [],
-  //     });
-  //   }
-  // }, [state_product.productList]);
+  useEffect(() => {
+    if (state_product.productList.length > 0) {
+      setDatatable({
+        columns: [
+          {
+            label: "STT",
+            field: "products_id",
+            width: 150,
+          },
+          {
+            label: "Category",
+            field: "name_category",
+            width: 150,
+          },
+          {
+            label: "Name",
+            field: "name",
+            width: 150,
+            attributes: {
+              "aria-controls": "DataTable",
+              "aria-label": "Name",
+            },
+          },
+          {
+            label: "Description",
+            field: "description",
+            width: 200,
+          },
+          {
+            label: "Retail Price",
+            field: "retail_price",
+            sort: "asc",
+            width: 200,
+          },
+          {
+            label: "Release Date",
+            field: "release_date",
+            sort: "asc",
+            width: 200,
+          },
+        ],
+        rows: state_product.productList,
+      });
+    }
+  }, [state_product.productList]);
 
   return (
     <div className="row">
@@ -147,28 +145,30 @@ export default function Products() {
                 </button>
               </div>
             </div>
-            <MDBDataTableV5
-              className="tableProducts"
-              hover
-              responsive
-              entriesOptions={[5, 10, 20, 25]}
-              entries={5}
-              pagesAmount={4}
-              data={datatable}
-              //Cho thanh header có text màu trắng
-              theadTextWhite
-              //Cho thanh search lên top
-              searchTop
-              searchBottom={false}
-              //Tạo checkbox
-              // Tìm hiểu thêm tại trang https://mdbootstrap.com/docs/react/tables/datatables/#top-select-serach
-              checkbox
-              headCheckboxID="id2"
-              bodyCheckboxID="checkboxes2"
-              getValueCheckBox={(e) => {
-                showLogs2(e);
-              }}
-            />
+            {datatable.rows?.length > 0 && (
+              <MDBDataTableV5
+                className="tableProducts"
+                hover
+                responsive
+                entriesOptions={[5, 10, 20, 25]}
+                entries={5}
+                pagesAmount={4}
+                data={datatable}
+                //Cho thanh header có text màu trắng
+                theadTextWhite
+                //Cho thanh search lên top
+                searchTop
+                searchBottom={false}
+                //Tạo checkbox
+                // Tìm hiểu thêm tại trang https://mdbootstrap.com/docs/react/tables/datatables/#top-select-serach
+                checkbox
+                headCheckboxID="id2"
+                bodyCheckboxID="checkboxes2"
+                getValueCheckBox={(e) => {
+                  showLogs2(e);
+                }}
+              />
+            )}
           </div>
         </div>
       </div>

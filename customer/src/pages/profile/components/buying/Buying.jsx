@@ -1,33 +1,73 @@
-import React from 'react';
-import { Tab, Tabs } from 'react-bootstrap';
-import TableComponent from '../Table/Table';
+import React, { useEffect, useState } from "react";
+import { Tab, Tabs } from "react-bootstrap";
+import TableComponent from "../Table/Table";
 import HisToryList from "../../../../assets/json/profileHistory.json";
 import PenddingList from "../../../../assets/json/profilePendding.json";
 import CurrentList from "../../../../assets/json/profileCurent.json";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchOrder } from "../../../../slices/profileDataSlice";
 
-const buyingTableHead = [
-  "Item",
-  "Style",
-  "PurchaseDate",
-  "Price",
-  "Status"
-]
-const renderHead = (item, index) => <th key={index}>{item}</th>
+const buyingTableHead = ["Item", "Style", "PurchaseDate", "Price", "Status"];
+const renderHead = (item, index) => <th key={index}>{item}</th>;
 const renderBody = (item, index) => (
   <tr>
     <td>
-      <div className="description">{item.Desctition}</div>
+      <div className="description">{item.brand}</div>
       <div className="titlePro">{item.name}</div>
-      <div className="size">Size: {item.Size}</div>
+      <div className="size">Size: {item.size}</div>
     </td>
-    <td>{item.Style}</td>
-    <td>{item.PurchaseDate}</td>
-    <td>{item.Price}</td>
-    <td>{item.Status}</td>
+    <td>{item.description}</td>
+    <td>{new Date(item.date).toLocaleDateString("vi-VN")}</td>
+    <td>{item.price}</td>
+    <td>Item Was Delivery</td>
   </tr>
-)
+);
+
 const Buying = () => {
-  const [key, setKey] = React.useState('current');
+  const { order, sale } = useSelector((state) => state.profile);
+  const [dataOrder, setDataOrder] = useState(order);
+  const [dataSale, setDataSale] = useState(sale);
+  const [successSale, setSuccessSale] = useState(sale);
+  const [cancleSale, setCancleSale] = useState(sale);
+
+  const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchOrder(user._id));
+  }, []);
+  useEffect(() => {
+    setDataOrder(
+      order.reduce((prev, curItem) => {
+        if (curItem.type === "buy") {
+          return [...prev, curItem];
+        } else return prev;
+      }, [])
+    );
+  }, [order]);
+  useEffect(() => {
+    setDataSale(
+      sale.reduce((prev, curItem) => {
+        if (curItem.type === "buy" && curItem.status === "Chờ xác nhận") {
+          return [...prev, curItem];
+        } else return prev;
+      }, [])
+    );
+    setSuccessSale(
+      sale.reduce((prev, curItem) => {
+        if (curItem.type === "buy" && curItem.status === "Đã xác nhận") {
+          return [...prev, curItem];
+        } else return prev;
+      }, [])
+    );
+    setCancleSale(
+      sale.reduce((prev, curItem) => {
+        if (curItem.type === "buy" && curItem.status === "Huỷ") {
+          return [...prev, curItem];
+        } else return prev;
+      }, [])
+    );
+  }, [sale]);
+  const [key, setKey] = React.useState("pending");
   return (
     <div>
       <div className="header">
@@ -39,41 +79,45 @@ const Buying = () => {
         onSelect={(k) => setKey(k)}
         className="mb-3"
       >
-        <Tab eventKey="current" title="Current">
-          <TableComponent
-            limit='3'
-            headData={buyingTableHead}
-            renderHead={(item, index) => renderHead(item, index)}
-            bodyData={CurrentList}
-            renderBody={(item, index) => renderBody(item, index)}
-          />
-
-        </Tab>
         <Tab eventKey="pending" title="Pending">
-
           <TableComponent
-            limit='3'
+            limit="3"
             headData={buyingTableHead}
             renderHead={(item, index) => renderHead(item, index)}
-            bodyData={PenddingList}
+            bodyData={dataOrder}
             renderBody={(item, index) => renderBody(item, index)}
           />
-
         </Tab>
-        <Tab eventKey="history" title="History">
-
+        <Tab eventKey="delivery" title="Delivery">
           <TableComponent
-            limit='3'
+            limit="3"
             headData={buyingTableHead}
             renderHead={(item, index) => renderHead(item, index)}
-            bodyData={HisToryList}
+            bodyData={dataSale}
             renderBody={(item, index) => renderBody(item, index)}
           />
-
+        </Tab>
+        <Tab eventKey="successfully" title="Successfully">
+          <TableComponent
+            limit="3"
+            headData={buyingTableHead}
+            renderHead={(item, index) => renderHead(item, index)}
+            bodyData={successSale}
+            renderBody={(item, index) => renderBody(item, index)}
+          />
+        </Tab>
+        <Tab eventKey="cancel" title="Cancel">
+          <TableComponent
+            limit="3"
+            headData={buyingTableHead}
+            renderHead={(item, index) => renderHead(item, index)}
+            bodyData={cancleSale}
+            renderBody={(item, index) => renderBody(item, index)}
+          />
         </Tab>
       </Tabs>
     </div>
   );
-}
+};
 
 export default Buying;

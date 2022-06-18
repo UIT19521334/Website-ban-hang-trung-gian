@@ -87,6 +87,15 @@ export const getAll = async (req, res) => {
   }
 };
 
+export const getAllBase = async (req, res) => {
+  try {
+    const product = await Product.find();
+    if (product && product.length > 0) {
+      return res.json(product);
+    }
+  } catch (error) {}
+};
+
 export const update = async (req, res) => {
   try {
     const product = await Product.findByIdAndUpdate(

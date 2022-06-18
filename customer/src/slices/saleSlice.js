@@ -21,6 +21,20 @@ export const fetchSaleByProduct = createAsyncThunk(
     }
   }
 );
+export const createSale = createAsyncThunk(
+  "sale/create",
+  async (data, thunkAPI) => {
+    try {
+      const url = `${apiUrl}/sale/create`;
+      const response = await axios.post(url, data);
+      if (response.data) {
+        return response.data;
+      }
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
 const saleSlice = createSlice({
   name: "sale",
   initialState: initState,
@@ -32,6 +46,12 @@ const saleSlice = createSlice({
       .addCase(fetchSaleByProduct.fulfilled, (state, action) => {
         state.isLoading = false;
         state.productSale = action.payload;
+      })
+      .addCase(createSale.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(createSale.fulfilled, (state, action) => {
+        state.isLoading = false;
       });
   },
 });

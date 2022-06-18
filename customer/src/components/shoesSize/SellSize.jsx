@@ -1,11 +1,13 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { Modal, Form, Button } from "react-bootstrap";
 import sizeDATA from "../../assets/json/size.json";
 import { UserContext } from "../../UserContext";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { authSelector } from "../../redux/authSelector";
-import { createOrder } from "../../slices/orderSlice";
+import { createOrder, updateActive } from "../../slices/orderSlice";
+import { createSale } from "../../slices/saleSlice";
+import { toast } from "react-toastify";
 function SellSize(props) {
   // const {user} = useContext(UserContext);
   const { user } = useSelector(authSelector);
@@ -17,16 +19,22 @@ function SellSize(props) {
   const [isLocation, setIsLocation] = React.useState(false);
   const [size, setSize] = useState(1);
 
+  const [contactNum, setContactNum] = useState("");
+  const [address, setAddress] = useState("");
+
   const [ask, setAsk] = React.useState();
   const setAskData = (e) => {
     setAsk(e.target.value);
   };
+
+  const hightestBidOrder = useRef();
   const handleProductOrder = () => {
     return props.productOrder.reduce((prev, curItem) => {
       if (curItem.order_type === "sell") return prev;
       if (curItem.asker_id === user._id) return prev;
       if (prev[curItem.size]) {
         if (prev[curItem.size] < curItem.price) {
+          hightestBidOrder.current = curItem;
           prev[curItem.size] = curItem.price;
           return prev;
         } else {
@@ -53,7 +61,24 @@ function SellSize(props) {
   };
   const CloseLocation2 = () => {
     setIsLocation(!isLocation);
-    alert("Buying sucess");
+    if (isSell) {
+      handleSale();
+    } else {
+      const data = {
+        product_id: props.product_id,
+        asker_id: user._id,
+        size,
+        price: ask,
+        order_type: "sell",
+        active: true,
+        sold: false,
+        address,
+        contactNum,
+      };
+      dispatch(createOrder(data));
+      props.handleClose();
+      toast("Ask successfully");
+    }
   };
   const dispatch = useDispatch();
   const handleNext = () => {
@@ -69,24 +94,30 @@ function SellSize(props) {
           CheckMore();
         } else {
           if (ask > 0) {
-            const data = {
-              product_id: props.product_id,
-              asker_id: user._id,
-              size,
-              price: ask,
-              order_type: "sell",
-              active: true,
-              sold: false,
-            };
-            dispatch(createOrder(data));
-            props.handleClose();
-            alert("Your ask have save");
+            CloseLocation();
+          } else {
+            alert("Input your ask");
           }
         }
       }
     } else {
       setIsUser(false);
     }
+  };
+  const handleSale = () => {
+    const data = {
+      product_id: props.product_id,
+      order_id: hightestBidOrder.current._id,
+      userTaken: user._id,
+      size,
+      price: hightestBidOrder.current?.price,
+      address,
+      contactNum,
+    };
+    dispatch(createSale(data));
+    dispatch(updateActive(hightestBidOrder.current._id));
+    props.handleClose();
+    toast("Sell successfully");
   };
   return (
     <Modal size="lg" show={props.view} onHide={props.handleClose}>
@@ -192,6 +223,7 @@ function SellSize(props) {
                 type="number"
                 placeholder="example: 0915017711"
                 autoFocus
+                onChange={(e) => setContactNum(e.target.value)}
               />
             </Form.Group>
             <Form.Group
@@ -199,7 +231,11 @@ function SellSize(props) {
               controlId="exampleForm.ControlTextarea1"
             >
               <Form.Label>Your address</Form.Label>
-              <Form.Control as="textarea" rows={6} />
+              <Form.Control
+                as="textarea"
+                rows={6}
+                onChange={(e) => setAddress(e.target.value)}
+              />
             </Form.Group>
           </Form>
         </Modal.Body>

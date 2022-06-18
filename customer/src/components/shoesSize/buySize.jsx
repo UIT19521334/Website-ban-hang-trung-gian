@@ -1,11 +1,13 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { Modal, Form, Button } from "react-bootstrap";
 import sizeDATA from "../../assets/json/size.json";
 import { UserContext } from "../../UserContext";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { authSelector } from "../../redux/authSelector";
-import { createOrder } from "../../slices/orderSlice";
+import { createOrder, updateActive } from "../../slices/orderSlice";
+import { createSale } from "../../slices/saleSlice";
+import { ToastContainer, toast } from "react-toastify";
 function BuySize(props) {
   // const {user} = useContext(UserContext);
   const { user } = useSelector(authSelector);
@@ -17,17 +19,24 @@ function BuySize(props) {
   const [isLocation, setIsLocation] = React.useState(false);
   const [size, setSize] = useState(1);
 
+  const [contactNum, setContactNum] = useState("");
+  const [address, setAddress] = useState("");
+
+  const lowestBidOrder = useRef();
   const [bid, SetBid] = React.useState();
   const setbidData = (e) => {
     SetBid(e.target.value);
   };
 
   const handleProductOrder = () => {
+    console.log("sxdf", props.productOrder);
     return props.productOrder.reduce((prev, curItem) => {
       if (curItem.order_type === "buy") return prev;
       if (curItem.asker_id === user._id) return prev;
+      if (!curItem.active) return prev;
       if (prev[curItem.size]) {
         if (prev[curItem.size] > curItem.price) {
+          lowestBidOrder.current = curItem;
           prev[curItem.size] = curItem.price;
           return prev;
         } else {
@@ -54,9 +63,44 @@ function BuySize(props) {
   };
   const CloseLocation2 = () => {
     setIsLocation(!isLocation);
-    alert("Buying sucess");
-  };
 
+    if (isBuy) {
+      handleSale();
+    } else {
+      const data = {
+        product_id: props.product_id,
+        asker_id: user._id,
+        size,
+        price: bid,
+        order_type: "buy",
+        active: true,
+        sold: false,
+        contactNum,
+        address,
+      };
+      dispatch(createOrder(data));
+
+      props.handleClose();
+
+      toast("Your bid have save");
+    }
+  };
+  const handleSale = () => {
+    const data = {
+      product_id: props.product_id,
+      order_id: lowestBidOrder.current._id,
+      userTaken: user._id,
+      size,
+      price: lowestBidOrder.current.price,
+      address,
+      contactNum,
+    };
+    dispatch(createSale(data));
+    dispatch(updateActive(lowestBidOrder.current._id));
+    props.handleClose();
+
+    toast("Sale successffully");
+  };
   const dispatch = useDispatch();
   const handleNext = () => {
     if (user) {
@@ -67,22 +111,13 @@ function BuySize(props) {
         }
         CloseLocation();
       } else {
-        if (bid > price) {
+        if (bid > price && price) {
           CheckMore();
         } else {
           if (bid > 0) {
-            const data = {
-              product_id: props.product_id,
-              asker_id: user._id,
-              size,
-              price: bid,
-              order_type: "buy",
-              active: true,
-              sold: false,
-            };
-            dispatch(createOrder(data));
-            props.handleClose();
-            alert("Your bid have save");
+            CloseLocation();
+          } else {
+            alert("Input your bid");
           }
         }
       }
@@ -194,6 +229,7 @@ function BuySize(props) {
                 type="number"
                 placeholder="example: 0915017711"
                 autoFocus
+                onChange={(e) => setContactNum(e.target.value)}
               />
             </Form.Group>
             <Form.Group
@@ -201,7 +237,11 @@ function BuySize(props) {
               controlId="exampleForm.ControlTextarea1"
             >
               <Form.Label>Your address</Form.Label>
-              <Form.Control as="textarea" rows={6} />
+              <Form.Control
+                as="textarea"
+                rows={6}
+                onChange={(e) => setAddress(e.target.value)}
+              />
             </Form.Group>
           </Form>
         </Modal.Body>

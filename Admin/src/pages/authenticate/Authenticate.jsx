@@ -62,6 +62,56 @@ export default function Authenticates() {
     ],
     rows: state_authenticate.authenticateList,
   });
+
+  useEffect(() => {
+    setDatatable({
+      columns: [
+        {
+          label: "STT",
+          field: "stt",
+          width: 150,
+        },
+        {
+          label: "Seller",
+          field: "asker",
+          width: 150,
+        },
+        {
+          label: "Buyer",
+          field: "taker",
+          width: 200,
+        },
+        {
+          label: "Product",
+          field: "product",
+          width: 200,
+        },
+        {
+          label: "Price",
+          field: "price",
+          sort: "asc",
+          width: 100,
+        },
+        {
+          label: "Size",
+          field: "size",
+          sort: "asc",
+          width: 100,
+        },
+        {
+          label: "Date",
+          field: "date_sale",
+          width: 150,
+        },
+        {
+          label: "Time",
+          field: "time_sale",
+          width: 150,
+        },
+      ],
+      rows: state_authenticate.authenticateList,
+    });
+  }, [state_authenticate]);
   //   <Badge type = {[val.status]} content={val.status}/> Dòng này để thêm màu cho status mà chưa được
   const [checkbox1, setCheckbox1] = React.useState("");
 
@@ -81,28 +131,30 @@ export default function Authenticates() {
                 <button className="btn__fix"> Fix</button>
               </div>
             </div>
-            <MDBDataTableV5
-              className="tableProducts"
-              hover
-              responsive
-              entriesOptions={[5, 10, 20, 25]}
-              entries={5}
-              pagesAmount={4}
-              data={datatable}
-              //Cho thanh header có text màu trắng
-              theadTextWhite
-              //Cho thanh search lên top
-              searchTop
-              searchBottom={false}
-              //Tạo checkbox
-              // Tìm hiểu thêm tại trang https://mdbootstrap.com/docs/react/tables/datatables/#top-select-serach
-              checkbox
-              headCheckboxID="id2"
-              bodyCheckboxID="checkboxes2"
-              getValueCheckBox={(e) => {
-                showLogs2(e);
-              }}
-            />
+            {datatable.rows?.length > 0 && (
+              <MDBDataTableV5
+                className="tableProducts"
+                hover
+                responsive
+                entriesOptions={[5, 10, 20, 25]}
+                entries={5}
+                pagesAmount={4}
+                data={datatable}
+                //Cho thanh header có text màu trắng
+                theadTextWhite
+                //Cho thanh search lên top
+                searchTop
+                searchBottom={false}
+                //Tạo checkbox
+                // Tìm hiểu thêm tại trang https://mdbootstrap.com/docs/react/tables/datatables/#top-select-serach
+                checkbox
+                headCheckboxID="id2"
+                bodyCheckboxID="checkboxes2"
+                getValueCheckBox={(e) => {
+                  showLogs2(e);
+                }}
+              />
+            )}
           </div>
         </div>
       </div>

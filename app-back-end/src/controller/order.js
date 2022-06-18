@@ -108,6 +108,22 @@ export const update = async (req, res) => {
     console.log(err);
   }
 };
+
+export const updateActive = async (req, res) => {
+  try {
+    const order = await Order.findByIdAndUpdate(
+      req.params.id,
+      {
+        active: false,
+      },
+      { new: true }
+    );
+    res.status(200).json(order);
+  } catch (err) {
+    res.status(500).json(err);
+    console.log(err);
+  }
+};
 export const deleteById = async (req, res) => {
   try {
     await Order.findByIdAndDelete(req.params.id);

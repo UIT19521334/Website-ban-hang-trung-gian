@@ -2,14 +2,24 @@ import Sale from "../models/sale.js";
 
 export const create = async (req, res) => {
   try {
-    const { product_id, asker_id, taker_id, size, price } = req.body;
+    const {
+      product_id,
+      order_id,
+      userTaken,
+      size,
+      price,
+      contactNum,
+      address,
+    } = req.body;
 
     const newSale = new Sale({
       product_id,
-      asker_id,
-      taker_id,
+      order_id,
+      userTaken,
       size,
       price,
+      address,
+      contactNum,
       fee: (3 * price) / 100,
       status: "Chờ xác nhận",
       active: true,
@@ -21,6 +31,15 @@ export const create = async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
     console.log(err);
+  }
+};
+export const getByProductId = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const sales = await Sale.find({ product_id: id });
+    res.status(200).json(sales);
+  } catch (error) {
+    return res.status(500).json(error);
   }
 };
 
