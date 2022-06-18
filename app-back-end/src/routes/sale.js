@@ -1,9 +1,17 @@
 import express from "express";
-import { create, getAll, update, deleteById } from "../controller/sale.js";
+import {
+  create,
+  getAll,
+  update,
+  deleteById,
+  getAllSale,
+} from "../controller/sale.js";
 
 const router = express.Router();
 
 router.post("/sale/create", create);
+
+router.get("/sale/getAllSale", getAllSale);
 
 router.get("/sale/getAll", getAll);
 

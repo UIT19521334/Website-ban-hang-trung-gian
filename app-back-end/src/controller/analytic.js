@@ -17,16 +17,16 @@ export const getAll = async (req, res) => {
     const curMonth = (curDate.getMonth() + 1).padLeft();
     const curDt = curDate.getDate().padLeft();
 
-    const filteredAuthenticate = auths.filter((auth) => {
+    const filteredSales = sales.filter((sale) => {
       //   const date = new Date(auth.createdAt);
       //   const month = (date.getMonth() + 1).padLeft();
-      return !auth.active /*&& month == curMonth*/;
+      return !sale.active /*&& month == curMonth*/;
     });
 
     let revenue = 0;
 
-    for (let auth of filteredAuthenticate) {
-      revenue += auth.fee;
+    for (let sale of filteredSales) {
+      revenue += sale.fee;
     }
 
     let totalProducts = products.length;
@@ -61,7 +61,7 @@ export const getAll = async (req, res) => {
     let totalSells = filteredOrderSell.length;
     let totalBuys = filteredOrderBuy.length;
 
-    const totalSales = sales.length;
+    const totalSales = filteredSales.length;
 
     res.status(200).json({
       revenue,
