@@ -47,8 +47,8 @@ export const getAll = async (req, res) => {
   try {
     const sales = await Sale.find()
       .populate("product_id")
-      .populate({ path: "asker_id", populate: { path: "asker_id" } })
-      .populate({ path: "taker_id", populate: { path: "asker_id" } });
+      .populate({ path: "order_id", populate: { path: "asker_id" } })
+      .populate({ path: "userTaken" });
 
     var stt = 1;
 
@@ -65,13 +65,21 @@ export const getAll = async (req, res) => {
 
       let result = {};
       result.stt = stt;
-      result.asker = sale.asker_id.asker_id.name;
-      result.taker = sale.taker_id.asker_id.name;
+
+      if (sale.order_id.order_type === "sell") {
+        result.asker = sale.order_id.asker_id.name;
+        result.taker = sale.userTaken.name;
+      } else {
+        result.taker = sale.order_id.asker_id.name;
+        result.asker = sale.userTaken.name;
+      }
+      result.status = sale.status;
       result.product = sale.product_id.name;
       result.size = sale.size;
       result.price = sale.price;
       result.date_sale = [dt, month, year].join("/");
       result.time_sale = [h, m, s].join(":");
+      result._id = sale._id;
       payload.push(result);
       stt++;
     }

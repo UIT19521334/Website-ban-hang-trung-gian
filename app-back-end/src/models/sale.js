@@ -9,7 +9,7 @@ const saleSchema = new mongoose.Schema(
     },
     userTaken: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Order", //buyer
+      ref: "User", //buyer
       required: true,
     },
     product_id: {

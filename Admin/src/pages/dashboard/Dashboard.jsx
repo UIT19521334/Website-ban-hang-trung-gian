@@ -30,6 +30,21 @@ const Dashboard = () => {
       title: "Revenue",
     },
     {
+      icon: "bx bx-dollar-circle",
+      count: analyticList.totalSales,
+      title: "Sale",
+    },
+    {
+      icon: "bx bx-dollar-circle",
+      count: analyticList.totalCancel,
+      title: "Cancel",
+    },
+    {
+      icon: "bx bx-dollar-circle",
+      count: analyticList.totalPending,
+      title: "Pending",
+    },
+    {
       icon: "bx bx-store",
       count: analyticList.totalProducts,
       title: "Products",
@@ -38,11 +53,6 @@ const Dashboard = () => {
       icon: "bx bx-store",
       count: analyticList.totalUsers,
       title: "Users",
-    },
-    {
-      icon: "bx bx-store",
-      count: analyticList.totalNewUsers,
-      title: "New Users",
     },
     {
       icon: "bx bx-store",
@@ -55,9 +65,9 @@ const Dashboard = () => {
       title: "Bid",
     },
     {
-      icon: "bx bx-dollar-circle",
-      count: analyticList.totalSales,
-      title: "Sale",
+      icon: "bx bx-store",
+      count: analyticList.totalNewUsers,
+      title: "New Users",
     },
   ];
 

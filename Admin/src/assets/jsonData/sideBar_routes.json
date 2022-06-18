@@ -5,7 +5,7 @@
         "icon":"bx bx-category"
     },
     {
-        "display_name":"Customer",
+        "display_name":"Customers",
         "route":"/customer",
         "icon":"bx bx-user-pin"
     },
@@ -20,14 +20,9 @@
         "icon":"bx bx-cart"
     },
     {
-        "display_name":"Authenticates",
-        "route":"/authenticates",
-        "icon":"bx bx-cart"
-    },
-    {
         "display_name":"Sales",
         "route":"/sales",
-        "icon":"bx bx-cart"
+        "icon":"bx bx-purchase-tag"
     },
     {
         "display_name":"Analytics",

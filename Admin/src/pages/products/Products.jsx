@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { MDBDataTableV5 } from "mdbreact";
 // import productsList from "../../assets/jsonData/products-list.json";
@@ -29,7 +29,9 @@ export default function Products() {
     }
   };
 
-  const [datatable, setDatatable] = React.useState({
+  const [datatable, setDatatable] = React.useState();
+
+  const fixData = useRef({
     columns: [
       {
         label: "STT",
@@ -77,8 +79,62 @@ export default function Products() {
     setCheckbox1(e);
   };
 
+  const [fixState, setFixState] = useState(false);
+
   useEffect(() => {
-    if (state_product.productList.length > 0) {
+    if (fixData.current.rows.length > 0) {
+      setFixState(true);
+    }
+  }, [fixData.current]);
+
+  useEffect(() => {
+    if (
+      state_product.productList?.length > 0 &&
+      fixData.current.rows.length === 0
+    ) {
+      setFixState(true);
+      fixData.current = {
+        columns: [
+          {
+            label: "STT",
+            field: "products_id",
+            width: 150,
+          },
+          {
+            label: "Category",
+            field: "name_category",
+            width: 150,
+          },
+          {
+            label: "Name",
+            field: "name",
+            width: 150,
+            attributes: {
+              "aria-controls": "DataTable",
+              "aria-label": "Name",
+            },
+          },
+          {
+            label: "Description",
+            field: "description",
+            width: 200,
+          },
+          {
+            label: "Retail Price",
+            field: "retail_price",
+            sort: "asc",
+            width: 200,
+          },
+          {
+            label: "Release Date",
+            field: "release_date",
+            sort: "asc",
+            width: 200,
+          },
+        ],
+        rows: state_product.productList,
+      };
+      setFixState(true);
       setDatatable({
         columns: [
           {
@@ -145,7 +201,7 @@ export default function Products() {
                 </button>
               </div>
             </div>
-            {datatable.rows?.length > 0 && (
+            {state_product.productList?.length > 0 && fixState && (
               <MDBDataTableV5
                 className="tableProducts"
                 hover
@@ -153,7 +209,7 @@ export default function Products() {
                 entriesOptions={[5, 10, 20, 25]}
                 entries={5}
                 pagesAmount={4}
-                data={datatable}
+                data={fixData.current}
                 //Cho thanh header có text màu trắng
                 theadTextWhite
                 //Cho thanh search lên top
@@ -161,7 +217,7 @@ export default function Products() {
                 searchBottom={false}
                 //Tạo checkbox
                 // Tìm hiểu thêm tại trang https://mdbootstrap.com/docs/react/tables/datatables/#top-select-serach
-                checkbox
+                checkbox={true}
                 headCheckboxID="id2"
                 bodyCheckboxID="checkboxes2"
                 getValueCheckBox={(e) => {

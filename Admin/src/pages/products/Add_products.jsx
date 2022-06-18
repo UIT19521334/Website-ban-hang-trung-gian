@@ -62,6 +62,7 @@ const Add_products = (props) => {
         icon: "success",
         button: "OK",
       });
+      window.location.reload(false);
     } else {
       dispatch(ProductActions.editProduct(form));
 
@@ -71,6 +72,7 @@ const Add_products = (props) => {
         icon: "success",
         button: "OK",
       });
+      window.location.reload(false);
     }
     setProduct(initProduct);
     resetCss();
@@ -179,6 +181,18 @@ const Add_products = (props) => {
               }}
             />
           </div>
+          {/* <div className="col-4">
+            <input
+              type="file"
+              className="add_popup_input"
+              placeholder="Image of Product"
+              value={product.img_path}
+              onChange={(e) => {
+                setProduct({ ...product, img_path: e.target.value });
+                checkEditData();
+              }}
+            />
+          </div> */}
 
           {/* <div className="col-4">
             <Autocomplete
@@ -194,7 +208,7 @@ const Add_products = (props) => {
           <button
             className="btn__add"
             onClick={handleModalSave}
-            disabled={!editData}
+            // disabled={!editData}
           >
             {" "}
             {props.modalFlag}{" "}

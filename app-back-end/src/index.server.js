@@ -11,7 +11,6 @@ import productRoutes from "./routes/product.js";
 import orderRoutes from "./routes/order.js";
 import saleRoutes from "./routes/sale.js";
 import followRoutes from "./routes/follow.js";
-import authenticateRoutes from "./routes/authenticate.js";
 import RuleRoutes from "./routes/rule.js";
 import AnalyticRoutes from "./routes/analytic.js";
 
@@ -50,7 +49,6 @@ app.use("/api", productRoutes);
 app.use("/api", orderRoutes);
 app.use("/api", saleRoutes);
 app.use("/api", followRoutes);
-app.use("/api", authenticateRoutes);
 app.use("/api", RuleRoutes);
 app.use("/api", AnalyticRoutes);
 

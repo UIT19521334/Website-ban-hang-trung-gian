@@ -20,7 +20,18 @@ export const getAll = async (req, res) => {
     const filteredSales = sales.filter((sale) => {
       //   const date = new Date(auth.createdAt);
       //   const month = (date.getMonth() + 1).padLeft();
-      return !sale.active /*&& month == curMonth*/;
+      return sale.status === "Đã xác nhận" /*&& month == curMonth*/;
+    });
+
+    const filteredSalesCancel = sales.filter((sale) => {
+      //   const date = new Date(auth.createdAt);
+      //   const month = (date.getMonth() + 1).padLeft();
+      return sale.status === "Hủy" /*&& month == curMonth*/;
+    });
+    const filteredSalesPending = sales.filter((sale) => {
+      //   const date = new Date(auth.createdAt);
+      //   const month = (date.getMonth() + 1).padLeft();
+      return sale.status === "Chờ xác nhận" /*&& month == curMonth*/;
     });
 
     let revenue = 0;
@@ -61,6 +72,9 @@ export const getAll = async (req, res) => {
     let totalSells = filteredOrderSell.length;
     let totalBuys = filteredOrderBuy.length;
 
+    let totalCancel = filteredSalesCancel.length;
+    let totalPending = filteredSalesPending.length;
+
     const totalSales = filteredSales.length;
 
     res.status(200).json({
@@ -71,6 +85,8 @@ export const getAll = async (req, res) => {
       totalSells,
       totalBuys,
       totalSales,
+      totalCancel,
+      totalPending,
     });
   } catch (err) {
     res.status(500).json({ error: err });

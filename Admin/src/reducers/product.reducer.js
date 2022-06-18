@@ -56,9 +56,13 @@ export default (state = initState, action) => {
     case productConstants.ADD_PRODUCT_SUCCESS:
       state = {
         ...state,
-        products: rebuildAddProduct(state.products, action.payload.product),
+        productList: rebuildAddProduct(
+          state.productList,
+          action.payload.product
+        ),
         loading: false,
       };
+      console.log(state);
       break;
     case productConstants.ADD_PRODUCT_FAILURE:
       state = {
@@ -75,7 +79,7 @@ export default (state = initState, action) => {
     case productConstants.EDIT_PRODUCT_SUCCESS:
       state = {
         ...state,
-        products: rebuildEditProduct(state.products, action.payload.product),
+        productList: rebuildEditProduct(state.products, action.payload.product),
         loading: false,
       };
       break;

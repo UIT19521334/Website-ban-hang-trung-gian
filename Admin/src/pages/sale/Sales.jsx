@@ -5,6 +5,7 @@ import Badge from "../../components/badge/Badge";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import SaleActions from "../../actions/sale.actions";
+import { useRef } from "react";
 
 export default function Sales() {
   const dispatch = useDispatch();
@@ -14,7 +15,42 @@ export default function Sales() {
   }, []);
 
   const state_sale = useSelector((state) => state.sales);
-
+  const fixData = useRef({
+    columns: [
+      {
+        label: "STT",
+        field: "stt",
+        width: 150,
+      },
+      {
+        label: "Product",
+        field: "product",
+        width: 200,
+      },
+      {
+        label: "Size",
+        field: "size",
+        width: 200,
+      },
+      {
+        label: "Price",
+        field: "price",
+        sort: "asc",
+        width: 100,
+      },
+      {
+        label: "Date",
+        field: "date_sale",
+        width: 150,
+      },
+      {
+        label: "Time",
+        field: "time_sale",
+        width: 150,
+      },
+    ],
+    rows: state_sale.saleList,
+  });
   const [datatable, setDatatable] = React.useState({
     columns: [
       {
@@ -53,6 +89,43 @@ export default function Sales() {
   });
 
   useEffect(() => {
+    if (fixData.current.rows.length === 0 && state_sale.saleList?.length > 0)
+      fixData.current = {
+        columns: [
+          {
+            label: "STT",
+            field: "stt",
+            width: 150,
+          },
+          {
+            label: "Product",
+            field: "product",
+            width: 200,
+          },
+          {
+            label: "Size",
+            field: "size",
+            width: 200,
+          },
+          {
+            label: "Price",
+            field: "price",
+            sort: "asc",
+            width: 100,
+          },
+          {
+            label: "Date",
+            field: "date_sale",
+            width: 150,
+          },
+          {
+            label: "Time",
+            field: "time_sale",
+            width: 150,
+          },
+        ],
+        rows: state_sale.saleList,
+      };
     setDatatable({
       columns: [
         {
@@ -102,14 +175,14 @@ export default function Sales() {
         <div className="card">
           <div className="card__body">
             <div className="card__body-header-cus">
-              <h2>Orders page</h2>
+              <h2>Orders</h2>
               <div className="card__body-header-right">
-                <button className="btn__add"> Add </button>
+                <button className="btn__add"> Confirm </button>
                 <button className="btn__del"> Delete </button>
                 <button className="btn__fix"> Fix</button>
               </div>
             </div>
-            {datatable.rows?.length > 0 && (
+            {fixData.current.rows?.length > 0 && (
               <MDBDataTableV5
                 className="tableProducts"
                 hover
@@ -117,7 +190,7 @@ export default function Sales() {
                 entriesOptions={[5, 10, 20, 25]}
                 entries={5}
                 pagesAmount={4}
-                data={datatable}
+                data={fixData.current}
                 //Cho thanh header có text màu trắng
                 theadTextWhite
                 //Cho thanh search lên top
@@ -125,7 +198,7 @@ export default function Sales() {
                 searchBottom={false}
                 //Tạo checkbox
                 // Tìm hiểu thêm tại trang https://mdbootstrap.com/docs/react/tables/datatables/#top-select-serach
-                checkbox
+                checkbox={true}
                 headCheckboxID="id2"
                 bodyCheckboxID="checkboxes2"
                 getValueCheckBox={(e) => {

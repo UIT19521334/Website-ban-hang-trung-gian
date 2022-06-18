@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { MDBDataTableV5 } from "mdbreact";
 import customerList from "../../assets/jsonData/customer-list.json";
 import Add_customer from "./Add_customers";
@@ -21,6 +21,50 @@ export default function Customer() {
   }, []);
 
   const state_user = useSelector((state) => state.user.users);
+
+  const fixData = useRef({
+    columns: [
+      {
+        label: "STT",
+        field: "id",
+        width: 150,
+      },
+      {
+        label: "Name",
+        field: "name",
+        width: 270,
+        attributes: {
+          "aria-controls": "DataTable",
+          "aria-label": "Name",
+        },
+      },
+      {
+        label: "Email",
+        field: "email",
+        sort: "disabled",
+        width: 200,
+      },
+      {
+        label: "Phone",
+        field: "phoneNumber",
+        sort: "disabled",
+        width: 100,
+      },
+      {
+        label: "Total Orders",
+        field: "total_orders",
+        sort: "asc",
+        width: 100,
+      },
+      {
+        label: "Total Spend",
+        field: "total_spend",
+        sort: "asc",
+        width: 100,
+      },
+    ],
+    rows: state_user,
+  });
 
   const [datatable, setDatatable] = React.useState({
     columns: [
@@ -65,52 +109,102 @@ export default function Customer() {
     ],
     rows: state_user,
   });
+  const [fixState, setFixState] = useState(false);
 
   useEffect(() => {
+    if (fixData.current.rows.length > 0) {
+      setFixState(true);
+    }
+  }, [fixData.current]);
+  useEffect(() => {
+    if (fixData.current.rows.length === 0 && state_user.length > 0) {
+      fixData.current = {
+        columns: [
+          {
+            label: "STT",
+            field: "id",
+            width: 150,
+          },
+          {
+            label: "Name",
+            field: "name",
+            width: 270,
+            attributes: {
+              "aria-controls": "DataTable",
+              "aria-label": "Name",
+            },
+          },
+          {
+            label: "Email",
+            field: "email",
+            sort: "disabled",
+            width: 200,
+          },
+          {
+            label: "Phone",
+            field: "phoneNumber",
+            sort: "disabled",
+            width: 100,
+          },
+          {
+            label: "Total Orders",
+            field: "total_orders",
+            sort: "asc",
+            width: 100,
+          },
+          {
+            label: "Total Spend",
+            field: "total_spend",
+            sort: "asc",
+            width: 100,
+          },
+        ],
+        rows: state_user,
+      };
+    }
     setDatatable({
       columns: [
         {
           label: "STT",
-          field: "id",
+          field: "products_id",
+          width: 150,
+        },
+        {
+          label: "Category",
+          field: "name_category",
           width: 150,
         },
         {
           label: "Name",
           field: "name",
-          width: 270,
+          width: 150,
           attributes: {
             "aria-controls": "DataTable",
             "aria-label": "Name",
           },
         },
         {
-          label: "Email",
-          field: "email",
-          sort: "disabled",
+          label: "Description",
+          field: "description",
           width: 200,
         },
         {
-          label: "Phone",
-          field: "phoneNumber",
-          sort: "disabled",
-          width: 100,
+          label: "Retail Price",
+          field: "retail_price",
+          sort: "asc",
+          width: 200,
         },
         {
-          label: "Total Orders",
-          field: "total_orders",
+          label: "Release Date",
+          field: "release_date",
           sort: "asc",
-          width: 100,
-        },
-        {
-          label: "Total Spend",
-          field: "total_spend",
-          sort: "asc",
-          width: 100,
+          width: 200,
         },
       ],
       rows: state_user,
     });
   }, [state_user]);
+
   const [checkbox1, setCheckbox1] = React.useState("");
 
   const showLogs2 = (e) => {
@@ -123,9 +217,9 @@ export default function Customer() {
         <div className="card">
           <div className="card__body">
             <div className="card__body-header-cus">
-              <h2>Customer</h2>
+              <h2>Customers</h2>
               <div className="card__body-header-right">
-                <button className="btn__add" onClick={showAddPage}>
+                {/* <button className="btn__add" onClick={showAddPage}>
                   {" "}
                   Add{" "}
                 </button>
@@ -133,12 +227,12 @@ export default function Customer() {
                 <button className="btn__fix" onClick={showAddPage}>
                   {" "}
                   Fix
-                </button>
+                </button> */}
               </div>
             </div>
 
             {/* <WithCheckBoxes data={datatable}></WithCheckBoxes> */}
-            {datatable.rows.length > 0 && (
+            {fixData.current.rows.length > 0 && fixState && (
               <MDBDataTableV5
                 className="tableProducts"
                 hover
@@ -146,7 +240,7 @@ export default function Customer() {
                 entriesOptions={[5, 10, 20, 25]}
                 entries={5}
                 pagesAmount={4}
-                data={datatable}
+                data={fixData.current}
                 //Cho thanh header có text màu trắng
                 theadTextWhite
                 //Cho thanh search lên top
@@ -154,7 +248,7 @@ export default function Customer() {
                 searchBottom={false}
                 //Tạo checkbox
                 // Tìm hiểu thêm tại trang https://mdbootstrap.com/docs/react/tables/datatables/#top-select-serach
-                checkbox
+                checkbox={true}
                 headCheckboxID="id2"
                 bodyCheckboxID="checkboxes2"
                 getValueCheckBox={(e) => {
