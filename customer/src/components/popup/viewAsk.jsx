@@ -5,7 +5,8 @@ import "./popup.css";
 function ViewAsk(props) {
   const handleProductOrder = () => {
     const productOrder = props.productOrder.reduce((prev, curItem) => {
-      if (curItem.order_type === "sell") return [...prev, curItem];
+      if (curItem.order_type === "sell" && curItem.active)
+        return [...prev, curItem];
       else return prev;
     }, []);
     const fixedOrder = productOrder.reduce((prev, curItem) => {

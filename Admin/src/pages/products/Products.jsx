@@ -6,6 +6,7 @@ import Add_products from "./Add_products";
 import "./products.css";
 import ProductActions from "../../actions/product.actions";
 import CategoryActions from "../../actions/category.actions";
+import axiosIntance from "../../helpers/axios";
 // import Badge from '../../components/badge/Badge';
 export default function Products() {
   const dispatch = useDispatch();
@@ -179,6 +180,12 @@ export default function Products() {
     }
   }, [state_product.productList]);
 
+  const deletedelete = () => {
+    axiosIntance.delete(`/product/${checkbox1._id}`);
+    alert("Product has been deleted");
+    window.location.reload(false);
+  };
+
   return (
     <div className="row">
       <div className="col-12">
@@ -191,7 +198,10 @@ export default function Products() {
                   {" "}
                   Add{" "}
                 </button>
-                <button className="btn__del"> Delete </button>
+                <button className="btn__del" onClick={() => deletedelete()}>
+                  {" "}
+                  Delete{" "}
+                </button>
                 <button
                   className="btn__fix"
                   onClick={() => showAddPage("Edit")}
@@ -207,7 +217,7 @@ export default function Products() {
                 hover
                 responsive
                 entriesOptions={[5, 10, 20, 25]}
-                entries={5}
+                entries={10}
                 pagesAmount={4}
                 data={fixData.current}
                 //Cho thanh header có text màu trắng

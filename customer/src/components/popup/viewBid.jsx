@@ -5,7 +5,8 @@ import "./popup.css";
 function ViewBid(props) {
   const handleProductOrder = () => {
     const productOrder = props.productOrder.reduce((prev, curItem) => {
-      if (curItem.order_type === "buy") return [...prev, curItem];
+      if (curItem.order_type === "buy" && curItem.active)
+        return [...prev, curItem];
       else return prev;
     }, []);
 

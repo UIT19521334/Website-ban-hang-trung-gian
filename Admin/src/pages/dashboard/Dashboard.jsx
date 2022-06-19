@@ -11,61 +11,64 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import ProductActions from "../../actions/product.actions";
 import AnalyticActions from "../../actions/analytic.action";
+import UserAction from "../../actions/user.actions";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(AnalyticActions.getAll());
+    dispatch(UserAction.getAllUser());
   }, []);
 
+  const state_user = useSelector((state) => state.user.users);
   const state_analytic = useSelector((state) => state.analytic);
 
   const analyticList = state_analytic.analyticList;
 
   const statusCards = [
     {
-      icon: "bx bx-shopping-bag",
+      icon: "bx bx-dollar-circle",
       count: analyticList.revenue,
       title: "Revenue",
     },
     {
-      icon: "bx bx-dollar-circle",
+      icon: "bx bx-shopping-bag",
       count: analyticList.totalSales,
       title: "Sale",
     },
     {
-      icon: "bx bx-dollar-circle",
-      count: analyticList.totalCancel,
-      title: "Cancel",
-    },
-    {
-      icon: "bx bx-dollar-circle",
-      count: analyticList.totalPending,
-      title: "Pending",
-    },
-    {
-      icon: "bx bx-store",
-      count: analyticList.totalProducts,
-      title: "Products",
-    },
-    {
-      icon: "bx bx-store",
-      count: analyticList.totalUsers,
-      title: "Users",
-    },
-    {
-      icon: "bx bx-store",
+      icon: "bx bx-shopping-bag",
       count: analyticList.totalSells,
       title: "Ask",
     },
     {
-      icon: "bx bxl-facebook",
+      icon: "bx bx-shopping-bag",
       count: analyticList.totalBuys,
       title: "Bid",
     },
     {
-      icon: "bx bx-store",
+      icon: "bx bx-shopping-bag",
+      count: analyticList.totalCancel,
+      title: "Cancel",
+    },
+    {
+      icon: "bx bx-shopping-bag",
+      count: analyticList.totalPending,
+      title: "Pending",
+    },
+    {
+      icon: "bx bx-package",
+      count: analyticList.totalProducts,
+      title: "Products",
+    },
+    {
+      icon: "bx bx-group",
+      count: analyticList.totalUsers,
+      title: "Users",
+    },
+    {
+      icon: "bx bx-user-plus",
       count: analyticList.totalNewUsers,
       title: "New Users",
     },
@@ -105,7 +108,7 @@ const Dashboard = () => {
             </div>
             <div className="card__body">
               {/*Bảng*/}
-              <Topcustomers />
+              <Topcustomers listUser={state_user} />
             </div>
           </div>
         </div>

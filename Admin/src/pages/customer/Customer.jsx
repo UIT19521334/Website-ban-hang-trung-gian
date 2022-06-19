@@ -51,14 +51,14 @@ export default function Customer() {
         width: 100,
       },
       {
-        label: "Total Orders",
-        field: "total_orders",
+        label: "Total Sell",
+        field: "totalSell",
         sort: "asc",
         width: 100,
       },
       {
-        label: "Total Spend",
-        field: "total_spend",
+        label: "Total Buy",
+        field: "totalBuy",
         sort: "asc",
         width: 100,
       },
@@ -95,14 +95,14 @@ export default function Customer() {
         width: 100,
       },
       {
-        label: "Total Orders",
-        field: "total_orders",
+        label: "Total Sell",
+        field: "totalSell",
         sort: "asc",
         width: 100,
       },
       {
-        label: "Total Spend",
-        field: "total_spend",
+        label: "Total Buy",
+        field: "totalBuy",
         sort: "asc",
         width: 100,
       },
@@ -147,14 +147,14 @@ export default function Customer() {
             width: 100,
           },
           {
-            label: "Total Orders",
-            field: "total_orders",
+            label: "Total Sell",
+            field: "totalSell",
             sort: "asc",
             width: 100,
           },
           {
-            label: "Total Spend",
-            field: "total_spend",
+            label: "Total Buy",
+            field: "totalBuy",
             sort: "asc",
             width: 100,
           },
@@ -238,7 +238,7 @@ export default function Customer() {
                 hover
                 responsive
                 entriesOptions={[5, 10, 20, 25]}
-                entries={5}
+                entries={10}
                 pagesAmount={4}
                 data={fixData.current}
                 //Cho thanh header có text màu trắng

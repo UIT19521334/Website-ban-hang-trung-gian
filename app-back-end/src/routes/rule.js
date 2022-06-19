@@ -5,8 +5,8 @@ const router = express.Router();
 
 router.get("/rule/getAll", getAll);
 
-router.put("/rule/:id", update);
-
 router.post("/rule/create", create);
+
+router.put("/rule/:id", update);
 
 export default router;

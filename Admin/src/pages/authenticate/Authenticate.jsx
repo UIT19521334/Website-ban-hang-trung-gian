@@ -51,6 +51,11 @@ export default function Authenticates() {
         width: 100,
       },
       {
+        label: "Fee",
+        field: "fee",
+        width: 150,
+      },
+      {
         label: "Date",
         field: "date_sale",
         width: 150,
@@ -102,6 +107,11 @@ export default function Authenticates() {
         field: "size",
         sort: "asc",
         width: 100,
+      },
+      {
+        label: "Fee",
+        field: "fee",
+        width: 150,
       },
       {
         label: "Date",
@@ -162,6 +172,11 @@ export default function Authenticates() {
             width: 100,
           },
           {
+            label: "Fee",
+            field: "fee",
+            width: 150,
+          },
+          {
             label: "Date",
             field: "date_sale",
             width: 150,
@@ -214,6 +229,11 @@ export default function Authenticates() {
           width: 100,
         },
         {
+          label: "Fee",
+          field: "fee",
+          width: 150,
+        },
+        {
           label: "Date",
           field: "date_sale",
           width: 150,
@@ -242,9 +262,11 @@ export default function Authenticates() {
   const updateStatus = (iFlag) => {
     if (iFlag === "Confirm") {
       axiosIntance.put(`/sale/${checkbox1._id}`, { status: "Đã xác nhận" });
+      alert("Xác nhận thành công!!!");
       window.location.reload(false);
     } else {
       axiosIntance.put(`/sale/${checkbox1._id}`, { status: "Hủy" });
+      alert("Hủy thành công!!!");
       window.location.reload(false);
     }
   };
@@ -279,7 +301,7 @@ export default function Authenticates() {
                 hover
                 responsive
                 entriesOptions={[5, 10, 20, 25]}
-                entries={5}
+                entries={10}
                 pagesAmount={4}
                 data={fixData.current}
                 //Cho thanh header có text màu trắng

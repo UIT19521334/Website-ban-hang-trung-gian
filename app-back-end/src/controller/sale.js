@@ -20,7 +20,7 @@ export const create = async (req, res) => {
       price,
       address,
       contactNum,
-      fee: (3 * price) / 100,
+      fee: (10 * price) / 100,
       status: "Chờ xác nhận",
       active: true,
     });
@@ -80,6 +80,7 @@ export const getAll = async (req, res) => {
       result.date_sale = [dt, month, year].join("/");
       result.time_sale = [h, m, s].join(":");
       result._id = sale._id;
+      result.fee = sale.fee;
       payload.push(result);
       stt++;
     }

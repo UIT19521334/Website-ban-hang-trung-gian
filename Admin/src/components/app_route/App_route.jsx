@@ -8,6 +8,7 @@ import Orders from "../../pages/orders/Orders";
 import Products from "../../pages/products/Products";
 import Sales from "../../pages/sale/Sales";
 import Authenticates from "../../pages/authenticate/Authenticate";
+import Settings from "../../pages/rule/Rules";
 import Admin_layout from "../layout/Admin_layout";
 
 const App_route = () => {
@@ -21,6 +22,7 @@ const App_route = () => {
         <Route path="/products" element={<Products />} />
         <Route path="/orders" element={<Orders />} />
         <Route path="/sales" element={<Authenticates />} />
+        <Route path="/settings" element={<Settings />} />
       </Route>
       {/* <Route path="/login">
         <Login />

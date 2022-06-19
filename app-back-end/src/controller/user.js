@@ -8,6 +8,7 @@ import Follow from "../models/follow.js";
 export const getAll = async (req, res) => {
   try {
     var users = await User.find();
+    const sales = await Sale.find().populate("order_id");
 
     let listCustomer = [];
 
@@ -18,6 +19,17 @@ export const getAll = async (req, res) => {
       // let profile = await Profile.find({ account: us._id });
       // us.profile = profile;
       if (us.role === "user") {
+        var totalSell = 0;
+        var totalBuy = 0;
+        for (let sale of sales) {
+          if (us._id == sale.userTaken) {
+            totalBuy++;
+          } else if (us._id == sale.order_id.asker_id) {
+            totalSell++;
+          }
+        }
+        us.totalBuy = totalBuy;
+        us.totalSell = totalSell;
         us.id = x;
         listCustomer.push(us);
         x++;

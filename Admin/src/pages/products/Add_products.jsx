@@ -170,20 +170,8 @@ const Add_products = (props) => {
               }}
             />
           </div>
-          <div className="col-4">
-            <input
-              className="add_popup_input"
-              placeholder="Image of Product"
-              value={product.img_path}
-              onChange={(e) => {
-                setProduct({ ...product, img_path: e.target.value });
-                checkEditData();
-              }}
-            />
-          </div>
           {/* <div className="col-4">
             <input
-              type="file"
               className="add_popup_input"
               placeholder="Image of Product"
               value={product.img_path}
@@ -193,6 +181,22 @@ const Add_products = (props) => {
               }}
             />
           </div> */}
+          <div className="col-4">
+            <input
+              type="file"
+              className="add_popup_input"
+              placeholder="Image of Product"
+              // value={product.img_path}
+              onChange={(e) => {
+                setProduct({
+                  ...product,
+                  img_path:
+                    "https://cdn.flightclub.com/750/TEMPLATE/273203/1.jpg",
+                });
+                checkEditData();
+              }}
+            />
+          </div>
 
           {/* <div className="col-4">
             <Autocomplete

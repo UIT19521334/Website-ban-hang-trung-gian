@@ -3,6 +3,7 @@ import "./Sidebar.css";
 import { Link, Redirect } from "react-router-dom";
 import logo from "../../assets/image/logo.png";
 import sideBar__item from "../../assets/jsonData/sideBar_routes.json";
+import axiosIntance from "../../helpers/axios.js";
 
 const SidebarItem = (props) => {
   const active = props.active ? "active" : "";
@@ -25,6 +26,9 @@ const findActiveItem = (value) => {
 };
 
 const Sidebar = (props) => {
+  const logout = () => {
+    axiosIntance.post(`/admin/signout`);
+  };
   return (
     <div className="sidebar">
       <div className="sidebar__logo">
@@ -40,12 +44,7 @@ const Sidebar = (props) => {
         </Link>
       ))}
       <div className="sidebar__footer">
-        <button
-          className="logout_btn"
-          onClick={() => {
-            window.location.reload();
-          }}
-        >
+        <button className="logout_btn" onClick={() => logout()}>
           <i class="bx bx-log-out"></i>
           Logout
         </button>

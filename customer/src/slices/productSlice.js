@@ -69,7 +69,7 @@ const productSlice = createSlice({
             category: item.brand,
             describe: item.description,
             price: item.retail_price,
-            sold: "324",
+            sold: Math.floor(Math.random() * 10),
           };
           product.push(fixItem);
         });

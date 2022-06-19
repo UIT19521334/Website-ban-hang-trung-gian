@@ -188,7 +188,7 @@ export default function Sales() {
                 hover
                 responsive
                 entriesOptions={[5, 10, 20, 25]}
-                entries={5}
+                entries={10}
                 pagesAmount={4}
                 data={fixData.current}
                 //Cho thanh header có text màu trắng
